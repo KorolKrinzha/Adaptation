@@ -1,34 +1,23 @@
-const Popup = ({children}) =>{
+const Popup = ({title, setModalOpen, Component}) =>{
     return (
-        <div className="modalBackground">
-          <div className="modalContainer">
+        <div className="container -lg">
+          <div className="sections">
             <div className="titleCloseBtn">
-              {/* <button
-                onClick={() => {
-                  windowClose()
-                }}
-              >
-                X
-              </button> */}
+            <button
+            onClick={() => {
+              setModalOpen(false);
+            }}
+          >
+            X
+          </button>
             </div>
-            <div className="title">
-              <h1>Are You Sure You Want to Continue?</h1>
-            </div>
+            
+              <h1 className="title">{title}</h1>
+            
             <div className="body">
 
-                {children}
-              <p>The next page looks amazing. Hope you want to go there!</p>
-            </div>
-            <div className="footer">
-              {/* <button
-                onClick={() => {
-                  setOpenModal(false);
-                }}
-                id="cancelBtn"
-              >
-                Cancel
-              </button> */}
-              <button>Continue</button>
+                <Component></Component>
+
             </div>
           </div>
         </div>

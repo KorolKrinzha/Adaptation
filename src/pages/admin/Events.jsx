@@ -4,15 +4,14 @@ import NewEventForm from "./NewEventForm";
 
 
 const Events = ()=> {
-  const [modalOpen, setModalOpen] = useState(false);
+  
     return (
         <div className="home">
 
-          <button onClick={()=>{
-            setModalOpen(true)
-          }}>Создать  ивент
-          </button>
-          {modalOpen && <NewEventForm setModalOpen={setModalOpen} />}
+
+          <NewEventForm/>
+
+          
           
           </div>
       );

@@ -109,7 +109,7 @@ const Sign = () =>{
             required></input>
 
     <div className="middle-textSection">
-      <button type="submit" className="sign-button">Зарегистрироваться</button>
+      <button type="submit" className="form-button">Зарегистрироваться</button>
       <p className="small-text">Уже зарегистрированы?
                 <a href="/login">Выполните вход</a>
               </p>
