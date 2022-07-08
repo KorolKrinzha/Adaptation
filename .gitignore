@@ -26,3 +26,8 @@ yarn-error.log*
 /API/venv
 /API/__pycache__
 /API/env.py
+
+# styles
+/src/styles/fonts
+/src/styles/style.css
+/src/styles/style.css.map
