@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# flask
+/API/venv
+/API/__pycache__
+/API/env.py
