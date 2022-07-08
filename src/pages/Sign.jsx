@@ -51,7 +51,7 @@ const Sign = () =>{
 
         <div className="row justify-content-center mt-4">
     <form onSubmit={signUser} className="bg primary">
-    <div class="sign-formSection">
+    <div className="sign-formSection">
       <label htmlFor="surname">Фамилия</label>
       <input
           type="text"
