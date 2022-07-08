@@ -5,3 +5,4 @@ export { default as Login } from "./Login";
 export { default as Score } from "./Score";
 
 export { default as Scoreboard } from "./admin/Scoreboard";
+export { default as Events } from "./admin/Events";

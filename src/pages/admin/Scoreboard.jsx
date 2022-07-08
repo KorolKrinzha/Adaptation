@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Navigate } from "react-router-dom";
-import { logged_in } from "../../Auth";
 
 
 const Scoreboard = ()=> {

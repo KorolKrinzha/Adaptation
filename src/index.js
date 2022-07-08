@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Home, NotFound, Sign, Login, Scoreboard, Score } from "./pages";
+import {
+  Home,
+  NotFound,
+  Sign,
+  Login,
+  Scoreboard,
+  Score,
+  Events,
+} from "./pages";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
@@ -18,9 +26,17 @@ root.render(
         <Route path="/" element={<Home />} />
         <Route path="/sign" element={<Sign />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/events" element={<Events />} />
 
         <Route path="*" element={<NotFound />} />
-        <Route path="/score" />
+        <Route
+          path="/score"
+          element={
+            <ProtectedRoute>
+              <Score />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/scoreboard"
