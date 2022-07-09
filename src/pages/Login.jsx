@@ -1,6 +1,7 @@
 import { useState } from "react"
 import "../styles/style.css"
 import Footer from "../components/Footer"
+import Cookies from "universal-cookie/es6"
 
 
 const Sign = () =>{
@@ -29,8 +30,21 @@ const Sign = () =>{
               "Content-type": "application/json; charset=UTF-8",
             },
           }).then(
-            window.location.reload()
-          )
+            res=>res.json()
+          ).then(res=>{
+            if (res['statusSuccess']){
+                let session_token = res['session_token']
+                console.log(session_token)
+                const cookies = new Cookies()
+                cookies.set('session_token', session_token, {path:'/'}) 
+
+            }
+            else{
+                // создать помечающий текст/попап
+                console.log("Ошибка")
+            } 
+
+          })
       
 
     }

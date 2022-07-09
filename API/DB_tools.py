@@ -51,6 +51,21 @@ def DB_JSON(statement):
     return json_data
 
 
+def DB_FETCH_ONE(statement):
+    mydb = mysql.connector.connect(
+    host=env.MYSQL_HOST,
+    port=3306,
+    user= env.MYSQL_USER,
+    password = env.MYSQL_PASSWORD,
+    database=env.MYSQL_DB  
+        
+        )
+    mycursor = mydb.cursor(buffered=True)
+    account = mycursor.execute(statement)
+    account = list(mycursor.fetchone())
+    
+    return account
+
 def password_hash_create(password):
     password_hash = generate_password_hash(password)
     return password_hash

@@ -4,7 +4,7 @@ from flask import Flask, request
 import mysql.connector
 import env
 import json
-from DBs import sing_new_user, auth_new_user, show_all_users
+from DBs import sign_new_user, auth_new_user, show_all_users, login_user
 
 
 from QRs import create_QR
@@ -56,14 +56,33 @@ def api_signuser():
         print(firstname, email, password)
         user_id = auth_new_user(email, password)
         print(user_id)
-        sing_new_user(user_id, lastname, firstname, grade, email)
+        sign_new_user(user_id, lastname, firstname, grade, email)
         
         return {'statusSuccess':True, 'session_token':user_id}
     except:
         return {'statusSuccess':False}
         
     
+@app.route("/api/loginuser", methods=['POST'])
+def api_loginuser():
     
+    try:
+        post_data = request.data
+        data_json = json.loads(post_data.decode('utf-8'))
+
+        email = data_json['email']
+        password = data_json['password']
+        user_id = login_user(email, password) 
+        print(user_id)
+        if user_id!="Login Failed":
+            return {'statusSuccess':True, 'session_token':user_id}
+        
+        return {'statusSuccess':False}
+        
+
+    except:
+        return {'statusSuccess':False}
+
      
 
 @app.route("/api/user")

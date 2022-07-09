@@ -1,5 +1,5 @@
 from IDs import create_ID, create_path
-from DB_tools import DB_COMMIT, DB_JSON, password_hash_create
+from DB_tools import DB_COMMIT, DB_JSON, DB_FETCH_ONE, password_hash_create, password_hash_check
 
 # ! TODO
 def auth_new_user(email,password):
@@ -11,12 +11,31 @@ def auth_new_user(email,password):
         
         return user_id
 
-def sing_new_user(user_id, lastname, firstname, grade, email):    
+# ! Сделать проверку на уникальность почты
+def sign_new_user(user_id, lastname, firstname, grade, email):    
     DB_COMMIT(f"INSERT INTO `LycUsers`\
         (`user_id`,`lastname`,`firstname`,`grade`,`email`, `count`, `eventlist`) \
         VALUES ('{user_id}','{lastname}', '{firstname}', '{grade}', '{email}', 0, '[]');")    
     return ""
 
+def login_user(email, password):
+    try:
+     
+        account = DB_FETCH_ONE(f"SELECT * FROM LycAuth WHERE email='{email}'")
+    except:
+        account = []
+    if len(account)==0:
+        return "Login Failed"
+    else:
+        user_id = account[0]
+        hash_password = account[2]
+
+        if password_hash_check(hash_password, password):
+            return user_id
+    
+        
+    return "Login Failed"
+    
 
 def show_all_users():
     users = DB_JSON("SELECT * FROM LycUsers")
