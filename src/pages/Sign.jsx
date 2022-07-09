@@ -75,7 +75,7 @@ const Sign = () =>{
         value={grade}
         onChange={(e) => setGrade(e.target.value)}
         >
-                <option disabled selected value>Лицеист</option>
+                <option disabled >Лицеист</option>
                 <option>Матинфо</option>
                 <option>Восток</option>
                 <option>Гум</option>

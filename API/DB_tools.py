@@ -1,8 +1,12 @@
 import mysql.connector
 import env
 import json
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # ! Дбоваить валидаторы
+
+
+
 
 def DB_COMMIT(statement):
     mydb = mysql.connector.connect(
@@ -45,3 +49,12 @@ def DB_JSON(statement):
     mycursor.close()
 
     return json_data
+
+
+def password_hash_create(password):
+    password_hash = generate_password_hash(password)
+    return password_hash
+
+def password_hash_check(hash_password, password):
+    
+    return check_password_hash(hash_password, password)
