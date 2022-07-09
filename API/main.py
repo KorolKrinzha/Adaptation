@@ -43,23 +43,28 @@ def api_createevent():
 
 @app.route("/api/signuser", methods=['POST'])
 def api_signuser():
-    post_data = request.data
-    data_json = json.loads(post_data.decode('utf-8'))
-    firstname = data_json['firstname']
-    lastname = data_json['lastname']
-    grade = data_json['grade']
+    try:
+        post_data = request.data
+        data_json = json.loads(post_data.decode('utf-8'))
+        firstname = data_json['firstname']
+        lastname = data_json['lastname']
+        grade = data_json['grade']
 
-    email = data_json['email']
-    password = data_json['password']
+        email = data_json['email']
+        password = data_json['password']
+        
+        print(firstname, email, password)
+        user_id = auth_new_user(email, password)
+        print(user_id)
+        sing_new_user(user_id, lastname, firstname, grade, email)
+        
+        return {'statusSuccess':True, 'session_token':user_id}
+    except:
+        return {'statusSuccess':False}
+        
     
-    print(firstname, email, password)
-    user_id = auth_new_user(email, password)
-    print(user_id)
-    sing_new_user(user_id, lastname, firstname, grade, email)
     
-    
-    
-    return {'statusSuccess':True}
+     
 
 @app.route("/api/user")
 def api_user():

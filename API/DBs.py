@@ -11,13 +11,12 @@ def auth_new_user(email,password):
         
         return user_id
 
-def sing_new_user(user_id, lastname, firstname, grade, email):
-    
+def sing_new_user(user_id, lastname, firstname, grade, email):    
     DB_COMMIT(f"INSERT INTO `LycUsers`\
         (`user_id`,`lastname`,`firstname`,`grade`,`email`, `count`, `eventlist`) \
-        VALUES ('{user_id}','{lastname}', '{firstname}', '{grade}', '{email}', 0, '[]');")
-    
+        VALUES ('{user_id}','{lastname}', '{firstname}', '{grade}', '{email}', 0, '[]');")    
     return ""
+
 
 def show_all_users():
     users = DB_JSON("SELECT * FROM LycUsers")

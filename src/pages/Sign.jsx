@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "../styles/style.css"
-
+import Cookies from "universal-cookie/es6"
 
 const Sign = () =>{
 
@@ -8,6 +8,7 @@ const Sign = () =>{
     const [lastname, setLastname] = useState('')
     const [grade, setGrade] = useState('')
     const [email, setEmail] = useState('')
+    const [response, setRresponse] = useState('')
     const [password, setPassword] = useState('')
 
 
@@ -15,7 +16,6 @@ const Sign = () =>{
 
     const signUser = (event) =>{
         event.preventDefault();
-        console.log(firstname)
 
 
         fetch(`/api/signuser`,{
@@ -31,8 +31,20 @@ const Sign = () =>{
               "Content-type": "application/json; charset=UTF-8",
             },
           }).then(
-            window.location.reload()
-          )
+            res => res.json()
+          ).then(res=>{
+              if (res['statusSuccess']){
+                  let session_token = res['session_token']
+                  console.log(session_token)
+                  const cookies = new Cookies()
+                  cookies.set('session_token', session_token, {path:'/'}) 
+
+              }
+              else{
+                  console.log("Ошибка")
+              } 
+              
+            })
       
 
     }
