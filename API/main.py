@@ -4,7 +4,7 @@ from flask import Flask, request
 import mysql.connector
 import env
 import json
-from DBs import sign_new_user, auth_new_user, show_all_users, login_user
+from DBs import sign_new_user, auth_new_user, show_all_users, login_user, show_event
 
 
 from QRs import create_QR
@@ -35,7 +35,7 @@ def api_users():
 
 
 
-
+# ! Тестовое
 @app.route("/api/createevent")
 def api_createevent():
     event_URL = create_QR()
@@ -83,7 +83,18 @@ def api_loginuser():
     except:
         return {'statusSuccess':False}
 
-     
+
+@app.route('/api/event/<event_PATH>', methods=['POST'])
+def api_event(event_PATH):
+
+    response = show_event(event_PATH)
+    
+    change_dynamic_event(response["event_id"])
+    
+    
+    
+    return response
+         
 
 @app.route("/api/user")
 def api_user():

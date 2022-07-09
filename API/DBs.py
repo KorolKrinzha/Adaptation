@@ -51,3 +51,14 @@ def check_user_is_admin(user_ID):
     return
 
 
+def show_event(event_PATH):
+    # делает проверку, есть ли ивент с таким путем. Если есть, возращает инфу
+    event_id = "123"
+    title = "Sas"
+    description = "sas"
+    value = 1
+    return {"event_id":123,"title":event_PATH, "description":description, "value": value}
+
+#  Проверяет, статичный ли ивент. Если нет, 
+def change_dynamic_event(event_id):
+    return
