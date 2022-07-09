@@ -24,8 +24,6 @@ const Sign = () =>{
               firstname: firstname,
               lastname: lastname,
               grade: grade,
-              count: 0,
-              events:[],
               email: email,
               password: password
             }),

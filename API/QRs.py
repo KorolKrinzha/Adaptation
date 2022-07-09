@@ -1,16 +1,8 @@
 import qrcode
-from uuid import uuid4
 from env import SITELINK
+from IDs import create_ID, create_path
 
 
-def create_path():
-    random_name = str(uuid4())
-    random_name = random_name.replace("-","")
-    return random_name
-
-def create_ID():
-    random_ID = str(uuid4())
-    return random_ID
 
     
 # создает QR и возвращает имя файла

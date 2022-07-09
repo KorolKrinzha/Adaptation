@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "../styles/style.css"
+import Footer from "../components/Footer"
 
 
 const Sign = () =>{
@@ -18,14 +19,9 @@ const Sign = () =>{
         console.log(firstname)
 
 
-        fetch(`/api/signuser`,{
+        fetch(`/api/loginuser`,{
             method: "POST",
             body: JSON.stringify({
-              firstname: firstname,
-              lastname: lastname,
-              grade: grade,
-              count: 0,
-              events:[],
               email: email,
               password: password
             }),
@@ -75,12 +71,16 @@ const Sign = () =>{
                 <a href="/sign">Зарегистрируйтесь здесь</a>
               </p>
 
+              
+
       </div>
 
       </div>
   </form>
   </div>
+  
   </div>
+
 );
 }
 

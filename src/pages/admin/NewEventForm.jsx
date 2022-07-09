@@ -13,7 +13,6 @@ const CreateEvent = () =>{
   const [dynamic, setDynamic] = useState(true)
 
 
-  const [state, setState] = useState(true)
 
   const addEvent = ()=>{
 
