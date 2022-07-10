@@ -148,8 +148,11 @@ def api_event(event_PATH):
         session_token = request.cookies['session_token']
         
         response = show_event(event_PATH)    
-        add_points_to_user(session_token, response['value'], response['event_id'])
-        change_dynamic_event(response["event_id"])
+        if not check_visited(session_token, response["event_id"]):
+            
+            add_points_to_user(session_token, response['value'], response['event_id'])
+            add_visit(session_token, response['event_id'])
+            change_dynamic_event(response["event_id"])
         return response
 
     else:

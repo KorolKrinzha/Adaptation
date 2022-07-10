@@ -1,5 +1,6 @@
 import mysql.connector
 import env
+import time
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -99,3 +100,7 @@ def password_hash_create(password):
 def password_hash_check(hash_password, password):
     
     return check_password_hash(hash_password, password)
+
+def current_date():
+    result = time.strftime('%Y-%m-%d %H:%M:%S')
+    return result

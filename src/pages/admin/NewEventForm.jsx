@@ -10,7 +10,7 @@ const CreateEvent = () =>{
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState(1)
   const [dynamic, setDynamic] = useState(true)
 
 

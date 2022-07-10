@@ -1,6 +1,6 @@
 from IDs import create_ID, create_path
 from DB_tools import DB_COMMIT, DB_JSON, DB_FETCH_ONE, DB_CHECK_EXISTENCE, \
-password_hash_create, password_hash_check
+password_hash_create, password_hash_check, current_date
 
 # ! TODO
 
@@ -79,7 +79,6 @@ def change_dynamic_event(event_id):
     return
 
 def add_points_to_user(session_token, value, event_id):
-    check_event_complision(session_token, event_id)
     # уеличиваем баллы у пользователя
     DB_COMMIT(f"UPDATE `lycusers` \
         SET `count` =`count`+ {value} WHERE `user_id`= '{session_token}'")
@@ -87,12 +86,16 @@ def add_points_to_user(session_token, value, event_id):
     return
 
 def check_visited(session_token, event_id):
+    visited = DB_CHECK_EXISTENCE(f"SELECT COUNT(1) FROM lycvisits WHERE \
+        `event_id` = '{event_id}' and `user_id` = '{session_token}'")
     
-    return False
+    return visited
 
 def add_visit(session_token, event_id):
+    visit_time = current_date()
+    DB_COMMIT(f"INSERT INTO `lycvisits` (`event_id`,`user_id`,`visit_time`) \
+        VALUES ('{event_id}','{session_token}', date(now()))")
+    
     
     return
 
-def check_event_complision(session_token, event_id):
-    return
