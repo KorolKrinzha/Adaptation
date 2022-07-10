@@ -62,7 +62,13 @@ def DB_FETCH_ONE(statement):
         )
     mycursor = mydb.cursor(buffered=True)
     account = mycursor.execute(statement)
-    account = list(mycursor.fetchone())
+    try:
+        account = list(mycursor.fetchone())
+    except:
+        account = []
+    
+    mycursor.close()
+    mydb.close()
     
     return account
 

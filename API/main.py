@@ -7,6 +7,7 @@ import json
 from DBs import sign_new_user, auth_new_user, \
     show_all_users, login_user, show_event, \
     add_points_to_user, change_dynamic_event, create_event,\
+        check_visited, add_visit, \
         check_admin, check_user
 
 
@@ -35,12 +36,34 @@ def api_users():
     
 
 
-@app.route("/api/check_user")
+@app.route("/api/check_user", methods=['POST'])
 def api_check_user():
     if 'session_token' in request.cookies:
         
         session_token = request.cookies['session_token']
         if check_user(session_token):
+            return {'statusSuccess':True}
+        else:
+            return {'statusSuccess':False}
+            
+        
+        
+        
+        
+
+    else:
+        return {'statusSuccess':False}
+    
+    return {'statusSuccess':False}
+
+@app.route("/api/check_admin", methods=['POST'])
+def api_check_admin():
+    if 'session_token' in request.cookies:
+        
+        session_token = request.cookies['session_token']
+        
+        if check_user(session_token):
+            
             return {'statusSuccess':True}
         else:
             return {'statusSuccess':False}

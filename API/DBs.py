@@ -67,12 +67,12 @@ def create_event(title, description, value, dynamic=False):
     return {'event_ID': event_ID, 'event_url':event_url}
 
 def show_event(event_PATH):
+    
     # делает проверку, есть ли ивент с таким путем. Если есть, возращает инфу
-    event_id = "123"
-    title = "Sas"
-    description = "sas"
-    value = 1
-    return {"event_id":123,"title":event_PATH, "description":description, "value": value}
+    event = DB_FETCH_ONE(f"SELECT * FROM `lycevents` WHERE `url` = '{event_PATH}'")
+    
+    return {"event_id":event[0],"title":event[1], 
+            "description":event[2], "value": event[3], "dynamic":bool(event[4])}
 
 #  Проверяет, статичный ли ивент. Если нет, 
 def change_dynamic_event(event_id):
@@ -83,6 +83,14 @@ def add_points_to_user(session_token, value, event_id):
     # уеличиваем баллы у пользователя
     DB_COMMIT(f"UPDATE `lycusers` \
         SET `count` =`count`+ {value} WHERE `user_id`= '{session_token}'")
+    
+    return
+
+def check_visited(session_token, event_id):
+    
+    return False
+
+def add_visit(session_token, event_id):
     
     return
 

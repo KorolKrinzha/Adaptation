@@ -3,6 +3,8 @@ import { Route, Navigate } from "react-router-dom";
 
 
 const Scoreboard = ()=> {
+
+
     return (
         <div className="home">
           <div class="container">
