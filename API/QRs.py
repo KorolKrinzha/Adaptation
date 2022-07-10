@@ -1,20 +1,17 @@
 import qrcode
 from env import SITELINK
-from IDs import create_ID, create_path
 
 
 
     
 # создает QR и возвращает имя файла
-def create_QR():     
+def create_QR(event_ID, event_path):     
     qr = qrcode.QRCode(
         version=1,
         box_size=10
        
     )
     
-    event_path = create_path()
-    event_ID = create_ID()
     
     event_URL = f'{SITELINK}/event/{event_path}'
     

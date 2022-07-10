@@ -3,6 +3,7 @@ import "../../styles/style.css"
 
 import Popup from "../../components/Popup"
 import Checkbox from "../../components/Checkbox";
+import axios from "axios";
 
 
 const CreateEvent = () =>{
@@ -15,6 +16,16 @@ const CreateEvent = () =>{
 
 
   const addEvent = ()=>{
+
+    axios.post(`/api/admin/createevent`,{
+      title: title,
+      description: description,
+      value: value,
+      dynamic: dynamic,
+      withCredentials: true
+    }).then(response =>{
+      console.log(response)
+    }).catch(err => console.log(err))
 
   }
 

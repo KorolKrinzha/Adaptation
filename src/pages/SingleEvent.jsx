@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const SingleEvent = () =>{
     const [title, setTitle] = useState('')
@@ -19,20 +20,13 @@ const SingleEvent = () =>{
         return <Navigate to="/404"/>
     }
     else{
-
-        fetch(`/api/event/${eventPATH}`,
-        {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            
+        axios.post(`/api/event/${eventPATH}`,
+        {withCredentials: true
         }).then(
-            res => res.json()
-          ).then(res=>{console.log(res)})
-
+            response => console.log(response['data'])
+        ).catch(error => console.log(error))
+        
     }
-
     return (
         <div>HI {eventPATH}</div>
     );

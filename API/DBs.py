@@ -1,7 +1,10 @@
 from IDs import create_ID, create_path
-from DB_tools import DB_COMMIT, DB_JSON, DB_FETCH_ONE, password_hash_create, password_hash_check
+from DB_tools import DB_COMMIT, DB_JSON, DB_FETCH_ONE, DB_CHECK_EXISTENCE, \
+password_hash_create, password_hash_check
 
 # ! TODO
+
+
 def auth_new_user(email,password):
         user_id = create_ID()
         password = password_hash_create(password)
@@ -45,11 +48,23 @@ def show_user():
     return
 
 def check_user(user_ID):
+    
+    exists = DB_CHECK_EXISTENCE(f"SELECT COUNT(1) FROM lycusers \
+        WHERE user_id = '{user_ID}'")
+    return exists
+
+def check_admin(user_ID):
+    
     return
 
-def check_user_is_admin(user_ID):
-    return
-
+def create_event(title, description, value, dynamic=False):
+    event_ID = create_ID()
+    event_url = create_path()
+    DB_COMMIT(f"INSERT INTO `LycEvents`\
+        (`event_id`,`title`,`description`,`value`,`dynamic`, `url`) \
+        VALUES \
+            ('{event_ID}','{title}', '{description}',{value}, {dynamic}, '{event_url}');")
+    return {'event_ID': event_ID, 'event_url':event_url}
 
 def show_event(event_PATH):
     # делает проверку, есть ли ивент с таким путем. Если есть, возращает инфу
@@ -61,4 +76,15 @@ def show_event(event_PATH):
 
 #  Проверяет, статичный ли ивент. Если нет, 
 def change_dynamic_event(event_id):
+    return
+
+def add_points_to_user(session_token, value, event_id):
+    check_event_complision(session_token, event_id)
+    # уеличиваем баллы у пользователя
+    DB_COMMIT(f"UPDATE `lycusers` \
+        SET `count` =`count`+ {value} WHERE `user_id`= '{session_token}'")
+    
+    return
+
+def check_event_complision(session_token, event_id):
     return

@@ -27,7 +27,7 @@ root.render(
         <Route path="/" element={<Home />} />
         <Route path="/sign" element={<Sign />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create_events" element={<Events />} />
+        <Route path="/admin_events" element={<Events />} />
         <Route path="/event" element={<SingleEvent />}>
           <Route path=":eventPATH" element={<SingleEvent />}></Route>
         </Route>
