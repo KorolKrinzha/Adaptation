@@ -1,5 +1,5 @@
 import time 
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 # from flaskext.mysql import MySQL
 import mysql.connector
 import env
@@ -12,7 +12,7 @@ from DBs import sign_new_user, auth_new_user, \
 
 
 from QRs import create_QR
-
+from DB_tools import export_to_csv
 
 
 
@@ -182,3 +182,8 @@ def api_score_events():
 @app.route('/api/time')
 def get_current_time():
     return {'time': time.time()}
+
+@app.route("/api/export/users/csv", methods=['GET'])
+def api_export_users():
+    filename = export_to_csv("lycusers")
+    return send_from_directory('../public/CSV', filename, as_attachment=True)

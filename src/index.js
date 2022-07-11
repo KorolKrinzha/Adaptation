@@ -42,7 +42,7 @@ root.render(
         />
 
         <Route
-          path="/scoreboard"
+          path="/admin/scoreboard"
           element={
             <AdminRoute>
               <Scoreboard />
