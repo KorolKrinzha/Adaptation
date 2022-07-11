@@ -44,8 +44,19 @@ def show_all_users():
     users = DB_JSON("SELECT * FROM LycUsers")
     return users
     
-def show_user():
-    return
+def show_user(session_token):
+    # print(session_token)
+    user = DB_FETCH_ONE(f"SELECT * FROM `lycusers` WHERE `user_id` = '{session_token}'")
+    
+    
+    return {'lastname': user[1], 'firstname': user[2], 'count': user[5], 'events': user[6]}
+
+def show_user_events(session_token):
+    event_list = DB_JSON(f"SELECT lycevents.title, lycvisits.event_id FROM lycevents \
+        INNER JOIN lycvisits ON \
+            lycvisits.event_id = lycevents.event_id where lycvisits.user_id = '{session_token}'")
+    
+    return event_list
 
 def check_user(user_ID):
     

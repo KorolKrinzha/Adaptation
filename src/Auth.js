@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const check_user = () => {
-  return false;
+  return true;
 };
 
 export const check_admin = async () => {

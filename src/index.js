@@ -27,7 +27,6 @@ root.render(
         <Route path="/" element={<Home />} />
         <Route path="/sign" element={<Sign />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin/events" element={<Events />} />
         <Route path="/event" element={<SingleEvent />}>
           <Route path=":eventPATH" element={<SingleEvent />}></Route>
         </Route>
@@ -47,6 +46,15 @@ root.render(
           element={
             <AdminRoute>
               <Scoreboard />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/events"
+          element={
+            <AdminRoute>
+              <Events />
             </AdminRoute>
           }
         />

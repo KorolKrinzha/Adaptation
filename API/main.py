@@ -8,7 +8,7 @@ from DBs import sign_new_user, auth_new_user, \
     show_all_users, login_user, show_event, \
     add_points_to_user, change_dynamic_event, create_event,\
         check_visited, add_visit, \
-        check_admin, check_user
+        check_admin, check_user, show_user, show_user_events
 
 
 from QRs import create_QR
@@ -163,9 +163,21 @@ def api_event(event_PATH):
     return {'statusSuccess':False}
          
 
-@app.route("/api/user")
-def api_user():
-    return ""
+@app.route("/api/score", methods=['POST'])
+def api_score():
+    session_token = request.cookies['session_token']
+    user_info = show_user(session_token)     
+    
+    return user_info
+
+@app.route("/api/score/events", methods=['GET'])
+def api_score_events():
+    session_token = request.cookies['session_token']
+    events = show_user_events(session_token)
+    print(events)
+    
+    
+    return events
 
 @app.route('/api/time')
 def get_current_time():
