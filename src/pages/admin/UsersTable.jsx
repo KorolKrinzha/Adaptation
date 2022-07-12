@@ -1,19 +1,51 @@
-import React from 'react'
-import { useTable } from 'react-table';
-import MOCK_DATA from './DATA.json'
-import COLUMNS from './columns';
+import React, { useEffect, useState } from 'react'
+import { useTable, useSortBy } from 'react-table';
+import SCOREBOARD_COLUMNS from './columns';
 import { useMemo } from 'react';
+import axios from 'axios';
 import './table.css'
 const UsersTable = () => {
-  const columns = useMemo(()=>COLUMNS,[])
-  const data = useMemo(()=>MOCK_DATA,[])
+
+  const [users, setusers] = useState([]);
+
+  const fetchusers = async () => {
+    const response = await axios
+      .get("/api/admin/users")
+      .catch((err) => console.log(err));
+
+    if (response) {
+      const users = response.data;
+
+      console.log("users: ", users);
+      setusers(users);
+    }
+  }; 
+
+  
+
+
+  const columns = useMemo(()=>SCOREBOARD_COLUMNS,[])
+  const usersData = useMemo(() => [...users], [users]);
+
+  
+
+  
+
+
   
   const tableInstance = useTable({
-    columns,
-    data
-  })
+    columns: columns,
+    data: usersData
+  },
+  useSortBy)
 
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
+
+  useEffect(() => {
+    fetchusers();
+  }, []);
+
+
 
 
   return (
@@ -24,8 +56,11 @@ const UsersTable = () => {
             <tr {...headerGroup.getHeaderGroupProps()}>
               {
                 headerGroup.headers.map((column)=>(
-               <th {...column.getHeaderProps()}>
+               <th {...column.getHeaderProps(column.getSortByToggleProps({title:"Кликни для сортировки"}))}>
                  {column.render('Header')}
+                 <span>
+                   {column.isSorted ? (column.isSortedDesc ? '🔽':'🔼') : '🔗'}
+                 </span>
                </th>    
                 ))}
               <th></th>

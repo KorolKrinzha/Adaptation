@@ -1,16 +1,24 @@
-const COLUMNS = [
+const SCOREBOARD_COLUMNS = [
   {
-    Header: "ID",
-    accessor: "id",
+    Header: "Фамилия",
+    accessor: "lastname",
   },
   {
-    Header: "ifrst name",
-    accessor: "first_name",
+    Header: "Имя",
+    accessor: "firstname",
   },
   {
-    Header: "last name",
-    accessor: "last_name",
+    Header: "Направление",
+    accessor: "grade",
+  },
+  {
+    Header: "Баллы",
+    accessor: "count",
+  },
+  {
+    Header: "Почта",
+    accessor: "email",
   },
 ];
 
-export default COLUMNS;
+export default SCOREBOARD_COLUMNS;

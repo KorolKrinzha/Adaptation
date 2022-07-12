@@ -29,8 +29,8 @@ def test_connection():
     
     return "Пользователь зареган"
 
-@app.route("/api/users")
-def api_users():
+@app.route("/api/admin/users")
+def api_admin_users():
     return show_all_users()
     
     
