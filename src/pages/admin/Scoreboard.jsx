@@ -27,6 +27,7 @@ const Scoreboard = ()=> {
         <ExportButton fileformat="pdf">
         PDF
         </ExportButton>
+        <UsersTable/>
 
 
         </div>

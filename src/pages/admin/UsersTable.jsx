@@ -1,45 +1,58 @@
-import {useMemo} from 'react'
+import React from 'react'
+import { useTable } from 'react-table';
+import MOCK_DATA from './DATA.json'
+import COLUMNS from './columns';
+import { useMemo } from 'react';
+import './table.css'
+const UsersTable = () => {
+  const columns = useMemo(()=>COLUMNS,[])
+  const data = useMemo(()=>MOCK_DATA,[])
+  
+  const tableInstance = useTable({
+    columns,
+    data
+  })
+
+  const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
 
 
-const UsersTable  = ()=>{
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {
+          headerGroups.map((headerGroup)=>(
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {
+                headerGroup.headers.map((column)=>(
+               <th {...column.getHeaderProps()}>
+                 {column.render('Header')}
+               </th>    
+                ))}
+              <th></th>
+            </tr>
+          ))}
 
-    const data = useMemo(
-   () => [
-     {
-       col1: 'Hello',
-       col2: 'World',
-     },
-     {
-       col1: 'react-table',
-       col2: 'rocks',
-     },
-     {
-       col1: 'whatever',
-       col2: 'you want',
-     },
-   ],
-   []
- )
+      </thead>
+      <tbody {...getTableBodyProps()}>
 
- const columns = React.useMemo(
-   () => [
-     {
-       Header: 'Column 1',
-       accessor: 'col1', // accessor is the "key" in the data
-     },
-     {
-       Header: 'Column 2',
-       accessor: 'col2',
-     },
-   ],
-   []
- )
+                  {
+                    rows.map(row=>{
+                        prepareRow(row)
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {
+                              row.cells.map((cell)=>{
+                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                              })
+                            }
+                          </tr>
+                        )
+                    })
+                  }
+      </tbody>
 
-
-
-    return (
-        <div>HI</div>
-    )
+    </table>
+  )
 }
 
-export const UsersTable;
+export default UsersTable;
