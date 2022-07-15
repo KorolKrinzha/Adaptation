@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, useGlobalFilter } from 'react-table';
 import SCOREBOARD_COLUMNS from './columns';
 import { useMemo } from 'react';
 import axios from 'axios';
 import './table.css'
+import GlobalTableFilter from '../../components/GlobalTableFilter';
 const UsersTable = () => {
 
   const [users, setusers] = useState([]);
@@ -37,9 +38,19 @@ const UsersTable = () => {
     columns: columns,
     data: usersData
   },
-  useSortBy)
+  useGlobalFilter,
+  useSortBy
+  )
 
-  const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance
+  const {getTableProps, 
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter } = tableInstance
+
+    const {globalFilter} = state
 
   useEffect(() => {
     fetchusers();
@@ -49,6 +60,8 @@ const UsersTable = () => {
 
 
   return (
+    <div>
+    <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter}/>
     <table {...getTableProps()}>
       <thead>
         {
@@ -87,7 +100,9 @@ const UsersTable = () => {
       </tbody>
 
     </table>
+    </div>
   )
+
 }
 
 export default UsersTable;

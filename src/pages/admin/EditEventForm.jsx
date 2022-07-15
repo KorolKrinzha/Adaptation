@@ -4,6 +4,7 @@ import { ReactComponent as DeleteEventButton } from '../../assets/deleteevent.sv
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
 import { Link } from 'react-router-dom'
 
+
 const EditEventForm = ({event}) => {
     const [title, setTitle] = useState(event.title)
     const [description, setDescription] = useState(event.description)
@@ -51,6 +52,9 @@ const EditEventForm = ({event}) => {
       <button onClick={(e)=>deleteEvent(e)}>
         <DeleteEventButton/>
         </button>
+
+
+        <img src={`/QR/${event.event_id}`} alt="Lyceum Adaptation QR code"/>
       
 
       <form onSubmit={editEvent}>

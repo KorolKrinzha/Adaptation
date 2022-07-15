@@ -11,7 +11,6 @@ const ProtectedRoute = ({ children }) => {
     .post("/api/check_admin", { withCredentials: true })
     .then((response) => {
       if (response["data"]["statusSuccess"]){
-          console.log("sas")
           setAuth(true)
 
         return true      

@@ -1,5 +1,5 @@
 import time 
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, abort
 # from flaskext.mysql import MySQL
 import mysql.connector
 import env
@@ -214,3 +214,12 @@ def get_current_time():
 def api_export_users():
     filename = export_to_csv("lycusers")
     return send_from_directory('../public/CSV', filename, as_attachment=True)
+
+@app.route("/QR/<event_id>")
+def QR_event(event_id):
+    try:
+        filename = f'{event_id}.png'
+        return send_from_directory('../public/QR/', filename)
+    except:
+        abort(404)
+    

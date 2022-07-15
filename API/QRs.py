@@ -18,7 +18,7 @@ def create_QR(event_ID, event_path):
     qr.add_data(event_URL)
     qr.make(fit=True)
     qr_image = qr.make_image(fill_color="black", back_color="white")
-    qr_image.save(f'../public/{event_ID}.png')
+    qr_image.save(f'../public/QR/{event_ID}.png')
     event_info = {"ID": event_ID, "Path": event_path }
     return event_info
 
