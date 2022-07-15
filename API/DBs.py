@@ -81,9 +81,12 @@ def show_event(event_PATH):
     
     # делает проверку, есть ли ивент с таким путем. Если есть, возращает инфу
     event = DB_FETCH_ONE(f"SELECT * FROM `lycevents` WHERE `url` = '{event_PATH}'")
+    try:
     
-    return {"event_id":event[0],"title":event[1], 
+        return {"event_id":event[0],"title":event[1], 
             "description":event[2], "value": event[3], "dynamic":bool(event[4])}
+    except:
+        return ''
     
     
 def show_all_events():
@@ -91,8 +94,15 @@ def show_all_events():
     return events
 
 #  Проверяет, статичный ли ивент. Если нет, 
+def check_dynamic(event_id):
+    exists = DB_CHECK_EXISTENCE(f"SELECT COUNT(1) FROM lycevents WHERE `event_id`='{event_id}' AND `dynamic`=1")
+    return exists
+
 def change_dynamic_event(event_id):
-    return
+    new_url = create_path()
+    DB_COMMIT(f"UPDATE `lycevents` SET url='{new_url}' WHERE `event_id`='{event_id}'")
+        
+    return {'event_id':event_id, 'event_url':new_url}
 
 def add_points_to_user(session_token, value, event_id):
     # уеличиваем баллы у пользователя

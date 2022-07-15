@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../../styles/style.css"
 
 import Popup from "../../components/Popup"
-import Checkbox from "../../components/Checkbox";
 import axios from "axios";
 
 
@@ -11,7 +10,7 @@ const CreateEvent = () =>{
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [value, setValue] = useState(1)
-  const [dynamic, setDynamic] = useState(true)
+  const [dynamic, setDynamic] = useState('')
 
 
 
@@ -60,14 +59,16 @@ const CreateEvent = () =>{
             onChange={(e) => setValue(e.target.value)}
           ></input>
 
-          <label htmlFor="dynamic">Укажите, будет ли меняться QR код и ссылка на событие
+        <div class="d-flex flex-row">
+          <input type='checkbox'     
+          onChange={(e) => setDynamic(e.target.value)}
+          />
+          <label htmlFor="dynamic">Будет ли меняться QR код и ссылка на событие
           </label>
-          <p className="small-text">Галочка - да, будет меняться после каждого сканирования</p>
-          <Checkbox
-        
-        value={dynamic}
-        onChange={(e) => setDynamic(e.target.value)}
-      />
+
+
+        </div>
+
 
           
 

@@ -9,7 +9,7 @@ from DBs import sign_new_user, auth_new_user, \
     add_points_to_user, change_dynamic_event, create_event,\
         check_visited, add_visit, \
         check_admin, check_user, show_user, show_user_events, \
-            show_all_events, editevent
+            show_all_events, editevent, check_dynamic
 
 
 from QRs import create_QR
@@ -88,7 +88,7 @@ def api_admin_createevent():
     title = data_json['title']
     description = data_json['description']
     value = data_json['value']
-    dynamic = False
+    dynamic = True if data_json['dynamic']=='on' else False
     event_creditentials = create_event(title, description, value, dynamic)
     create_QR(event_creditentials['event_ID'], event_creditentials['event_url'])
     
@@ -178,7 +178,13 @@ def api_event(event_PATH):
             
             add_points_to_user(session_token, response['value'], response['event_id'])
             add_visit(session_token, response['event_id'])
-            change_dynamic_event(response["event_id"])
+            
+        if check_dynamic(response['event_id']):
+            print("saaaas")
+            
+            new_event_creditentials = change_dynamic_event(response["event_id"])
+            create_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
+        
         return response
         
             

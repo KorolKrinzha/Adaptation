@@ -235,8 +235,9 @@ $question-height: 20px;
         @extend .text-center;
 
     }
-    select,
-    input{
+
+
+    input:not([type=checkbox]){
         @extend .text-center;
         @extend .align-middle;
         height: 50px; 
@@ -253,6 +254,22 @@ $question-height: 20px;
 
     textarea{
         @extend .form-control;
+    }
+
+    input[type='checkbox'] {
+        -webkit-appearance:none;
+        width:30px;
+        height:30px;
+        line-height: 30px;
+        background:white;
+        border-radius:5px;
+        border:2px solid #555;
+        @extend .align-middle;
+        @extend .justify-content-center;
+
+    }
+    input[type='checkbox']:checked {
+        background: $success;
     }
 }
 
