@@ -9,7 +9,7 @@ from DBs import sign_new_user, auth_new_user, \
     add_points_to_user, change_dynamic_event, create_event,\
         check_visited, add_visit, \
         check_admin, check_user, show_user, show_user_events, \
-            show_all_events
+            show_all_events, editevent
 
 
 from QRs import create_QR
@@ -85,13 +85,10 @@ def api_check_admin():
 def api_admin_createevent():
     post_data = request.data
     data_json = json.loads(post_data.decode('utf-8'))
-    # print(data_json)
     title = data_json['title']
     description = data_json['description']
     value = data_json['value']
-    # dynamic = data_json['dynamic']
     dynamic = False
-    print(title)
     event_creditentials = create_event(title, description, value, dynamic)
     create_QR(event_creditentials['event_ID'], event_creditentials['event_url'])
     
@@ -106,9 +103,28 @@ def api_admin_deleteevent():
     
     return ''
 
-@app.route("/api/admin/editevent")
+@app.route("/api/admin/editevent", methods=['POST'])
 def api_admin_editevent():
-    return ''
+    post_data = request.data
+    try:
+        data_json = json.loads(post_data.decode('utf-8'))
+    except Exception as e:
+        print(str(e))
+    event_id = data_json['event_id']
+    title = data_json['title']
+    description = data_json['description']
+    value = data_json['value']
+    print(event_id)
+    try:
+        editevent(event_id, title, description, value)
+        print("OKAy")
+        
+        return {'statusSuccess':True}
+    except:
+        return {'statusSuccess':False}
+
+    
+    
     
 
 @app.route("/api/signuser", methods=['POST'])
@@ -123,9 +139,7 @@ def api_signuser():
         email = data_json['email']
         password = data_json['password']
         
-        print(firstname, email, password)
         user_id = auth_new_user(email, password)
-        print(user_id)
         sign_new_user(user_id, lastname, firstname, grade, email)
         
         return {'statusSuccess':True, 'session_token':user_id}
@@ -143,7 +157,6 @@ def api_loginuser():
         email = data_json['email']
         password = data_json['password']
         user_id = login_user(email, password) 
-        print(user_id)
         if user_id!="Login Failed":
             return {'statusSuccess':True, 'session_token':user_id}
         
@@ -167,6 +180,8 @@ def api_event(event_PATH):
             add_visit(session_token, response['event_id'])
             change_dynamic_event(response["event_id"])
         return response
+        
+            
 
     else:
         return {'statusSuccess':False}
@@ -187,7 +202,6 @@ def api_score():
 def api_score_events():
     session_token = request.cookies['session_token']
     events = show_user_events(session_token)
-    print(events)
     
     
     return events

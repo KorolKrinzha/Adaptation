@@ -60,7 +60,7 @@ const CreateEvent = () =>{
             onChange={(e) => setValue(e.target.value)}
           ></input>
 
-          <label htmlFor="value">Укажите, будет ли меняться QR код и ссылка на событие
+          <label htmlFor="dynamic">Укажите, будет ли меняться QR код и ссылка на событие
           </label>
           <p className="small-text">Галочка - да, будет меняться после каждого сканирования</p>
           <Checkbox

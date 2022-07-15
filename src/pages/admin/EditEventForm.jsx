@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-
+import { ReactComponent as DeleteEventButton } from '../../assets/deleteevent.svg'
+import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
+import { Link } from 'react-router-dom'
 
 const EditEventForm = ({event}) => {
     const [title, setTitle] = useState(event.title)
@@ -20,8 +22,9 @@ const EditEventForm = ({event}) => {
     }
 
     const editEvent = () =>{
+      console.log("submit")
       axios.post("/api/admin/editevent",{
-        event_id: event.id,
+        event_id: event.event_id,
         title: title,
         description: description,
         value: value,
@@ -29,7 +32,7 @@ const EditEventForm = ({event}) => {
       }).then(res=>
       {
         if (res['statusSuccess'])
-        window.location.reload();
+        console.log("Yeeee")
       })
 
       console.log('dele')
@@ -40,10 +43,15 @@ const EditEventForm = ({event}) => {
       <button onClick={(e)=>{
         e.preventDefault()
         setDisabled(!disabled)
-      }}>Редактировать</button>
+      }}>
+        <EditEventButton/>
+      </button>
 
-      <button onClick={(e)=>deleteEvent(e)}>Удалить</button>
 
+      <button onClick={(e)=>deleteEvent(e)}>
+        <DeleteEventButton/>
+        </button>
+      
 
       <form onSubmit={editEvent}>
         <div className="sign-formSection">
@@ -68,15 +76,16 @@ const EditEventForm = ({event}) => {
 
           <label htmlFor="value">Стоимость ивента</label>
           <input 
+          disabled={disabled}
           required
           type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           ></input>
 
-          <label htmlFor="value">Укажите, будет ли меняться QR код и ссылка на событие
-          </label>
-          <p className="small-text">Галочка - да, будет меняться после каждого сканирования</p>
+          <p>Это {event.dynamic ? "динамичный":"статичный"} ивент</p>
+          <Link to={`/event/${event.url}`}>Страница ивента</Link>
+          
 
 
           
@@ -85,7 +94,7 @@ const EditEventForm = ({event}) => {
 
           </div>
   
-        <button type="submit" className="form-button">Обновить ивент</button>
+        <button type="submit" className="form-button" disabled={disabled}>Обновить ивент</button>
       </form>
 
 

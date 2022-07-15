@@ -115,3 +115,12 @@ def add_visit(session_token, event_id):
     
     return
 
+def editevent(event_id, title, description,value):
+    try:
+        DB_COMMIT(f"UPDATE `lycevents` SET title='{title}', description='{description}', value={value} \
+              WHERE `event_id`='{event_id}'")
+    except Exception as e:
+        print(str(e))
+        
+    return 
+
