@@ -84,6 +84,11 @@ def show_event(event_PATH):
     
     return {"event_id":event[0],"title":event[1], 
             "description":event[2], "value": event[3], "dynamic":bool(event[4])}
+    
+    
+def show_all_events():
+    events = DB_JSON("SELECT * FROM `lycevents`")
+    return events
 
 #  Проверяет, статичный ли ивент. Если нет, 
 def change_dynamic_event(event_id):

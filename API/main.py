@@ -8,7 +8,8 @@ from DBs import sign_new_user, auth_new_user, \
     show_all_users, login_user, show_event, \
     add_points_to_user, change_dynamic_event, create_event,\
         check_visited, add_visit, \
-        check_admin, check_user, show_user, show_user_events
+        check_admin, check_user, show_user, show_user_events, \
+            show_all_events
 
 
 from QRs import create_QR
@@ -34,7 +35,9 @@ def api_admin_users():
     return show_all_users()
     
     
-
+@app.route("/api/admin/events")
+def api_admin_events():
+    return show_all_events()
 
 @app.route("/api/check_user", methods=['POST'])
 def api_check_user():
@@ -44,8 +47,7 @@ def api_check_user():
         if check_user(session_token):
             return {'statusSuccess':True}
         else:
-            return {'statusSuccess':False}
-            
+            return {'statusSuccess':False}          
         
         
         
@@ -97,6 +99,17 @@ def api_admin_createevent():
     
     
     return {'url': f'event/{title}'}
+
+
+@app.route("/api/admin/deleteevent")
+def api_admin_deleteevent():
+    
+    return ''
+
+@app.route("/api/admin/editevent")
+def api_admin_editevent():
+    return ''
+    
 
 @app.route("/api/signuser", methods=['POST'])
 def api_signuser():

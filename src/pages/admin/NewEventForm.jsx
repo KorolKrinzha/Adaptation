@@ -44,13 +44,13 @@ const CreateEvent = () =>{
           ></input>
 
           <label htmlFor="description">Описание ивента</label>
-          <input 
+          <textarea 
           required
           type="text"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          ></input>
+          ></textarea>
 
           <label htmlFor="value">Стоимость ивента</label>
           <input 

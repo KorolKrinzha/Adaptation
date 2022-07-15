@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Route, Navigate } from "react-router-dom";
-import { check_admin } from "../Auth";
 import axios from "axios";
 
 
@@ -8,29 +7,28 @@ const ProtectedRoute = ({ children }) => {
     const [auth, setAuth] = useState(true)
 
 
-    // axios
-    // .post("/api/check_admin", { withCredentials: true })
-    // .then((response) => {
-    //     console.log(response["data"]["statusSuccess"])
+    axios
+    .post("/api/check_admin", { withCredentials: true })
+    .then((response) => {
+      if (response["data"]["statusSuccess"]){
+          console.log("sas")
+          setAuth(true)
 
-    //   setAuth(response["data"]["statusSuccess"])
-    //   return auth ? children : <Navigate to="/404" />;
-    // })
-    // .catch((error) => {
-    //   if (error.response) {
-    //     // обработка ошибок
-    //     console.log(error.response.data);
-    //     console.log(error.response.status);
-    //     console.log(error.response.headers);
-    //   } else if (error.request) {
-    //     console.log(error.request);
-    //   } else {
-    //     console.log("Error", error.message);
+        return true      
+    }
+    else{
+        return false
         
+    }
+    })
+    .catch((error) => {
+        return false
         
-    //   }
-      
-    // });
+    })
+
+
+
+
 
     return auth ? children : <Navigate to="/404" />;
     

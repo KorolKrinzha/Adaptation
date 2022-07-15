@@ -250,6 +250,10 @@ $question-height: 20px;
         @extend .form-select;       
         
     }
+
+    textarea{
+        @extend .form-control;
+    }
 }
 
 // КОНТЕЙНЕР ДЛЯ ПРЕДЛОЖЕНИЯ ЛОГИНА

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Navigate } from "react-router-dom";
-import ExportButton from "./ExportButton"
+import ExportButton from "../../components/ExportButton"
 import UsersTable from "./UsersTable"
 
 const Scoreboard = ()=> {

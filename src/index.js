@@ -32,6 +32,7 @@ root.render(
         </Route>
 
         <Route path="*" element={<NotFound />} />
+        
         <Route
           path="/score"
           element={
