@@ -15,7 +15,7 @@ def check_admin(session_token):
                                 {'user_id':session_token})    
     return exists
 
-# ---ПОПАДАНИЕ ПОЛЬЗОВАТЕЛЯ В СИСТЕМУ---
+# ---ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ В СИСТЕМУ---
 def auth_new_user(email,password):
         user_id = create_ID()
         password = password_hash_create(password)
@@ -136,7 +136,7 @@ def create_event(title, description, value, dynamic=False):
 
 def edit_event(event_id, title, description,value):
     try:
-        DB_COMMIT("""UPDATE `lycevents` SET title=%(title)s, description=%(description)s, value={value} \
+        DB_COMMIT("""UPDATE `lycevents` SET title=%(title)s, description=%(description)s, value=%(value)s 
               WHERE `event_id`=%(event_id)s""",
               {'title':title,
                'description':description,

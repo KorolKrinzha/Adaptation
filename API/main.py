@@ -23,7 +23,7 @@ from DB_tools import export_to_csv
 
 app = Flask(__name__)
 
-
+# ---Protected routes---
 def admin_role(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -45,22 +45,22 @@ def user_role(f):
     return wrap
     
 
-def api_check_user(request):
-    if 'session_token' in request.cookies:        
-        session_token = request.cookies['session_token']
+# def api_check_user(request):
+#     if 'session_token' in request.cookies:        
+#         session_token = request.cookies['session_token']
         
-        return check_user(session_token)
-    else:
-        return False    
+#         return check_user(session_token)
+#     else:
+#         return False    
 
-def api_check_admin(request):
-    if 'session_token' in request.cookies:        
-        session_token = request.cookies['session_token']
+# def api_check_admin(request):
+#     if 'session_token' in request.cookies:        
+#         session_token = request.cookies['session_token']
         
             
-        return check_admin(session_token)
-    else:
-        return False
+#         return check_admin(session_token)
+#     else:
+#         return False
     
 
 # @app.route("/api/check_user", methods=['POST'])
@@ -70,7 +70,7 @@ def api_check_admin(request):
 
 
 
-
+# ---ТЕСТИРОВАНИЕ API---
 @app.route("/api", methods=['GET'])
 @user_role
 def test_connection():    
@@ -81,6 +81,97 @@ def test_connection():
 def test_admin():
     return "WELCOME TO API:ADMIN"
     
+
+    
+    
+# ---ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ В СИСТЕМУ---
+@app.route("/api/signuser", methods=['POST'])
+def api_signuser():
+    try:
+        post_data = request.data
+        data_json = json.loads(post_data.decode('utf-8'))
+        firstname = data_json['firstname']
+        lastname = data_json['lastname']
+        grade = data_json['grade']
+
+        email = data_json['email']
+        password = data_json['password']
+        
+        user_id = auth_new_user(email, password)
+        sign_new_user(user_id, lastname, firstname, grade, email)
+        
+        return {'statusSuccess':True, 'session_token':user_id}
+    except:
+        return {'statusSuccess':False}
+        
+    
+@app.route("/api/loginuser", methods=['POST'])
+def api_loginuser():
+    
+    try:
+        post_data = request.data
+        data_json = json.loads(post_data.decode('utf-8'))
+
+        email = data_json['email']
+        password = data_json['password']
+        user_id = login_user(email, password) 
+        if user_id!="Login Failed":
+            return {'statusSuccess':True, 'session_token':user_id}
+        
+        return {'statusSuccess':False}
+        
+
+    except:
+        return {'statusSuccess':False}
+
+
+
+         
+# ---ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ В СИСТЕМЕ---    
+@app.route("/api/score", methods=['POST'])
+def api_score():
+    session_token = request.cookies['session_token']
+    user_info = show_score(session_token)     
+    
+    return user_info
+
+@app.route("/api/score/events", methods=['GET'])
+def api_score_events():
+    session_token = request.cookies['session_token']
+    events = show_user_events(session_token)    
+    
+    return events
+
+@app.route('/api/event/<event_PATH>', methods=['POST'])
+def api_event(event_PATH):
+    if 'session_token' in request.cookies:
+        
+        session_token = request.cookies['session_token']
+        
+        response = show_event(event_PATH)    
+        if not check_visited(session_token, response["event_id"]):
+            
+            add_points_to_user(session_token, response['value'], response['event_id'])
+            add_visit(session_token, response['event_id'])
+            
+        if check_dynamic(response['event_id']):
+            print("saaaas")
+            
+            new_event_creditentials = change_dynamic_event(response["event_id"])
+            create_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
+        
+        return response      
+            
+
+    else:
+        return {'statusSuccess':False}
+    
+    
+    
+    return {'statusSuccess':False}
+
+# ---АДМИН В СИСТЕМЕ
+
 
 @app.route("/api/admin/users")
 def api_admin_users():
@@ -146,103 +237,16 @@ def api_admin_editevent():
     except:
         return {'statusSuccess':False}
 
-    
-    
 
-@app.route("/api/signuser", methods=['POST'])
-def api_signuser():
-    try:
-        post_data = request.data
-        data_json = json.loads(post_data.decode('utf-8'))
-        firstname = data_json['firstname']
-        lastname = data_json['lastname']
-        grade = data_json['grade']
-
-        email = data_json['email']
-        password = data_json['password']
-        
-        user_id = auth_new_user(email, password)
-        sign_new_user(user_id, lastname, firstname, grade, email)
-        
-        return {'statusSuccess':True, 'session_token':user_id}
-    except:
-        return {'statusSuccess':False}
-        
-    
-@app.route("/api/loginuser", methods=['POST'])
-def api_loginuser():
-    
-    try:
-        post_data = request.data
-        data_json = json.loads(post_data.decode('utf-8'))
-
-        email = data_json['email']
-        password = data_json['password']
-        user_id = login_user(email, password) 
-        if user_id!="Login Failed":
-            return {'statusSuccess':True, 'session_token':user_id}
-        
-        return {'statusSuccess':False}
-        
-
-    except:
-        return {'statusSuccess':False}
-
-
-@app.route('/api/event/<event_PATH>', methods=['POST'])
-def api_event(event_PATH):
-    if 'session_token' in request.cookies:
-        
-        session_token = request.cookies['session_token']
-        
-        response = show_event(event_PATH)    
-        if not check_visited(session_token, response["event_id"]):
-            
-            add_points_to_user(session_token, response['value'], response['event_id'])
-            add_visit(session_token, response['event_id'])
-            
-        if check_dynamic(response['event_id']):
-            print("saaaas")
-            
-            new_event_creditentials = change_dynamic_event(response["event_id"])
-            create_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
-        
-        return response
-        
-            
-
-    else:
-        return {'statusSuccess':False}
-    
-    
-    
-    return {'statusSuccess':False}
-         
-
-@app.route("/api/score", methods=['POST'])
-def api_score():
-    session_token = request.cookies['session_token']
-    user_info = show_score(session_token)     
-    
-    return user_info
-
-@app.route("/api/score/events", methods=['GET'])
-def api_score_events():
-    session_token = request.cookies['session_token']
-    events = show_user_events(session_token)
-    
-    
-    return events
-
-@app.route('/api/time')
-def get_current_time():
-    return {'time': time.time()}
-
+# ---ЭКСПОРТИРОВАНИЕ ФАЙЛОВ---
 @app.route("/api/export/users/csv", methods=['GET'])
+@admin_role
 def api_export_users():
     filename = export_to_csv("lycusers")
     return send_from_directory('../public/CSV', filename, as_attachment=True)
 
+
+# ---ФАЙЛЫ---
 @app.route("/QR/<event_id>")
 def QR_event(event_id):
     try:
