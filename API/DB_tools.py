@@ -8,9 +8,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # ! Дбоваить валидаторы
 
 
+        
 
 
-def DB_COMMIT(statement):
+def DB_COMMIT(statement,values):
     mydb = mysql.connector.connect(
     host=env.MYSQL_HOST,
     port=3306,
@@ -20,7 +21,7 @@ def DB_COMMIT(statement):
 )
     mycursor = mydb.cursor(buffered=True)
 
-    mycursor.execute(statement)
+    mycursor.execute(statement,values)
     mydb.commit()
     
     mydb.close()
@@ -29,7 +30,7 @@ def DB_COMMIT(statement):
     
     return
 
-def DB_JSON(statement):
+def DB_JSON(statement,values):
     mydb = mysql.connector.connect(
     host=env.MYSQL_HOST,
     port=3306,
@@ -39,7 +40,7 @@ def DB_JSON(statement):
         
         )
     mycursor = mydb.cursor(buffered=True)
-    mycursor.execute(statement)
+    mycursor.execute(statement,values)
     row_headers = [x[0] for x in mycursor.description]
     rv = mycursor.fetchall()
     data = []
@@ -53,7 +54,7 @@ def DB_JSON(statement):
     return json_data
 
 
-def DB_FETCH_ONE(statement):
+def DB_FETCH_ONE(statement,values):
     mydb = mysql.connector.connect(
     host=env.MYSQL_HOST,
     port=3306,
@@ -63,7 +64,7 @@ def DB_FETCH_ONE(statement):
         
         )
     mycursor = mydb.cursor(buffered=True)
-    account = mycursor.execute(statement)
+    account = mycursor.execute(statement,values)
     try:
         account = list(mycursor.fetchone())
     except:
@@ -74,7 +75,7 @@ def DB_FETCH_ONE(statement):
     
     return account
 
-def DB_CHECK_EXISTENCE(statement):
+def DB_CHECK_EXISTENCE(statement,values):
     mydb = mysql.connector.connect(
     host=env.MYSQL_HOST,
     port=3306,
@@ -84,7 +85,7 @@ def DB_CHECK_EXISTENCE(statement):
         
         )
     mycursor = mydb.cursor(buffered=True)
-    mycursor.execute(statement)
+    mycursor.execute(statement,values)
     row_headers = [x[0] for x in mycursor.description]
     rv = mycursor.fetchall()
     data = []
