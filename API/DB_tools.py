@@ -5,7 +5,7 @@ import json
 import csv
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# ! Дбоваить валидаторы
+# ! Дбоваить проверку почты
 
 
         
@@ -121,8 +121,7 @@ def password_hash_create(password):
     password_hash = generate_password_hash(password)
     return password_hash
 
-def password_hash_check(hash_password, password):
-    
+def password_hash_check(hash_password, password):    
     return check_password_hash(hash_password, password)
 
 def current_date():

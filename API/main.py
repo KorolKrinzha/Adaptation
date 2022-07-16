@@ -1,16 +1,19 @@
 import time 
+from functools import wraps
 from flask import Flask, request, send_from_directory, abort
-# from flaskext.mysql import MySQL
 import mysql.connector
 import env
 import json
-from DBs import sign_new_user, auth_new_user, \
-    show_all_users, login_user, show_event, \
-    add_points_to_user, change_dynamic_event, create_event,\
-        check_visited, add_visit, \
-        check_admin, check_user, show_user, show_user_events, \
-            show_all_events, edit_event, check_dynamic, delete_event
 
+
+# взаиодействие с пользователями
+from DBs import sign_new_user, login_user, auth_new_user, check_admin, check_user
+
+# взаимодействие обычного пользователя с ивентами
+from DBs import show_event, check_visited, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events 
+
+# взаимодействие админа с ивентами и пользователями
+from DBs import show_all_events, show_all_users, create_event, edit_event, delete_event
 
 from QRs import create_QR
 from DB_tools import export_to_csv
@@ -20,15 +23,64 @@ from DB_tools import export_to_csv
 
 app = Flask(__name__)
 
-@app.route("/api")
-def test_connection():
 
+def admin_role(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        try:
+            session_token = request.cookies['session_token']
+            if check_admin(session_token): return f(*args, **kwargs)
+            else: return abort(404)
+        except: return abort(404)
+    return wrap
+
+def user_role(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        try:
+            session_token = request.cookies['session_token']
+            if check_user(session_token): return f(*args, **kwargs)
+            else: return abort(404)
+        except: return abort(404)
+    return wrap
     
 
+def api_check_user(request):
+    if 'session_token' in request.cookies:        
+        session_token = request.cookies['session_token']
+        
+        return check_user(session_token)
+    else:
+        return False    
+
+def api_check_admin(request):
+    if 'session_token' in request.cookies:        
+        session_token = request.cookies['session_token']
+        
+            
+        return check_admin(session_token)
+    else:
+        return False
     
+
+# @app.route("/api/check_user", methods=['POST'])
+
+
+# @app.route("/api/check_admin", methods=['POST', 'GET'])
+
+
+
+
+@app.route("/api", methods=['GET'])
+@user_role
+def test_connection():    
+    return "WELCOME TO API"
+
+@app.route("/api/admin", methods=['GET'])
+@admin_role
+def test_admin():
+    return "WELCOME TO API:ADMIN"
     
-    
-    return "Пользователь зареган"
 
 @app.route("/api/admin/users")
 def api_admin_users():
@@ -39,46 +91,7 @@ def api_admin_users():
 def api_admin_events():
     return show_all_events()
 
-@app.route("/api/check_user", methods=['POST'])
-def api_check_user():
-    if 'session_token' in request.cookies:
-        
-        session_token = request.cookies['session_token']
-        if check_user(session_token):
-            return {'statusSuccess':True}
-        else:
-            return {'statusSuccess':False}          
-        
-        
-        
-        
 
-    else:
-        return {'statusSuccess':False}
-    
-    return {'statusSuccess':False}
-
-@app.route("/api/check_admin", methods=['POST', 'GET'])
-def api_check_admin():
-    if 'session_token' in request.cookies:
-        
-        session_token = request.cookies['session_token']
-        
-        if check_admin(session_token):
-            
-            return {'statusSuccess':True}
-        else:
-            return {'statusSuccess':False}
-            
-        
-        
-        
-        
-
-    else:
-        return {'statusSuccess':False}
-    
-    return {'statusSuccess':False}
 
 
 @app.route("/api/admin/createevent", methods=['POST'])
@@ -209,7 +222,7 @@ def api_event(event_PATH):
 @app.route("/api/score", methods=['POST'])
 def api_score():
     session_token = request.cookies['session_token']
-    user_info = show_user(session_token)     
+    user_info = show_score(session_token)     
     
     return user_info
 
