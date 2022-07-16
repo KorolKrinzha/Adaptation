@@ -5,7 +5,7 @@ const EventList = ({events,loading}) => {
   if (loading) return <h2>Загрузка...</h2>
   
   return (
-    <ul className='list-group list-group-horizontal px-3'>
+    <ul className='list-group px-3'>
       {events.map(event=>(
         <li key={event.event_id} className='list-group-item'>
           <EventForm event={event}/>

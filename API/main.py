@@ -9,7 +9,7 @@ from DBs import sign_new_user, auth_new_user, \
     add_points_to_user, change_dynamic_event, create_event,\
         check_visited, add_visit, \
         check_admin, check_user, show_user, show_user_events, \
-            show_all_events, editevent, check_dynamic
+            show_all_events, edit_event, check_dynamic, delete_event
 
 
 from QRs import create_QR
@@ -58,13 +58,13 @@ def api_check_user():
     
     return {'statusSuccess':False}
 
-@app.route("/api/check_admin", methods=['POST'])
+@app.route("/api/check_admin", methods=['POST', 'GET'])
 def api_check_admin():
     if 'session_token' in request.cookies:
         
         session_token = request.cookies['session_token']
         
-        if check_user(session_token):
+        if check_admin(session_token):
             
             return {'statusSuccess':True}
         else:
@@ -98,8 +98,19 @@ def api_admin_createevent():
     return {'url': f'event/{title}'}
 
 
-@app.route("/api/admin/deleteevent")
+@app.route("/api/admin/deleteevent", methods=['POST'])
 def api_admin_deleteevent():
+    post_data = request.data
+    try:
+        data_json = json.loads(post_data.decode('utf-8'))
+    except:
+        return
+    event_id = data_json['event_id']
+    try:
+        delete_event(event_id)
+        return {'statusSuccess':True}
+    except:
+        return {'statusSuccess':False}
     
     return ''
 
@@ -116,14 +127,12 @@ def api_admin_editevent():
     value = data_json['value']
     print(event_id)
     try:
-        editevent(event_id, title, description, value)
-        print("OKAy")
+        edit_event(event_id, title, description, value)
         
         return {'statusSuccess':True}
     except:
         return {'statusSuccess':False}
 
-    
     
     
 

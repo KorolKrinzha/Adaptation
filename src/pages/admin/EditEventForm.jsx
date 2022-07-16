@@ -15,11 +15,15 @@ const EditEventForm = ({event}) => {
     const deleteEvent = (e) =>{
       e.preventDefault()
       axios.post("/api/admin/deleteevent",{
-      event_id: event.id,
+      event_id: event.event_id,
       withCredentials: true
       }
-      )
-      return ''
+      ).then((res)=>{
+        if (res.data['statusSuccess']){
+          window.location.reload()
+        }
+      })
+      
     }
 
     const editEvent = () =>{

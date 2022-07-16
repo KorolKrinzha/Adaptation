@@ -7,6 +7,7 @@ const Sign = () =>{
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [grade, setGrade] = useState('')
+    const [group,setGroup] = useState('')
     const [email, setEmail] = useState('')
     const [response, setRresponse] = useState('')
     const [password, setPassword] = useState('')
@@ -23,7 +24,7 @@ const Sign = () =>{
             body: JSON.stringify({
               firstname: firstname,
               lastname: lastname,
-              grade: grade,
+              grade: `${grade} ${group}`,
               email: email,
               password: password
             }),
@@ -85,9 +86,10 @@ const Sign = () =>{
         <select type="" 
         required
         value={grade}
+        defaultValue='Лицеист'
         onChange={(e) => setGrade(e.target.value)}
         >
-                <option disabled >Лицеист</option>
+                <option  disabled value=''>Лицеист</option>
                 <option>Матинфо</option>
                 <option>Восток</option>
                 <option>Гум</option>
@@ -102,9 +104,20 @@ const Sign = () =>{
                 <option>Преподаватель</option>
 
               </select>
+
+    <label htmlFor="group">Кураторская группа</label>
+    <input 
+          required
+          type="number"
+          min="1"
+          max="6"
+            value={group}
+            onChange={(e) => setGroup(e.target.value)}>
+    </input>
+
     <label htmlFor="email">Мэйл</label>
         <input
-
+        type='email'
         placeholder="example@lyceum.ru"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -113,7 +126,7 @@ const Sign = () =>{
 
     <label htmlFor="password">Пароль</label>
             <input type="password"
-            placeholder=">5 символов" 
+            placeholder="******" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required></input>

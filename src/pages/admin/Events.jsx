@@ -4,6 +4,7 @@ import { useState } from "react";
 import EventList from "./EventList";
 import NewEventForm from "./NewEventForm";
 import Pagination from "../../components/Pagination";
+import ModalWindow from "../../components/ModalWindow";
 
 
 const Events = ()=> {
@@ -29,13 +30,21 @@ const Events = ()=> {
   const paginate = (pageNumber) =>{
     setCurrentPage(pageNumber)
   }
+
+
+
   
   return (
         <div className="container mt-5">
+
+          <NewEventForm/> 
+
           <EventList events={currentEvents} loading={loading} />
           <Pagination eventsPerPage={eventsPerPage} totalEvents={events.length} paginate={paginate}/>
 
-          <NewEventForm/>
+
+          
+
 
           
           

@@ -76,10 +76,11 @@ def check_user(user_ID):
         WHERE user_id = %(user_ID)s""",{'user_ID':user_ID})
     return exists
 
-def check_admin(user_ID):
-    # ! TODO
+def check_admin(session_token):
+    exists = DB_CHECK_EXISTENCE("""SELECT COUNT(1) FROM lycauth WHERE `user_id`=%(user_id)s AND `auth`=1;""", 
+                                {'user_id':session_token})
     
-    return
+    return exists
 
 def create_event(title, description, value, dynamic=False):
     event_ID = create_ID()
@@ -157,7 +158,7 @@ def add_visit(session_token, event_id):
     
     return
 
-def editevent(event_id, title, description,value):
+def edit_event(event_id, title, description,value):
     try:
         DB_COMMIT("""UPDATE `lycevents` SET title=%(title)s, description=%(description)s, value={value} \
               WHERE `event_id`=%(event_id)s""",
@@ -169,4 +170,12 @@ def editevent(event_id, title, description,value):
         print(str(e))
         
     return 
+
+def delete_event(event_id):
+    DB_COMMIT("""DELETE FROM `lycvisits` WHERE `event_id`=%(event_id)s;""", 
+              {'event_id':event_id})
+    DB_COMMIT("""DELETE FROM `lycevents` WHERE `event_id`=%(event_id)s;""", 
+              {'event_id':event_id})
+    
+    return
 
