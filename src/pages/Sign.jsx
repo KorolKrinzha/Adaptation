@@ -9,7 +9,6 @@ const Sign = () =>{
     const [grade, setGrade] = useState('')
     const [group,setGroup] = useState('')
     const [email, setEmail] = useState('')
-    const [response, setRresponse] = useState('')
     const [password, setPassword] = useState('')
 
 
@@ -39,6 +38,7 @@ const Sign = () =>{
                   console.log(session_token)
                   const cookies = new Cookies()
                   cookies.set('session_token', session_token, {path:'/'}) 
+                  window.location.reload();
 
               }
               else{

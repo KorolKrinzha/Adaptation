@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Route, Navigate } from "react-router-dom";
 import axios from "axios";
-import { NotFound } from "../pages";
+import { Login, NotFound, Sign } from "../pages";
 
 
 
@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
   }).then(res=>{
     if (res.data==='True') setAuth(true)
   })
-  return auth ? children:<NotFound/>
+  return auth ? children:<Sign/>
 }
 
 export default ProtectedRoute;
