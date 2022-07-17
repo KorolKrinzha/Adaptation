@@ -15,7 +15,6 @@ const ScoreEvents = () =>{
     .then(response => {
     
         const data = response['data']
-        console.log(typeof data)
         setEvents(data)
     })
     .catch(err => console.log(err))

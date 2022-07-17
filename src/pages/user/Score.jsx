@@ -11,7 +11,6 @@ const Score = ()=>{
     axios.post("/api/score", {
         withCredentials: true
     }).then(response =>{
-      console.log(response['data'])
       setFirstname(response['data']['firstname'])
       setLastname(response['data']['lastname'])
       setCount(response['data']['count'])

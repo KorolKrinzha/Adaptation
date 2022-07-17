@@ -1,39 +1,17 @@
 import { useState } from "react"
 import { Route, Navigate } from "react-router-dom";
 import axios from "axios";
+import { NotFound } from "../pages";
 
 
 const ProtectedRoute = ({ children }) => {
-    const [auth, setAuth] = useState(true)
-
-
-    axios
-    .post("/api/check_admin", { withCredentials: true })
-    .then((response) => {
-      if (response["data"]["statusSuccess"]){
-          setAuth(true)
-
-        return true      
-    }
-    else{
-        return false
-        
-    }
+    const [auth, setAuth] = useState(false)
+    axios.get('/api/check_admin',{
+      withCredentials:true
+    }).then(res=>{
+      if (res.data==='True') setAuth(true)
     })
-    .catch((error) => {
-        return false
-        
-    })
-
-
-
-
-
-    return auth ? children : <Navigate to="/404" />;
-    
-
-  
-  
-}
+    return auth ? children:<NotFound/>
+  }
 
 export default ProtectedRoute;

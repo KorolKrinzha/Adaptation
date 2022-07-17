@@ -45,13 +45,13 @@ def user_role(f):
     return wrap
     
 
-# def api_check_user(request):
-#     if 'session_token' in request.cookies:        
-#         session_token = request.cookies['session_token']
+def api_check_user(request):
+    if 'session_token' in request.cookies:        
+        session_token = request.cookies['session_token']
         
-#         return check_user(session_token)
-#     else:
-#         return False    
+        return check_user(session_token)
+    else:
+        return False    
 
 # def api_check_admin(request):
 #     if 'session_token' in request.cookies:        
@@ -63,11 +63,26 @@ def user_role(f):
 #         return False
     
 
-# @app.route("/api/check_user", methods=['POST'])
+@app.route("/api/check_user", methods=['POST', 'GET'])
+def api_check_user():
+    if 'session_token' in request.cookies:        
+        session_token = request.cookies['session_token']
+        print('session_token')
+        
+        return str(check_user(session_token))
+    else:
+        return str(False)    
 
 
-# @app.route("/api/check_admin", methods=['POST', 'GET'])
-
+@app.route("/api/check_admin", methods=['POST', 'GET'])
+def api_check_admin():
+    if 'session_token' in request.cookies:        
+        session_token = request.cookies['session_token']
+                
+            
+        return str(check_admin(session_token))
+    else:
+        return str(False)
 
 
 # ---ТЕСТИРОВАНИЕ API---

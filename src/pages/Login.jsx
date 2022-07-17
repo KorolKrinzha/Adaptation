@@ -4,20 +4,16 @@ import Footer from "../components/Footer"
 import Cookies from "universal-cookie/es6"
 
 
-const Sign = () =>{
+const Login = () =>{
 
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
-    const [grade, setGrade] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
 
 
 
-    const signUser = (event) =>{
+    const logUser = (event) =>{
         event.preventDefault();
-        console.log(firstname)
 
 
         fetch(`/api/loginuser`,{
@@ -37,10 +33,10 @@ const Sign = () =>{
                 console.log(session_token)
                 const cookies = new Cookies()
                 cookies.set('session_token', session_token, {path:'/'}) 
+                window.location.reload();
 
             }
             else{
-                // создать помечающий текст/попап
                 console.log("Ошибка")
             } 
 
@@ -60,7 +56,7 @@ const Sign = () =>{
         вам необходимо войти в систему</p>
 
         <div className="row justify-content-center mt-4">
-    <form onSubmit={signUser} className="bg primary">
+    <form onSubmit={logUser} className="bg primary">
     <div className="sign-formSection">
 
     <label htmlFor="email">Мэйл</label>
@@ -98,4 +94,4 @@ const Sign = () =>{
 );
 }
 
-export default Sign;  
+export default Login;   
