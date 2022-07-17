@@ -75,14 +75,7 @@ span {
 // ---ХЭДЕРЫ И ФУТЕРЫ---
 
 // ХЭДЕР
-.navbar {
-    @extend .navbar;
-    @extend .navbar-expand-lg;
-    @extend .navbar-light;
-    background-color: $bg-light !important;
 
-
-}
 
 // ФУТЕР
 .footer {
@@ -136,7 +129,6 @@ span {
 $question-height: 20px;
 
 // ВОПРОС
-// НАПРИМЕР: ЧТО ТАКОЕ SELF?
 .question {    
     @extend .p-2;
     @extend .me-auto;
@@ -162,7 +154,6 @@ $question-height: 20px;
 }
 
 // ОТВЕТ
-// НАПРИМЕР: SELF - КРУТО
 .response {
     @extend .p-2;
     white-space: pre-line;
@@ -417,7 +408,28 @@ $question-height: 20px;
 
 
 // !НОВОЕ
+.basicheader{
+    nav{
+        @extend .navbar;
+        @extend .navbar-expand-lg;
+        @extend .navbar-light;
+        background-color: $bg-light !important;
+        
+    }
+    ul{
+        @extend .navbar-nav;
+    }
+    li{
+        @extend .nav-item;
+        @extend .active;
+        
+        
+    }
+    NavLink{
+        @extend .nav-link;
+    }
 
+}
 
 // !!! НЕ УДАЛЯТЬ ИМПОРТ
 @import "../../node_modules/bootstrap/scss/bootstrap.scss"

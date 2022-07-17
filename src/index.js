@@ -16,12 +16,10 @@ import Header from "./components/Header";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 
-import axios from "axios";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Router>
-    <div>
+  <>
+    <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -31,8 +29,8 @@ root.render(
           <Route path=":eventPATH" element={<SingleEvent />}></Route>
         </Route>
 
-        <Route path="*" element={<NotFound />} />
-        
+        <Route path="*" element={<NotFound />}  />
+
         <Route
           path="/score"
           element={
@@ -60,8 +58,8 @@ root.render(
           }
         />
       </Routes>
-    </div>
-  </Router>
+    </Router>
+  </>
 );
 
 reportWebVitals();
