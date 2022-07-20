@@ -169,7 +169,7 @@ def show_logs():
                 INNER JOIN lycusers ON lycvisits.user_id = lycusers.user_id
                 INNER JOIN lycevents ON lycevents.event_id = lycvisits.event_id 
                 CROSS JOIN (select @cnt :=0) as increment
-                ORDER BY lycvisits.visit_time DESC
+                ORDER BY lycvisits.visit_time ASC
                 """, {})
         
     return logs
