@@ -19,28 +19,29 @@ const EditEventForm = ({event}) => {
       withCredentials: true
       }
       ).then((res)=>{
-        if (res.data['statusSuccess']){
-          window.location.reload()
+        if (res.response.status===200){
+          // window.location.reload()
+          console.log('Удалено')
         }
       })
       
     }
 
-    const editEvent = () =>{
-      console.log("submit")
+    const editEvent = (e) =>{
+      e.preventDefault()
       axios.post("/api/admin/editevent",{
         event_id: event.event_id,
         title: title,
         description: description,
         value: value,
         withCredentials: true
-      }).then(res=>
+      }).then(response=>
       {
-        if (res['statusSuccess'])
-        console.log("Yeeee")
-      })
+        if (response.status===200)
+        // ! TODO добавить уведомление
+        console.log("Редактировано")
+      }).catch((error)=>console.log(error.response.status))
 
-      console.log('dele')
     }
 
   return (
@@ -58,7 +59,7 @@ const EditEventForm = ({event}) => {
         </button>
 
 
-        <img src={`/QR/${event.event_id}`} alt="Lyceum Adaptation QR code"/>
+        <img src={`/QR/${event.event_id}`} alt="Lyceum Adaptation QR code" className='img-fluid'/>
       
 
       <form onSubmit={editEvent}>

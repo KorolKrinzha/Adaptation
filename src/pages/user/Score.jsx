@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Sign } from "..";
 import ScoreEvents from "./ScoreEvents";
 
 const Score = ()=>{
     const [fisrtname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [count, setCount] = useState(0)
+
+    const [found,setFound] = useState(true)
 
     useEffect(()=>{
     axios.post("/api/score", {
@@ -14,14 +17,16 @@ const Score = ()=>{
       setFirstname(response['data']['firstname'])
       setLastname(response['data']['lastname'])
       setCount(response['data']['count'])
-    }).catch(err => console.log(err))
+    }).catch(error => {
+      if (error.response.status==404) setFound(false)
+    } )
 
   },[])
   
    
 
 
-    return (
+    return found ? (
         <div className="EVENTS-textContainer">
 
         <h1 className="title">Адаптация | Баллы</h1>
@@ -46,6 +51,6 @@ const Score = ()=>{
   
       </div>
 
-    )
+    ): <Sign/>
 }
 export default Score

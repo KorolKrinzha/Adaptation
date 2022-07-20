@@ -4,6 +4,7 @@ import "../styles/style.css"
 
 const AdminHeader = () => {
     return (
+        <>
         <header className="basicheader">
             
       <nav role={"navigation"}>
@@ -11,7 +12,7 @@ const AdminHeader = () => {
   
   
           <a className="navbar-brand" href="/">
-            <img src="/src/svg/SELF_icon.svg" width="40" height="40" className="d-inline-block align-center" alt=""></img>
+            <img src="/src/svg/Adaptation_icon.svg" width="40" height="40" className="d-inline-block align-center" alt=""></img>
             Адаптация
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -44,6 +45,11 @@ const AdminHeader = () => {
       </nav>
      
       </header>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+      </>
+      
     );
 }
 export default AdminHeader;

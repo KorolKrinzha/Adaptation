@@ -1,6 +1,6 @@
 import time 
 from functools import wraps
-from flask import Flask, request, send_from_directory, abort
+from flask import Flask, request, send_from_directory, abort, Response
 import mysql.connector
 import env
 import json
@@ -46,29 +46,36 @@ def user_role(f):
     
 
 
-    
+# ---ПРОВЕРКА ПОЛЬЗОВАТЕЛЕЙ---
 
 @app.route("/api/check_user", methods=['POST', 'GET'])
 def api_check_user():
     if 'session_token' in request.cookies:        
         session_token = request.cookies['session_token']
         print('session_token')
+        try:
+            response = str(check_user(session_token))
+            return response
+        except:
+            return str(False) 
         
-        return str(check_user(session_token))
     else:
         return str(False)    
 
 
 @app.route("/api/check_admin", methods=['POST', 'GET'])
 def api_check_admin():
-
     if 'session_token' in request.cookies:        
         session_token = request.cookies['session_token']
-                
-            
-        return str(check_admin(session_token))
+        print('session_token')
+        try:
+            response = str(check_admin(session_token))
+            return response
+        except:
+            return str(False) 
+        
     else:
-        return str(False)
+        return str(False)    
 
 
 # ---ТЕСТИРОВАНИЕ API---
@@ -130,13 +137,18 @@ def api_loginuser():
          
 # ---ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ В СИСТЕМЕ---    
 @app.route("/api/score", methods=['POST'])
+@user_role
 def api_score():
     session_token = request.cookies['session_token']
-    user_info = show_score(session_token)     
+    try:
+        user_info = show_score(session_token)     
     
-    return user_info
+        return user_info
+    except:
+        abort(404)
 
 @app.route("/api/score/events", methods=['GET'])
+@user_role
 def api_score_events():
     session_token = request.cookies['session_token']
     events = show_user_events(session_token)    
@@ -144,42 +156,46 @@ def api_score_events():
     return events
 
 @app.route('/api/event/<event_PATH>', methods=['POST'])
+@user_role
 def api_event(event_PATH):
-    if 'session_token' in request.cookies:
         
-        session_token = request.cookies['session_token']
-        
-        response = show_event(event_PATH)    
+    session_token = request.cookies['session_token']
+    
+    response = show_event(event_PATH) 
+    try:   
         if not check_visited(session_token, response["event_id"]):
             
             add_points_to_user(session_token, response['value'], response['event_id'])
             add_visit(session_token, response['event_id'])
             
         if check_dynamic(response['event_id']):
-            print("saaaas")
             
             new_event_creditentials = change_dynamic_event(response["event_id"])
             create_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
         
         return response      
+    
+    except:
+        abort(404)
             
 
-    else:
-        return {'statusSuccess':False}
-    
-    
-    
-    return {'statusSuccess':False}
 
-# ---АДМИН В СИСТЕМЕ
+    
+    
+    
+    
+
+# ---АДМИН В СИСТЕМЕ---
 
 
 @app.route("/api/admin/users")
+@admin_role
 def api_admin_users():
     return show_all_users()
     
     
 @app.route("/api/admin/events")
+@admin_role
 def api_admin_events():
     return show_all_events()
 
@@ -187,6 +203,7 @@ def api_admin_events():
 
 
 @app.route("/api/admin/createevent", methods=['POST'])
+@admin_role
 def api_admin_createevent():
     post_data = request.data
     data_json = json.loads(post_data.decode('utf-8'))
@@ -200,43 +217,41 @@ def api_admin_createevent():
     
     
     
-    return {'url': f'event/{title}'}
+    return
 
 
 @app.route("/api/admin/deleteevent", methods=['POST'])
+@admin_role
 def api_admin_deleteevent():
     post_data = request.data
-    try:
-        data_json = json.loads(post_data.decode('utf-8'))
-    except:
-        return
+    data_json = json.loads(post_data.decode('utf-8'))
     event_id = data_json['event_id']
+    
     try:
         delete_event(event_id)
-        return {'statusSuccess':True}
+        
     except:
-        return {'statusSuccess':False}
+        return abort(500)
     
-    return ''
+    return abort(200)
 
 @app.route("/api/admin/editevent", methods=['POST'])
+@admin_role
 def api_admin_editevent():
     post_data = request.data
-    try:
-        data_json = json.loads(post_data.decode('utf-8'))
-    except Exception as e:
-        print(str(e))
+    data_json = json.loads(post_data.decode('utf-8'))
+
     event_id = data_json['event_id']
     title = data_json['title']
     description = data_json['description']
     value = data_json['value']
-    print(event_id)
+    
     try:
         edit_event(event_id, title, description, value)
         
-        return {'statusSuccess':True}
+        return Response(status=200)
     except:
-        return {'statusSuccess':False}
+        return abort(500)
 
 
 # ---ЭКСПОРТИРОВАНИЕ ФАЙЛОВ---

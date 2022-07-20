@@ -160,7 +160,15 @@ def show_all_events():
     events = DB_JSON("SELECT * FROM `lycevents`",{})
     return events
 
-
+# --ЛОГИ--
+def show_logs():
+    logs = DB_JSON(""" 
+                   SELECT lycusers.lastname, lycusers.firstname, lycevents.title, lycvisits.visit_time FROM lycvisits
+                   inner join lycusers on lycvisits.user_id = lycusers.user_id
+                   inner join lycevents on lycevents.event_id = lycvisits.event_id 
+                   order by lycvisits.visit_time desc;
+                   """, {})
+    return
 
 
 # ---ДЕЙСТВИЯ ИВЕНТОВ---
@@ -195,6 +203,9 @@ def add_visit(session_token, event_id):
     
     
     return
+
+
+
 
 
 

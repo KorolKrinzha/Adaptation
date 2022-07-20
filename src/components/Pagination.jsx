@@ -5,7 +5,6 @@ const Pagination = ({eventsPerPage, totalEvents, paginate}) => {
     for (let i=1; i<=Math.ceil(totalEvents/eventsPerPage); i++){
         pageNumbers.push(i)
     }
-    console.log(pageNumbers )
 
     return (
         <nav>

@@ -17,7 +17,7 @@ const ScoreEvents = () =>{
         const data = response['data']
         setEvents(data)
     })
-    .catch(err => console.log(err))
+    .catch(error => console.log(error))
 },[])
 
 

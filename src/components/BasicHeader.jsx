@@ -4,6 +4,7 @@ import "../styles/style.css"
 
 const BasicHeader = () => {
     return (
+        <>
         <header className="basicheader">
             
       <nav role={"navigation"}>
@@ -11,7 +12,7 @@ const BasicHeader = () => {
   
   
           <a className="navbar-brand" href="/">
-            <img src="/src/svg/SELF_icon.svg" width="40" height="40" className="d-inline-block align-center" alt=""></img>
+            <img src="/src/svg/Adaptation_icon.svg" width="40" height="40" className="d-inline-block align-center" alt=""></img>
             Адаптация
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -44,6 +45,9 @@ const BasicHeader = () => {
       </nav>
      
       </header>
+      <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+      </>
     );
 
 }
