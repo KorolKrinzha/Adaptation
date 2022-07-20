@@ -9,6 +9,7 @@ import {
   Score,
   Events,
   SingleEvent,
+  Logs,
 } from "./pages";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -29,7 +30,7 @@ root.render(
           <Route path=":eventPATH" element={<SingleEvent />}></Route>
         </Route>
 
-        <Route path="*" element={<NotFound />}  />
+        <Route path="*" element={<NotFound />} />
 
         <Route
           path="/score"
@@ -54,6 +55,15 @@ root.render(
           element={
             <AdminRoute>
               <Events />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/logs"
+          element={
+            <AdminRoute>
+              <Logs />
             </AdminRoute>
           }
         />

@@ -13,7 +13,7 @@ from DBs import sign_new_user, login_user, auth_new_user, check_admin, check_use
 from DBs import show_event, check_visited, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events 
 
 # взаимодействие админа с ивентами и пользователями
-from DBs import show_all_events, show_all_users, create_event, edit_event, delete_event
+from DBs import show_all_events, show_all_users, show_logs, create_event, edit_event, delete_event
 
 from QRs import create_QR
 from DB_tools import export_to_csv
@@ -31,7 +31,8 @@ def admin_role(f):
             session_token = request.cookies['session_token']
             if check_admin(session_token): return f(*args, **kwargs)
             else: return abort(404)
-        except: return abort(404)
+        except: 
+            return abort(404)
     return wrap
 
 def user_role(f):
@@ -52,7 +53,6 @@ def user_role(f):
 def api_check_user():
     if 'session_token' in request.cookies:        
         session_token = request.cookies['session_token']
-        print('session_token')
         try:
             response = str(check_user(session_token))
             return response
@@ -67,7 +67,6 @@ def api_check_user():
 def api_check_admin():
     if 'session_token' in request.cookies:        
         session_token = request.cookies['session_token']
-        print('session_token')
         try:
             response = str(check_admin(session_token))
             return response
@@ -198,6 +197,12 @@ def api_admin_users():
 @admin_role
 def api_admin_events():
     return show_all_events()
+
+
+@app.route("/api/admin/logs")
+@admin_role
+def api_admin_logs():  
+    return show_logs()
 
 
 

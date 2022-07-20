@@ -163,12 +163,16 @@ def show_all_events():
 # --ЛОГИ--
 def show_logs():
     logs = DB_JSON(""" 
-                   SELECT lycusers.lastname, lycusers.firstname, lycevents.title, lycvisits.visit_time FROM lycvisits
-                   inner join lycusers on lycvisits.user_id = lycusers.user_id
-                   inner join lycevents on lycevents.event_id = lycvisits.event_id 
-                   order by lycvisits.visit_time desc;
-                   """, {})
-    return
+                SELECT (@cnt := @cnt + 1) AS log_id, lycusers.lastname, lycusers.firstname, 
+                lycevents.title, lycvisits.visit_time, lycvisits.event_id
+                FROM lycvisits
+                INNER JOIN lycusers ON lycvisits.user_id = lycusers.user_id
+                INNER JOIN lycevents ON lycevents.event_id = lycvisits.event_id 
+                CROSS JOIN (select @cnt :=0) as increment
+                ORDER BY lycvisits.visit_time DESC
+                """, {})
+        
+    return logs
 
 
 # ---ДЕЙСТВИЯ ИВЕНТОВ---

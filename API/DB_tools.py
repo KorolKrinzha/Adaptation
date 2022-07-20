@@ -46,7 +46,7 @@ def DB_JSON(statement,values):
     data = []
     for result in rv[::-1]:
         data.append(dict(zip(row_headers, result)))
-    json_data = json.dumps(data)
+    json_data = json.dumps(data, default=str)
 
     mydb.close()
     mycursor.close()
