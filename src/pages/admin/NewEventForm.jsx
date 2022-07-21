@@ -59,7 +59,7 @@ const CreateEvent = () =>{
             onChange={(e) => setValue(e.target.value)}
           ></input>
 
-        <div class="d-flex flex-row">
+        <div className="d-flex flex-row">
           <input type='checkbox'     
           onChange={(e) => setDynamic(e.target.value)}
           />

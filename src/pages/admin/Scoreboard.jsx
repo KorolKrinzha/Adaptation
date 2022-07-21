@@ -20,11 +20,11 @@ const Scoreboard = ()=> {
     return (
         <div className="home">
             <p>Экспортировать пользователей</p>
-         <ExportButton fileformat="csv">
+         <ExportButton fileformat="csv" data="users">
          CSV
          </ExportButton>
 
-        <ExportButton fileformat="pdf">
+        <ExportButton fileformat="pdf" data="users">
         PDF
         </ExportButton>
         <UsersTable/>

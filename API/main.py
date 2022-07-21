@@ -15,7 +15,7 @@ from DBs import show_event, check_visited, add_points_to_user, add_visit, check_
 # взаимодействие админа с ивентами и пользователями
 from DBs import show_all_events, show_all_users, show_logs, create_event, edit_event, delete_event
 
-from QRs import create_QR
+from QRs import create_QR, update_QR,export_QR_codes, delete_QR
 from DB_tools import export_to_csv
 
 
@@ -170,7 +170,8 @@ def api_event(event_PATH):
         if check_dynamic(response['event_id']):
             
             new_event_creditentials = change_dynamic_event(response["event_id"])
-            create_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
+            print("Yami")
+            update_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
         
         return response      
     
@@ -217,7 +218,7 @@ def api_admin_createevent():
     value = data_json['value']
     dynamic = True if data_json['dynamic']=='on' else False
     event_creditentials = create_event(title, description, value, dynamic)
-    create_QR(event_creditentials['event_ID'], event_creditentials['event_url'])
+    create_QR(event_creditentials['event_ID'], event_creditentials['event_url'],dynamic)
     
     
     
@@ -234,6 +235,9 @@ def api_admin_deleteevent():
     
     try:
         delete_event(event_id)
+        try:
+            delete_QR(event_id)
+        except Exception as e: print(e)
         
     except:
         return abort(500)
@@ -265,6 +269,13 @@ def api_admin_editevent():
 def api_export_users():
     filename = export_to_csv("lycusers")
     return send_from_directory('../public/CSV', filename, as_attachment=True)
+
+
+@app.route("/api/export/events/zip", methods=['GET'])
+@admin_role
+def api_export_events():
+    filename = export_QR_codes()
+    return send_from_directory('../public/ZIP', f'{filename}.zip')
 
 
 # ---ФАЙЛЫ---

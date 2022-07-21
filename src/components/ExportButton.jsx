@@ -4,15 +4,17 @@ import fileDownload from "js-file-download";
 
 
 
-const ExportButton = ({fileformat, ...props}) =>{
+const ExportButton = ({fileformat, data,...props}) =>{
     const downloadCSV = (e)=>{
         e.preventDefault()
-        axios.get(`/api/export/users/${fileformat}`,{
+
+        axios.get(`/api/export/${data}/${fileformat}`,{
             withCredentials: true,
             responseType: "blob"
         }).then(response => {
-            fileDownload(response.data, "users.csv")
+            fileDownload(response.data, `${data}.${fileformat}`)
         }).catch(error => console.log(error))
+    
     }
 
     return(

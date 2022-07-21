@@ -33,6 +33,8 @@ yarn-error.log*
 /src/styles/style.css.map
 /src/assets/
 
-# photos
+# photos/tables
 /public/QR/
 /src/QR/
+/public/CSV
+/public/ZIP

@@ -5,6 +5,7 @@ import EventList from "./EventList";
 import NewEventForm from "./NewEventForm";
 import Pagination from "../../components/Pagination";
 import ModalWindow from "../../components/ModalWindow";
+import ExportButton from "../../components/ExportButton";
 
 
 const Events = ()=> {
@@ -36,6 +37,9 @@ const Events = ()=> {
   
   return (
         <div className="container mt-5">
+          <ExportButton fileformat="zip" data="events" >
+            Скачать все статичные QR-коды
+          </ExportButton>
 
           <NewEventForm/> 
 

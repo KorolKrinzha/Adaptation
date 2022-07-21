@@ -2,7 +2,9 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { ReactComponent as DeleteEventButton } from '../../assets/deleteevent.svg'
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
+import {ReactComponent as DownloadButton} from '../../assets/downloadeventqr.svg'
 import { Link } from 'react-router-dom'
+import fileDownload from 'js-file-download'
 
 
 const EditEventForm = ({event}) => {
@@ -20,7 +22,7 @@ const EditEventForm = ({event}) => {
       }
       ).then((res)=>{
         if (res.response.status===200){
-          // window.location.reload()
+          window.location.reload()
           console.log('Удалено')
         }
       })
@@ -44,6 +46,18 @@ const EditEventForm = ({event}) => {
 
     }
 
+    const downloadEventQR = (e) =>{
+      e.preventDefault()
+      axios.get(`/QR/${event.event_id}.png`,{
+        withCredentials: true,
+        responseType: "blob"
+      }).then((response)=>{
+        fileDownload(response.data, `${event.event_id}.png`)
+      })
+
+    }
+
+
   return (
     <div>
       <button onClick={(e)=>{
@@ -51,6 +65,10 @@ const EditEventForm = ({event}) => {
         setDisabled(!disabled)
       }}>
         <EditEventButton/>
+      </button>
+
+      <button onClick={(e)=>downloadEventQR(e)}>
+        <DownloadButton/>
       </button>
 
 
