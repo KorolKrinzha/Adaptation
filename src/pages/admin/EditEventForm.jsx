@@ -21,9 +21,9 @@ const EditEventForm = ({event}) => {
       withCredentials: true
       }
       ).then((res)=>{
-        if (res.response.status===200){
-          window.location.reload()
+        if (res.status===200){
           console.log('Удалено')
+          window.location.reload()
         }
       })
       

@@ -232,17 +232,15 @@ def api_admin_deleteevent():
     post_data = request.data
     data_json = json.loads(post_data.decode('utf-8'))
     event_id = data_json['event_id']
-    
     try:
         delete_event(event_id)
-        try:
-            delete_QR(event_id)
-        except Exception as e: print(e)
+        delete_QR(event_id)
         
-    except:
+    except Exception as e:
+        print(e)
         return abort(500)
     
-    return abort(200)
+    return Response(status=200)
 
 @app.route("/api/admin/editevent", methods=['POST'])
 @admin_role
