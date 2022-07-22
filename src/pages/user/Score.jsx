@@ -18,7 +18,7 @@ const Score = ()=>{
       setLastname(response['data']['lastname'])
       setCount(response['data']['count'])
     }).catch(error => {
-      if (error.response.status==404) setFound(false)
+      if (error.response.status===404) setFound(false)
     } )
 
   },[])

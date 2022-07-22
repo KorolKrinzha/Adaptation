@@ -287,3 +287,10 @@ def QR_event(event_id):
     except:
         abort(404)
     
+@app.route("/QRDYNAMIC/<event_id>")
+def QRDYNAMIC_event(event_id):
+    try:
+        filename = f'{event_id}.png'
+        return send_from_directory('../public/QRDYNAMIC/', filename)
+    except:
+        abort(404)

@@ -2,6 +2,7 @@ import qrcode
 from env import SITELINK
 from shutil import make_archive
 from os import remove
+from PIL import ImageDraw, Image
 
 
 
@@ -10,7 +11,7 @@ from os import remove
 def create_QR(event_ID, event_path, dynamic):     
     qr = qrcode.QRCode(
         version=1,
-        box_size=10
+        box_size=40
        
     )
     
@@ -23,9 +24,26 @@ def create_QR(event_ID, event_path, dynamic):
     if not dynamic:
         qr_image.save(f'../public/QR/{event_ID}.png')
     elif dynamic:
-        qr_image.save(f'../public/QR/DYNAMIC/{event_ID}.png')
+        qr_image.save(f'../public/QRDYNAMIC/{event_ID}.png')
     event_info = {"ID": event_ID, "Path": event_path }
+    print('AAAAAAAAAAAAAAAAAAAAAA')
+    add_text_to_QR('Text', f'{event_ID}.png')
+    
     return event_info
+
+def add_text_to_QR(title, filename):
+    try:
+        background = Image.new('RGBA', (176, 225), (255,255,255,255))
+        draw = ImageDraw.Draw(background)
+        draw.text((5,5), "Top text", (0,0,0))
+        draw.text((5,210),"Bottom", (0,0,0))
+        qr = Image.open(f'../public/QR/{filename}')
+        background.paste(qr, (0,20))
+        background.save(filename)
+    except Exception as e:print(e)
+    print("AAAAAAAAAAAAAAAAAAAAAAA")
+    return
+
 
 def update_QR(event_ID, event_URL):
     qr = qrcode.QRCode(

@@ -21,7 +21,7 @@ const SingleEvent = () =>{
                 
             }
         ).catch(error => {
-            if(error.response.status==404) setFound(false)
+            if(error.response.status===404) setFound(false)
         })
     },[])
 
@@ -31,7 +31,7 @@ const SingleEvent = () =>{
 
 
 
-    if (typeof eventPATH == 'undefined'){
+    if (typeof eventPATH === 'undefined'){
         return <NotFound/>
     }
     

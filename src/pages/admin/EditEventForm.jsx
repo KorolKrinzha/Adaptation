@@ -67,18 +67,25 @@ const EditEventForm = ({event}) => {
         <EditEventButton/>
       </button>
 
+      {!event.dynamic &&
+
       <button onClick={(e)=>downloadEventQR(e)}>
         <DownloadButton/>
       </button>
+      }
+      
 
 
       <button onClick={(e)=>deleteEvent(e)}>
         <DeleteEventButton/>
         </button>
 
-
-        <img src={`/QR/${event.event_id}`} alt="Lyceum Adaptation QR code" className='img-fluid'/>
-      
+        {!event.dynamic ?
+        <img src={`/QR/${event.event_id}`} alt="Lyceum Adaptation QR code" className='img-fluid'/> : null
+        }
+        {event.dynamic ?
+          <img src={`/QRDYNAMIC/${event.event_id}`} alt="Lyceum Adaptation QR code" className='img-fluid'/> : null
+        }
 
       <form onSubmit={editEvent}>
         <div className="sign-formSection">
