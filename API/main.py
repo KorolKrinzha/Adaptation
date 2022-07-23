@@ -7,7 +7,7 @@ import json
 
 
 # взаиодействие с пользователями
-from DBs import sign_new_user, login_user, auth_new_user, check_admin, check_user
+from DBs import sign_new_user, check_email, login_user, auth_new_user, check_admin, check_user
 
 # взаимодействие обычного пользователя с ивентами
 from DBs import show_event, check_visited, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events 
@@ -94,22 +94,26 @@ def test_admin():
 # ---ДОБАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ В СИСТЕМУ---
 @app.route("/api/signuser", methods=['POST'])
 def api_signuser():
-    try:
-        post_data = request.data
-        data_json = json.loads(post_data.decode('utf-8'))
-        firstname = data_json['firstname']
-        lastname = data_json['lastname']
-        grade = data_json['grade']
+    post_data = request.data
+    data_json = json.loads(post_data.decode('utf-8'))
+    firstname = data_json['firstname']
+    lastname = data_json['lastname']
+    grade = data_json['grade']
 
-        email = data_json['email']
-        password = data_json['password']
+    email = data_json['email']
+    password = data_json['password']  
+    if not(check_email(email)):     
+        try:   
+            user_id = auth_new_user(email, password)
+            sign_new_user(user_id, lastname, firstname, grade, email)
+            return {'session_token':user_id}
+        except:
+            return Response(response='Ошибка при регистрации. Пожалуйста, попробуйте еще раз', status=500)
+    else: return Response(response='Данная почта уже используется. Пожалуйста, попробуйте еще раз', status=500)
         
-        user_id = auth_new_user(email, password)
-        sign_new_user(user_id, lastname, firstname, grade, email)
         
-        return {'statusSuccess':True, 'session_token':user_id}
-    except:
-        return {'statusSuccess':False}
+    
+    return Response(response='Ошибка при регистрации. Пожалуйста, попробуйте еще раз', status=500)
         
     
 @app.route("/api/loginuser", methods=['POST'])
@@ -122,14 +126,16 @@ def api_loginuser():
         email = data_json['email']
         password = data_json['password']
         user_id = login_user(email, password) 
-        if user_id!="Login Failed":
-            return {'statusSuccess':True, 'session_token':user_id}
+        if (len(user_id)>0):
+            return {'session_token':user_id}
         
-        return {'statusSuccess':False}
+        return Response(response='Данный аккаунт не найден. Пожалуйста, проверьте введенные даннные',
+                        status=500)
         
 
     except:
-        return {'statusSuccess':False}
+        return Response(response='Данный аккаунт не найден. Пожалуйста, проверьте введенные даннные',
+                        status=500)
 
 
 

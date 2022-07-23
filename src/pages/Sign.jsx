@@ -1,6 +1,7 @@
 import { useState } from "react"
 import "../styles/style.css"
 import Cookies from "universal-cookie/es6"
+import axios from "axios"
 
 const Sign = () =>{
 
@@ -11,42 +12,32 @@ const Sign = () =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const [errorMessage, setErrorMessage] = useState()
+
 
 
 
     const signUser = (event) =>{
         event.preventDefault();
+        axios.post('/api/signuser',{
+          firstname: firstname,
+          lastname: lastname,
+          grade: `${grade} ${group}`,
+          email: email,
+          password: password
+        }).then((response)=>{
+          if (response.status===200){
+            let session_token = response.data['session_token']
+            const cookies = new Cookies()
+            cookies.set('session_token', session_token, {path:'/'}) 
+            window.location.reload();
+          }
+        }).catch((error)=>{
+        if (error.response){
+          setErrorMessage(error.response.data)
+        }
+      })
 
-
-        fetch(`/api/signuser`,{
-            method: "POST",
-            body: JSON.stringify({
-              firstname: firstname,
-              lastname: lastname,
-              grade: `${grade} ${group}`,
-              email: email,
-              password: password
-            }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }).then(
-            res => res.json()
-          ).then(res=>{
-              if (res['statusSuccess']){
-                  let session_token = res['session_token']
-                  console.log(session_token)
-                  const cookies = new Cookies()
-                  cookies.set('session_token', session_token, {path:'/'}) 
-                  window.location.reload();
-
-              }
-              else{
-                  console.log("Ошибка")
-              } 
-              
-            })
-      
 
     }
     
@@ -61,8 +52,7 @@ const Sign = () =>{
         вам необходимо зарегистрироваться <b>под настоящим именем и фамилией</b></p>
 
         <div className="row justify-content-center mt-4">
-    <form onSubmit={signUser} className="bg primary">
-    <div className="sign-formSection">
+    <form onSubmit={signUser} className="sign-formSection bg primary">
       <label htmlFor="surname">Фамилия</label>
       <input
           type="text"
@@ -131,17 +121,19 @@ const Sign = () =>{
             onChange={(e) => setPassword(e.target.value)}
             required></input>
 
+
     <div className="middle-textSection">
       <button type="submit" className="form-button">Зарегистрироваться</button>
-      <p className="small-text">Уже зарегистрированы?
-                <a href="/login">Выполните вход</a>
-              </p>
+      <p className="small-text">Уже зарегистрированы?</p>
+      <a href="/login">Выполните вход</a>
+    </div>
 
-      </div>
-
-      </div>
   </form>
-  </div>
+  
+
+    <p className="middle-textSection h5">{errorMessage}</p>
+
+    </div>
   </div>
 );
 }

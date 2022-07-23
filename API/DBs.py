@@ -29,6 +29,13 @@ def auth_new_user(email,password):
             })
         
         return user_id
+    
+    
+def check_email(email):
+    exists = DB_CHECK_EXISTENCE("""SELECT COUNT(1) FROM lycusers WHERE `email`=%(email)s""", 
+                                {'email':email})    
+    
+    return exists
 
 # ! Сделать проверку на уникальность почты
 def sign_new_user(user_id, lastname, firstname, grade, email):    
@@ -50,7 +57,7 @@ def login_user(email, password):
     except:
         account = []
     if len(account)==0:
-        return "Login Failed"
+        return ''
     else:
         user_id = account[0]
         hash_password = account[2]
@@ -59,7 +66,7 @@ def login_user(email, password):
             return user_id
     
         
-    return "Login Failed"
+    return ''
 
 
     
