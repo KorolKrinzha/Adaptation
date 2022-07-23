@@ -6,10 +6,11 @@ import NotificationContainer from 'react-notifications/lib/NotificationContainer
 import { ReactComponent as DeleteEventButton } from '../../assets/deleteevent.svg'
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
 import {ReactComponent as DownloadButton} from '../../assets/downloadeventqr.svg'
+import { NotificationManager } from 'react-notifications'
+
 import "../../styles/style.css"
 
-import { NotificationManager } from 'react-notifications'
-// import 'react-notifications/lib/notifications.css';
+import { SITELINK, APIPORT } from '../../env/envvar'
 
 const EditEventForm = ({event}) => {
     const [title, setTitle] = useState(event.title)
@@ -65,32 +66,28 @@ const EditEventForm = ({event}) => {
 
   return (
     <div>
-      <button onClick={(e)=>{
+      <button className='svg-button' onClick={(e)=>{
         e.preventDefault()
         setDisabled(!disabled)
+        
       }}>
         <EditEventButton/>
       </button>
 
       {!event.dynamic &&
 
-      <button onClick={(e)=>downloadEventQR(e)}>
+      <button className='svg-button' onClick={(e)=>downloadEventQR(e)}>
         <DownloadButton/>
       </button>
       }
       
 
 
-      <button onClick={(e)=>deleteEvent(e)}>
+      <button className='svg-button' onClick={(e)=>deleteEvent(e)}>
         <DeleteEventButton/>
         </button>
 
-        {!event.dynamic ?
-        <img src={`/QR/${event.event_id}`} alt="Lyceum Adaptation QR code" className='img-fluid'/> : null
-        }
-        {event.dynamic ?
-          <img src={`/QRDYNAMIC/${event.event_id}`} alt="Lyceum Adaptation QR code" className='img-fluid'/> : null
-        }
+        
 
       <form onSubmit={editEvent}>
         <div className="sign-formSection">
@@ -123,8 +120,19 @@ const EditEventForm = ({event}) => {
           ></input>
 
           <p>Это {event.dynamic ? "динамичный":"статичный"} ивент</p>
-          <Link to={`/event/${event.url}`}>Страница ивента</Link>
-          
+
+          {!event.dynamic ?
+          <Link to={{pathname:`${SITELINK}:${APIPORT}/QR/${event.event_id}`}} target="_blank">Страница ивента</Link> : null
+
+          }
+
+          {event.dynamic ? 
+          <Link to={`${SITELINK}:${APIPORT}/QRDYNAMIC/${event.event_id}`}>Страница ивента</Link>: null
+
+          }
+
+
+
 
 
           

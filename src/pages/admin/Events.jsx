@@ -2,9 +2,8 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import EventList from "./EventList";
-import NewEventForm from "./NewEventForm";
+import EventFormPopup from "./EventFormPopup";
 import Pagination from "../../components/Pagination";
-import ModalWindow from "../../components/ModalWindow";
 import ExportButton from "../../components/ExportButton";
 
 
@@ -41,7 +40,7 @@ const Events = ()=> {
             Скачать все статичные QR-коды
           </ExportButton>
 
-          <NewEventForm/> 
+          <EventFormPopup/> 
 
           <EventList events={currentEvents} loading={loading} />
           <Pagination eventsPerPage={eventsPerPage} totalEvents={events.length} paginate={paginate}/>

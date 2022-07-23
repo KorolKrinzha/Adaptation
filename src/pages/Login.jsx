@@ -46,7 +46,7 @@ const Login = () =>{
 
     return (
     <div className="container -lg">
-         <h1 className="title"> Адаптация | Вход</h1>
+         <h1 className="text-title"> Адаптация | Вход</h1>
       <p className="infotext">Для получения баллов
         вам необходимо войти в систему</p>
 

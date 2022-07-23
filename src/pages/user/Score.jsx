@@ -29,7 +29,7 @@ const Score = ()=>{
     return found ? (
         <div className="EVENTS-textContainer">
 
-        <h1 className="title">Адаптация | Баллы</h1>
+        <h1 className="text-title">Адаптация | Баллы</h1>
   
   
           <p className="infotext">Добро пожаловать,  {fisrtname} </p>

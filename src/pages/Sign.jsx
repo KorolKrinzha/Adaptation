@@ -47,7 +47,7 @@ const Sign = () =>{
 
     return (
      <div className="container -lg">
-         <h1 className="title"> Адаптация | Регистрация</h1>
+         <h1 className="text-title"> Адаптация | Регистрация</h1>
       <p className="infotext">Для получения баллов
         вам необходимо зарегистрироваться <b>под настоящим именем и фамилией</b></p>
 

@@ -39,3 +39,6 @@ yarn-error.log*
 /src/QR/
 /public/CSV
 /public/ZIP
+
+# environment variables
+/src/env

@@ -66,9 +66,11 @@ h6 {
 
 
 p {
-    font-family: Raleway;
     white-space: pre-line;
     @extend .text-break;
+    
+    font-family: Raleway;
+    @extend .h4;
     color: $primary;
 }
 
@@ -203,10 +205,14 @@ $question-height: 20px;
 // ---SIGN---
 
 // НАДПИСЬ ВВЕРХУ 
-.title{
-    @extend .h2;
+.text-title{
+    @extend .h1;
     @extend .text-center;
     @extend .mt-4;
+    
+
+    font-family: PrimaryHeading;
+    color: $success;
 }
 
 // ТЕКСТ СВЕРХУ 
@@ -252,10 +258,16 @@ $question-height: 20px;
 .sign-formSection{
     @extend .mb-4;
     
+    background-color: $bg-dark;
+    color: $success;
+
+    
     label{        
         @extend .form-label;
         @extend .mt-3;
         @extend .text-center;
+        @extend .h4;
+        font-family: PrimaryTextBold;
 
     }
 
@@ -265,18 +277,19 @@ $question-height: 20px;
         @extend .align-middle;
         height: 50px; 
         line-height: 50px;
+        color: transparent;
+        background-color: transparent;
+        border-radius:5px;
+        border:2px solid red;
+
+
     }
-    input{
-        @extend .form-control;
-        
-    }
-    select{
-        @extend .form-select;       
-        
-    }
+    
 
     textarea{
         @extend .form-control;
+        border-radius:5px;
+        border:2px solid red;
     }
 
     input[type='checkbox'] {
@@ -293,6 +306,15 @@ $question-height: 20px;
     }
     input[type='checkbox']:checked {
         background: $success;
+    }
+
+    input{
+        @extend .form-control;
+        
+    }
+    select{
+        @extend .form-select;       
+        
     }
 }
 
@@ -325,8 +347,10 @@ $question-height: 20px;
 
 
 .events-table {
+    
     @extend .table;
     @extend .justify-content-center;
+    color: $primary;
 
     tbody {
         th {
@@ -445,6 +469,16 @@ $question-height: 20px;
     }
 
 }
+
+// СТИЛЬ КНОПКИ ДЛЯ SVG КОМПОНЕНТОВ
+.svg-button{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+} 
 
 
 // УВЕДОМЛЕНИЯ
