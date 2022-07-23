@@ -1,5 +1,6 @@
 import React from 'react'
-import EventForm from './EditEventForm'
+import EditEventForm from './EditEventForm'
+import Popup from '../../components/Popup'
 
 const EventList = ({events,loading}) => {
   if (loading) return <h2>Загрузка...</h2>
@@ -8,7 +9,7 @@ const EventList = ({events,loading}) => {
     <ul className='list-group px-3'>
       {events.map(event=>(
         <li key={event.event_id} className='list-group-item'>
-          <EventForm event={event}/>
+          <EditEventForm event={event}/>
         </li>
       ))}
     </ul>

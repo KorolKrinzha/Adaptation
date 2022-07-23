@@ -11,13 +11,13 @@ $bg-grey: #282828;
 
 // ---ШРИФТЫ---
 @font-face {
-    font-family: PrimaryHeading, 'Railway', sans-serif; //railway extrabold
+    font-family: PrimaryHeading; //railway extrabold
     src: url(./fonts/Raleway-ExtraBold.ttf);
 }
 
 
 @font-face {
-    font-family: UserGuide, 'Raleway', sans-serif; //  railway medium italic
+    font-family: UserGuide; //  railway medium italic
     src: url(./fonts/Raleway-MediumItalic.ttf);
 }
 
@@ -210,7 +210,7 @@ $question-height: 20px;
 
 // НАДПИСЬ ВВЕРХУ 
 .text-title{
-    @extend .h1;
+    @extend .display-3;
     @extend .text-center;
     @extend .mt-4;
     
@@ -264,8 +264,6 @@ $question-height: 20px;
 
 
 .form-input-border{
-    // border-radius:5px;
-    // border:2px solid red;
     @extend .border-gradient;
     @extend .border-gradient-red;
 
@@ -309,9 +307,8 @@ $question-height: 20px;
     textarea{
         @extend .form-control;
         @extend .form-input-border;
-        background-color: transparent;
-        color: $success;
-        
+        background-color: transparent !important;
+        color: $success !important;        
     }
 
     input[type='checkbox'] {
@@ -621,9 +618,9 @@ $question-height: 20px;
 // ГРАДИЕНТЫ
   
   .border-gradient {
-    border: 10px solid;
+    border: 15px solid;
     border-image-slice: 1;
-    border-width: 5px;
+    border-width: 3px;
   }
   .border-gradient-red {
     border-image-source: linear-gradient(to left, $danger, $primary);
