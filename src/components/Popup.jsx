@@ -2,7 +2,7 @@ import { ReactComponent as CloseButton} from '../assets/cross.svg'
 import '../styles/style.css'
 
 
-const Popup = ({title, setModalOpen, Component}) =>{
+const Popup = ({title, setModalOpen, ...props}) =>{
     return (
         <div className="container -lg bg-grey">
           <div className="sections">
@@ -20,7 +20,7 @@ const Popup = ({title, setModalOpen, Component}) =>{
             
             <div className="body">
 
-                <Component></Component>
+                {props.children}
 
             </div>
           </div>

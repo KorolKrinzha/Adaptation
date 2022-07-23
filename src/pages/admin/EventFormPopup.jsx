@@ -8,7 +8,7 @@ import Popup from "../../components/Popup"
 
 
 const NewEventForm = () =>{
-    const [modalOpen, setModalOpen] = useState(false);
+      const [modalOpen, setModalOpen] = useState(false);
    
     
 
@@ -29,7 +29,9 @@ const NewEventForm = () =>{
         <AddEventButton/>
       </button>
      
-  {modalOpen && <Popup title="Создайте новый ивент" Component={CreateEvent} setModalOpen={setModalOpen}/>}            
+  {modalOpen && <Popup title="Создайте новый ивент" setModalOpen={setModalOpen}> 
+  <CreateEvent/>
+  </Popup>}            
 
             </div>
     )
