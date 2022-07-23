@@ -3,8 +3,10 @@ import { useTable, useSortBy, useGlobalFilter } from 'react-table';
 import SCOREBOARD_COLUMNS from './columns';
 import { useMemo } from 'react';
 import axios from 'axios';
-import './table.css'
 import GlobalTableFilter from '../../components/GlobalTableFilter';
+import '../../styles/style.css'
+
+
 const UsersTable = () => {
 
   const [users, setusers] = useState([]);
@@ -62,7 +64,7 @@ const UsersTable = () => {
   return (
     <div>
     <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter}/>
-    <table {...getTableProps()}>
+    <table {...getTableProps()} className='scoreboard-table'>
       <thead>
         {
           headerGroups.map((headerGroup)=>(

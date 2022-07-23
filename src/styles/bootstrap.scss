@@ -42,6 +42,11 @@ body,
 	height: 100%;
 }
 
+body{
+    background-color: $bg-dark;
+    background: $bg-dark;
+}
+
 h1{
     @extend .display-1;
     font-family: PrimaryHeading;
@@ -57,6 +62,8 @@ h6 {
 
 
 }
+
+
 
 p {
     font-family: Raleway;
@@ -316,68 +323,10 @@ $question-height: 20px;
 
 // ---ТАБЛИЦЫ---
 
-// СКОРБОРД
-.scoreboard-table {
-    
-    @extend .table;
-    @extend .justify-content-center;
-    
 
-    @extend .border-color-table;
-    
-    th{
-        border-bottom:1px solid $bg-dark !important;
-        
-    }
-    .scoreboard-table-separator{
-        border-left: 2px solid $primary !important;
-        width: 25%;
-    }
-
-
-    table {        
-        white-space: nowrap;
-        
-    }
-
-
-    th {
-        @extend .h4;
-        @extend .text-center;
-        @extend .mt-1;   
-        
-        
-    }
-
-    div{        
-        font-family: PrimaryText;
-        border-bottom: 2px solid $primary;
-              
-    }
-}
-
-// ШАБЛОН ДЛЯ РАСКРАСКИ ЛИНИЙ В ТАБЛИЦАХ 
-.border-color-table{
-    th{
-        border-top:1px solid  $bg-dark;
-        border-bottom:1px solid $warning;
-            
-    }
-    td{
-        border-top:1px solid rgb(255, 255, 255);
-        border-bottom:1px solid rgb(255, 255, 255);        
-    }
-    tr{
-        border-top:1px solid rgb(255, 255, 255);
-        border-bottom:1px solid rgb(255, 255, 255);   
-    }
-}
-
-// ТАБЛИЦА НА ГЛАВНОЙ СТРАНИЦЕ
 .events-table {
     @extend .table;
     @extend .justify-content-center;
-    @extend .border-color-table;  
 
     tbody {
         th {
@@ -404,6 +353,47 @@ $question-height: 20px;
         }
     }
 }
+
+// СКОРБОРД
+.scoreboard-table {
+    @extend .mt-4;    
+    @extend .table;
+    @extend .justify-content-center;   
+    table{
+    width: 75%;
+        }
+    
+    th{
+        border-bottom:1px solid $bg-dark !important;
+        color: $secondary;
+        @extend .h2;
+        @extend .text-center;
+        @extend .mt-4;   
+        background-color: $header-background !important;       
+    }
+
+    td{
+        color: $primary;
+            @extend .text-center;            
+            @extend .align-middle;
+            @extend .h3;
+            @extend .mb-4;
+            font-family: PrimaryText;
+            white-space: pre-line;
+            width: 50%;
+    }
+
+    tr{
+        background-color: $success
+    }
+    tr:nth-child(even) {
+        
+        background-color: $success;
+    }
+}
+
+
+
 
 // ---ИВЕНТЫ---
 .EVENTS-textContainer{
