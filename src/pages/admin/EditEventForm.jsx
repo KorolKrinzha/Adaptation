@@ -1,11 +1,15 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import fileDownload from 'js-file-download'
+import NotificationContainer from 'react-notifications/lib/NotificationContainer'
 import { ReactComponent as DeleteEventButton } from '../../assets/deleteevent.svg'
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
 import {ReactComponent as DownloadButton} from '../../assets/downloadeventqr.svg'
-import { Link } from 'react-router-dom'
-import fileDownload from 'js-file-download'
+import "../../styles/style.css"
 
+import { NotificationManager } from 'react-notifications'
+// import 'react-notifications/lib/notifications.css';
 
 const EditEventForm = ({event}) => {
     const [title, setTitle] = useState(event.title)
@@ -42,6 +46,7 @@ const EditEventForm = ({event}) => {
         if (response.status===200)
         // ! TODO добавить уведомление
         console.log("Редактировано")
+        NotificationManager.warning('Перезагрузите, чтобы видеть изменения', 'Ивент обновлен', 5000)
       }).catch((error)=>console.log(error.response.status))
 
     }
@@ -130,6 +135,8 @@ const EditEventForm = ({event}) => {
   
         <button type="submit" className="form-button" disabled={disabled}>Обновить ивент</button>
       </form>
+
+      <NotificationContainer/>
 
 
     </div>
