@@ -128,9 +128,9 @@ def create_event(title, description, value, dynamic=False):
     event_url = create_path()
     
     DB_COMMIT("""INSERT INTO `LycEvents`
-              (`event_id`,`title`,`description`,`value`,`dynamic`, `url`) 
-              VALUES 
-            (%(event_id)s,%(title)s, %(description)s,%(value)s, %(dynamic)s, %(event_url)s);""",{
+            (`event_id`,`title`,`description`,`value`,`dynamic`, `url`, `create_time`) 
+            VALUES 
+            (%(event_id)s,%(title)s, %(description)s,%(value)s, %(dynamic)s, %(event_url)s, now());""",{
                 'event_id':event_ID,
                 'title': title,
                 'description': description,
@@ -164,7 +164,7 @@ def delete_event(event_id):
     
     
 def show_all_events():
-    events = DB_JSON("SELECT * FROM `lycevents`",{})
+    events = DB_JSON("SELECT * FROM `lycevents` ORDER BY create_time ASC",{})
     return events
 
 # --ЛОГИ--
@@ -207,8 +207,9 @@ def check_visited(session_token, event_id):
 
 def add_visit(session_token, event_id):
     visit_time = current_date()
+    
     DB_COMMIT("""INSERT INTO `lycvisits` (`event_id`,`user_id`,`visit_time`) 
-        VALUES (%(event_id)s,%(session_token)s, date(now()))""",
+        VALUES (%(event_id)s,%(session_token)s, now())""",
         {'event_id':event_id,
          'session_token':session_token})
     

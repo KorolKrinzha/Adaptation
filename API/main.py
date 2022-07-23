@@ -228,7 +228,7 @@ def api_admin_createevent():
     
     
     
-    return
+    return Response(status=200)
 
 
 @app.route("/api/admin/deleteevent", methods=['POST'])
