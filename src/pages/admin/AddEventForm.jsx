@@ -27,7 +27,7 @@ const CreateEvent = () =>{
     return (
       <div className="row justify-content-center mt-4">
         <form onSubmit={addEvent}>
-          <div className="sign-formSection">
+          <div className="formSection bg-grey">
           
           <label htmlFor="title">Название ивента</label>
             <input 
@@ -51,6 +51,7 @@ const CreateEvent = () =>{
             <input 
             required
             type="number"
+            min="1"
               value={value}
               onChange={(e) => setValue(e.target.value)}
             ></input>

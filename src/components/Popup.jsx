@@ -4,10 +4,10 @@ import '../styles/style.css'
 
 const Popup = ({title, setModalOpen, Component}) =>{
     return (
-        <div className="container -lg">
+        <div className="container -lg bg-grey">
           <div className="sections">
             <div className="d-flex flex-row-reverse">
-            <button className='svg-button'
+            <button className='svg-button mt-3'
             onClick={() => {
               setModalOpen(false);
             }}

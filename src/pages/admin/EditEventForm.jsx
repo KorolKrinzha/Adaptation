@@ -90,7 +90,7 @@ const EditEventForm = ({event}) => {
         
 
       <form onSubmit={editEvent}>
-        <div className="sign-formSection">
+        <div className="formSection">
 
         <label htmlFor="title">Название ивента</label>
           <input disabled={disabled}
@@ -115,6 +115,7 @@ const EditEventForm = ({event}) => {
           disabled={disabled}
           required
           type="number"
+          min="1"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           ></input>

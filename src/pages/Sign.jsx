@@ -52,7 +52,7 @@ const Sign = () =>{
         вам необходимо зарегистрироваться <b>под настоящим именем и фамилией</b></p>
 
         <div className="row justify-content-center mt-4">
-    <form onSubmit={signUser} className="sign-formSection bg primary">
+    <form onSubmit={signUser} className="formSection bg primary">
       <label htmlFor="surname">Фамилия</label>
       <input
           type="text"

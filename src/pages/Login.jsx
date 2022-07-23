@@ -51,7 +51,7 @@ const Login = () =>{
         вам необходимо войти в систему</p>
 
     <div className="row justify-content-center mt-4">
-    <form onSubmit={logUser} className="sign-formSection bg primary">
+    <form onSubmit={logUser} className="formSection bg primary">
 
     <label htmlFor="email">Мэйл</label>
         <input

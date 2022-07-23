@@ -6,7 +6,7 @@ $danger: #A63543; // красный акцентный
 $warning: #F4A255; 
 $bg-dark: #191919; // цвет темной темы
 $info: $secondary;
-$header-background: #282828;
+$bg-grey: #282828;
 
 
 // ---ШРИФТЫ---
@@ -106,9 +106,13 @@ li,ul{
     list-style-type: none;
 }
 
+.bg-grey{
+    background-color: $bg-grey !important;
+}
+
 // ---ХЭДЕРЫ И ФУТЕРЫ---
 
-// ХЭДЕР
+
 
 
 // ФУТЕР
@@ -248,14 +252,27 @@ $question-height: 20px;
     @extend .m-3;
     @extend .text-center;
     @extend .btn;
-    @extend .btn-info;
+    @extend .btn-danger;
     @extend .d-flex;   
     
     @extend .justify-content-center;
+    @extend .h4;
+
+    font-family: PrimaryText;
+    color: $success !important;
+}
+
+
+.form-input-border{
+    // border-radius:5px;
+    // border:2px solid red;
+    @extend .border-gradient;
+    @extend .border-gradient-red;
+
 }
 
 // ДЛЯ ОКОШЕК В РЕГИСТРАЦИИ. НАПРИМЕР, МЭЙЛ
-.sign-formSection{
+.formSection{
     @extend .mb-4;
     
     background-color: $bg-dark;
@@ -273,39 +290,44 @@ $question-height: 20px;
 
 
     input:not([type=checkbox]){
+        @extend .form-input-border;
         @extend .text-center;
         @extend .align-middle;
         height: 50px; 
         line-height: 50px;
-        color: transparent;
-        background-color: transparent;
-        border-radius:5px;
-        border:2px solid red;
+        color: $success;
+        background-color: transparent;    
+    }
 
-
+    input:not([type=checkbox]):focus{
+        border: yellow;
+        color: $success;
+        background-color: transparent;    
     }
     
 
     textarea{
         @extend .form-control;
-        border-radius:5px;
-        border:2px solid red;
+        @extend .form-input-border;
+        background-color: transparent;
+        color: $success;
+        
     }
 
     input[type='checkbox'] {
-        -webkit-appearance:none;
-        width:30px;
-        height:30px;
+        appearance: none;
+        width:35px;
+        height:35px;
         line-height: 30px;
-        background:white;
-        border-radius:5px;
-        border:2px solid #555;
+        color: $success;
         @extend .align-middle;
         @extend .justify-content-center;
+        @extend .form-input-border;
+        @extend .mt-2;
 
     }
     input[type='checkbox']:checked {
-        background: $success;
+        background: $primary;
     }
 
     input{
@@ -393,7 +415,7 @@ $question-height: 20px;
         @extend .h2;
         @extend .text-center;
         @extend .mt-4;   
-        background-color: $header-background !important;       
+        background-color: $bg-grey !important;       
     }
 
     td{
@@ -452,7 +474,7 @@ $question-height: 20px;
         @extend .navbar;
         @extend .navbar-expand-lg;
         @extend .navbar-light;
-        background-color: $header-background !important;
+        background-color: $bg-grey !important;
         
     }
     ul{
@@ -596,7 +618,16 @@ $question-height: 20px;
   content: "";
 }
 
-
+// ГРАДИЕНТЫ
+  
+  .border-gradient {
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+  }
+  .border-gradient-red {
+    border-image-source: linear-gradient(to left, $danger, $primary);
+  }
 
 // !!! НЕ УДАЛЯТЬ ИМПОРТ
 @import "../../node_modules/bootstrap/scss/bootstrap.scss"
