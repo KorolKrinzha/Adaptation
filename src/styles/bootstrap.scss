@@ -95,9 +95,6 @@ b, strong{
     @extend .fw-bold;
 }
 
-// div {
-//     font-family: PrimaryText;
-// }
 
 span {
     color: $secondary
@@ -115,35 +112,12 @@ li,ul{
     background-color: $bg-dark !important;
 }
 
-// ---ХЭДЕРЫ И ФУТЕРЫ---
 
 
 
 
-// ФУТЕР
-.footer {
-    font-family: PrimaryHeading;
 
-    
-    @extend .mt-auto;
-    @extend .align-middle;
-    height: 35px; 
-    line-height: 35px;
-    margin-top: -35px;
-    background-color: $bg-dark;
-    
-    bottom: 0px;
-    
-
-    p {
-
-        @extend .text-center;
-        @extend .align-middle;
-        // color: #F4A255;
-    }
-}
-
-// ---ГЛАВНАЯ СТРАНИЦА---
+// ---POPUP---
 
 // КОНТЕЙНЕРЫ НА ГЛАВНОЙ СТРАНИЦЕ
 .sections{
@@ -153,63 +127,15 @@ li,ul{
     @extend .mt-4;
 }
 
-// МЕРЦАЮЩАЯ НАДПИСЬ НА ГЛАВНОЙ СТРАНИЦЕ
-.spring-educational-lyceum-festival{
-    font-family: PrimaryHeading;
-    @extend .display-5;
-    margin-bottom: 0;
-    margin-top: 0;
-    
-    
-}
 
 
 
 
-// ---FAQ---
 
-// ЭТО ДЛЯ ВЫСОТЫ ЛИНИИ СБОКУ
-$question-height: 20px;
 
-// ВОПРОС
-.question {    
-    @extend .p-2;
-    @extend .me-auto;
-    
 
-    @extend .align-middle;
-    @extend .fw-bold;    
-    height: $question-height; 
-    line-height: $question-height;
-}
 
-// КНОПКА СБОКУ ДЛЯ ОТВЕТА
-.collapse-button{
-    @extend .ms-auto;
-    @extend .p-2;
-    @extend .align-middle;   
-    span{
-        color: $primary;
-        line-height:$question-height;
-        @extend .align-middle;
-        @extend .justify-content-center;   
-    }
-}
 
-// ОТВЕТ
-.response {
-    @extend .p-2;
-    white-space: pre-line;
-}
-
-// ЦВЕТНАЯ ЛИНИЯ СЛЕВА
-.FAQ-element {
-    @extend .my-3;
-    @extend .align-items-start;
-    border-left: 3px solid;
-    border-color: $success;
-    
-}
 
 // ---SIGN---
 
@@ -300,6 +226,7 @@ $question-height: 20px;
         line-height: 50px;
         color: $success;
         background-color: transparent;    
+
     }
 
     input:not([type=checkbox]):focus{
@@ -339,27 +266,31 @@ $question-height: 20px;
         background: $primary;
     }
 
-    input{
-        @extend .form-control;
-        
-    }
     select{
-        @extend .form-select;       
+               
         @extend .form-input-border;
         background-color: transparent;
         color: $success;
         
     }
+
+
+    input{
+        @extend .form-control;        
+    }
+    select{
+        @extend .form-select;
+    }
+
 }
 
 .form-select{
-    $form-select-border-color: red;
-    $form-select-border-width: 10dx;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
 .form-control{
-    // border-image-source: linear-gradient(to left, $danger, $primary) !important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+    border-image-source: linear-gradient(to left, $danger, $primary) !important;
+    // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 38, 255, 0.6);
 }
 // КОНТЕЙНЕР ДЛЯ ПРЕДЛОЖЕНИЯ ЛОГИНА
 .middle-textSection{
@@ -389,37 +320,6 @@ $question-height: 20px;
 // ---ТАБЛИЦЫ---
 
 
-.events-table {
-    
-    @extend .table;
-    @extend .justify-content-center;
-    color: $primary;
-
-    tbody {
-        th {
-            color: $secondary;
-            @extend .h4;
-            @extend .text-center;
-            @extend .mt-4;            
-            
-        }
-
-        td {
-            color: $primary;
-            @extend .text-center;
-
-            
-            @extend .align-middle;
-
-
-            @extend .p2 !optional;
-            @extend .mb-4;
-            font-family: PrimaryText;
-            white-space: pre-line;
-            width: 50%;
-        }
-    }
-}
 
 // СКОРБОРД
 .scoreboard-table {
