@@ -345,10 +345,22 @@ $question-height: 20px;
     }
     select{
         @extend .form-select;       
+        @extend .form-input-border;
+        background-color: transparent;
+        color: $success;
         
     }
 }
 
+.form-select{
+    $form-select-border-color: red;
+    $form-select-border-width: 10dx;
+}
+
+.form-control{
+    // border-image-source: linear-gradient(to left, $danger, $primary) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
 // КОНТЕЙНЕР ДЛЯ ПРЕДЛОЖЕНИЯ ЛОГИНА
 .middle-textSection{
     @extend .d-flex;
@@ -648,7 +660,7 @@ $question-height: 20px;
     border-width: 3px;
   }
   .border-gradient-red {
-    border-image-source: linear-gradient(to left, $danger, $primary);
+    border-image-source: linear-gradient(to left, $danger, $primary) !important;
   }
 
 
