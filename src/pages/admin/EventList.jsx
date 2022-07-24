@@ -12,10 +12,11 @@ const EventList = ({events,loading}) => {
   return (
     <ul className='list-group px-3'>
       {events.map(event=>(
-        <li key={event.event_id} className='list-group-item'>
-          <div className='row mt-4'>
-          <p>{event.title}</p>
+        <li key={event.event_id} className='eventlist-li'>
+          <div className='eventlist-singleItem'>
+        <p className=''>{event.title}</p>
         <ShowAdminEvent event={event}/>
+        
         </div>
           
 

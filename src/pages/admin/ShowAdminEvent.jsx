@@ -9,7 +9,7 @@ const ShowAdminEvent = ({event}) => {
     const [modalOpen, setModalOpen] = useState(false);
 
   return (
-      <>
+      <div className='d-flex flex-column'>
     <button type='button' className='svg-button' onClick={()=>{setModalOpen(true)}}>
             <SeeButton/>
           </button>
@@ -18,7 +18,7 @@ const ShowAdminEvent = ({event}) => {
             <EditEventForm event={event}/>  
             </Popup>}         
 
-    </>
+    </div>
   )
 }
 

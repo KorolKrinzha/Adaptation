@@ -90,7 +90,7 @@ const EditEventForm = ({event}) => {
         
 
       <form onSubmit={editEvent}>
-        <div className="formSection">
+        <div className="formSection bg-grey">
 
         <label htmlFor="title">Название ивента</label>
           <input disabled={disabled}
@@ -123,12 +123,12 @@ const EditEventForm = ({event}) => {
           <p>Это {event.dynamic ? "динамичный":"статичный"} ивент</p>
 
           {!event.dynamic ?
-          <Link to={{pathname:`${SITELINK}:${APIPORT}/QR/${event.event_id}`}} target="_blank">Страница ивента</Link> : null
+          <a target="_blank" href={`${SITELINK}:${APIPORT}/QR/${event.event_id}`}>QR код ивента</a> : null
 
           }
 
           {event.dynamic ? 
-          <Link to={`${SITELINK}:${APIPORT}/QRDYNAMIC/${event.event_id}`}>Страница ивента</Link>: null
+          <a target="_blank" href={`${SITELINK}:${APIPORT}/QRDYNAMIC/${event.event_id}`}>QR код ивента</a> : null
 
           }
 

@@ -69,7 +69,7 @@ p {
     white-space: pre-line;
     @extend .text-break;
     
-    font-family: Raleway;
+    font-family: PrimaryText;
     @extend .h4;
     color: $primary;
 }
@@ -80,8 +80,9 @@ header {
 }
 
 a{
-    font-family: 'Inter', sans-serif;
-    color: $primary !important;
+    font-family: PrimaryText;
+    @extend .h4;
+    color: $danger !important;
 }
 
 u {
@@ -94,9 +95,9 @@ b, strong{
     @extend .fw-bold;
 }
 
-div {
-    font-family: PrimaryText;
-}
+// div {
+//     font-family: PrimaryText;
+// }
 
 span {
     color: $secondary
@@ -108,6 +109,10 @@ li,ul{
 
 .bg-grey{
     background-color: $bg-grey !important;
+}
+
+.bg-dark{
+    background-color: $bg-dark !important;
 }
 
 // ---ХЭДЕРЫ И ФУТЕРЫ---
@@ -302,6 +307,13 @@ $question-height: 20px;
         color: $success;
         background-color: transparent;    
     }
+
+    input:disabled{
+        border: transparent;
+        color: $success;
+        background-color: rebeccapurple;    
+
+    }
     
 
     textarea{
@@ -464,27 +476,40 @@ $question-height: 20px;
 }
 
 
-
+.navbar-toggler{
+    float: right;
+    @extend .mx-3;
+}
 // !НОВОЕ
 .basicheader{
     nav{
-        @extend .navbar;
+        @extend .navbar-dark;
         @extend .navbar-expand-lg;
         @extend .navbar-light;
         background-color: $bg-grey !important;
+        color: $success
         
     }
+    a{
+        font-family: PrimaryHeading;
+        @extend .h3;
+        @extend .align-middle;
+        color: $success !important;
+        text-decoration: none;
+
+        
+    }
+
     ul{
         @extend .navbar-nav;
+        @extend .mt-2;
+        @extend .mt-lg-0;
     }
     li{
         @extend .nav-item;
         @extend .active;
         
         
-    }
-    NavLink{
-        @extend .nav-link;
     }
 
 }
@@ -625,6 +650,27 @@ $question-height: 20px;
   .border-gradient-red {
     border-image-source: linear-gradient(to left, $danger, $primary);
   }
+
+
+// СПИСОК ИВЕНТОВ
+
+.eventlist-li{
+    @extend .list-group-item;
+    @extend .mt-4;
+    background-color: $bg-dark !important;
+}
+
+.eventlist-singleItem {
+    @extend .d-flex;
+    @extend .flex-column;
+    background-color: $bg-dark !important;
+
+    p{
+        font-family: PrimaryHeading;
+        color: $primary;
+        @extend .h2;
+    }
+}
 
 // !!! НЕ УДАЛЯТЬ ИМПОРТ
 @import "../../node_modules/bootstrap/scss/bootstrap.scss"
