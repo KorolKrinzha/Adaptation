@@ -95,6 +95,10 @@ b, strong{
     @extend .fw-bold;
 }
 
+i{
+    @extend .text-success;
+}
+
 
 span {
     color: $secondary
@@ -150,6 +154,18 @@ li,ul{
     color: $success;
 }
 
+.text-subtitle{
+    @extend .display-6;
+    @extend .mt-4;
+    @extend .px-5;
+    
+
+    font-family: PrimaryHeading;
+    color: $primary;
+
+
+}
+
 // ТЕКСТ СВЕРХУ 
 // НАПРИМЕР: ДЛЯ БАЛЛОВ ЗАЛОГИНЬСЯ ИЛИ ЭТО СКОРБОРД
 .infotext{
@@ -202,8 +218,7 @@ li,ul{
 
 // ДЛЯ ОКОШЕК В РЕГИСТРАЦИИ. НАПРИМЕР, МЭЙЛ
 .formSection{
-    @extend .mb-4;
-    
+    @extend .mb-4;    
     background-color: $bg-dark;
     color: $success;
 
@@ -224,31 +239,44 @@ li,ul{
         @extend .align-middle;
         height: 50px; 
         line-height: 50px;
-        color: $success;
+        color: $success !important;
         background-color: transparent;    
 
     }
 
     input:not([type=checkbox]):focus{
         border: yellow;
-        color: $success;
+        color: $success !important;
         background-color: transparent;    
     }
 
-    input:disabled{
-        border: transparent;
-        color: $success;
-        background-color: rebeccapurple;    
-
-    }
-    
-
     textarea{
-        @extend .form-control;
         @extend .form-input-border;
         background-color: transparent !important;
         color: $success !important;        
     }
+
+    input, textarea:disabled{
+        @extend .disabled;
+    }
+
+
+    select{               
+        background-color: transparent !important;
+        color: $success !important;
+        @extend .form-input-border;
+        option{
+            background-color: $bg-dark;
+        }        
+    }
+
+
+    input, select, textarea{
+        @extend .form-control;        
+    }
+    
+
+
 
     input[type='checkbox'] {
         appearance: none;
@@ -266,26 +294,16 @@ li,ul{
         background: $primary;
     }
 
-    select{
-               
-        @extend .form-input-border;
-        background-color: transparent;
-        color: $success;
-        
-    }
 
 
-    input{
-        @extend .form-control;        
-    }
-    select{
-        @extend .form-select;
-    }
+
 
 }
 
 .form-select{
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+    background-color: transparent;
+    color: $success;
 }
 
 .form-control{
@@ -302,11 +320,18 @@ li,ul{
     
 }
 
-// КНОПКА ВОЗВРАТА НА ПРЕДЫДУЩУЮ СТРАНИЦУ
-.sign-returnButton{
+.exportButton{
     @extend .btn;
     @extend  .btn-success;
     @extend  .text-warning;
+
+    @extend .m-3;
+    @extend .text-center;
+    @extend .h4;
+    
+    @extend .d-flex;   
+    @extend .justify-content-center;
+
 }
 
 // ДЛЯ ТЕКСТА С ПРЕДЛОЖЕНИЕМ ЛОГИНА
@@ -359,6 +384,12 @@ li,ul{
     }
 }
 
+.search-table{
+    @extend .d-flex;
+    @extend .justify-content-center;
+    @extend .h4;
+    color: $secondary;
+}
 
 
 
@@ -387,6 +418,34 @@ li,ul{
     @extend .text-success;
 }
 
+
+.score-singleEvent{
+    @extend .px-5;
+
+
+    li{
+        @extend .d-flex;
+        @extend .flex-row;
+    }
+    span{
+        background: url('../assets/tickedevent.svg') center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        color: transparent;
+
+
+    }
+    p{
+        $score-p-height: 10px;
+        @extend .align-middle;
+        height: $score-p-height; 
+        line-height: $score-p-height;
+        color: $primary;
+        @extend .mt-3;
+        @extend .mx-2;
+
+    }
+}
 
 .navbar-toggler{
     float: right;
@@ -555,9 +614,9 @@ li,ul{
 // ГРАДИЕНТЫ
   
   .border-gradient {
-    border: 15px solid;
-    border-image-slice: 1;
-    border-width: 3px;
+    border: 15px solid !important;
+    border-image-slice: 1 !important;
+    border-width: 3px !important;
   }
   .border-gradient-red {
     border-image-source: linear-gradient(to left, $danger, $primary) !important;

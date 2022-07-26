@@ -45,7 +45,7 @@ const Score = ()=>{
           Баллы можно обменять на лицейский мерч и другие призы
         </p>
 
-        <p> Ваши ивенты</p>
+        <p className="text-subtitle"> Ваши ивенты</p>
         <ScoreEvents />
   
   

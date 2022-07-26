@@ -22,9 +22,12 @@ const ScoreEvents = () =>{
 
 
     if (events.length>0){
-    return (<div>
+    return (<div className="score-singleEvent">
         {events.map((event) => {
-          return <li key={event.event_id}>{event.title}</li>;
+          return <li key={event.event_id}>
+                <span>V</span>
+                <p>{event.title}</p>
+              </li>;
           
         })}
     </div>)

@@ -19,7 +19,7 @@ const ExportButton = ({fileformat, data,...props}) =>{
 
     return(
         <div>
-        <button onClick={(e)=>downloadCSV(e)}>{props.children}</button>
+        <button className="exportButton" onClick={(e)=>downloadCSV(e)}>{props.children}</button>
         </div>
     )
 

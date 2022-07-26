@@ -18,8 +18,9 @@ const Scoreboard = ()=> {
 
 
     return (
-        <div className="home">
-            <p>Экспортировать пользователей</p>
+        <>
+            <p className="mb-0 pb-0">Экспортировать пользователей</p>
+            <div className="d-flex flex-row mt-0 pt-0">
          <ExportButton fileformat="csv" data="users">
          CSV
          </ExportButton>
@@ -27,10 +28,12 @@ const Scoreboard = ()=> {
         <ExportButton fileformat="pdf" data="users">
         PDF
         </ExportButton>
+        </div>
+
         <UsersTable/>
 
 
-        </div>
+        </>
       );
     }
 
