@@ -142,7 +142,10 @@ const EditEventForm = ({event}) => {
 
           </div>
   
-        <button type="submit" className="form-button" disabled={disabled}>Обновить ивент</button>
+        <div className='d-flex justify-content-center'>
+          <button type="submit" className="form-button" disabled={disabled}>ОБНОВИТЬ ИВЕНТ</button>
+        </div>
+
       </form>
 
       <NotificationContainer/>

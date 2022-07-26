@@ -34,7 +34,7 @@ const ScoreEvents = () =>{
     }
     else{
         return <div>
-            <p>Пока вы не принимали участие в ивентах</p>
+            <p className="score-noevents">Пока вы не принимали участие в ивентах</p>
 
             </div>
     }

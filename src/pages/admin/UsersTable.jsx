@@ -74,7 +74,7 @@ const UsersTable = () => {
                <th {...column.getHeaderProps(column.getSortByToggleProps({title:"Кликни для сортировки"}))}>
                  {column.render('Header')}
                  <span>
-                   {column.isSorted ? (column.isSortedDesc ? '🔽':'🔼') : '🔗'}
+                   {column.isSorted ? (column.isSortedDesc ? '↓':'↑') : '⇅'}
                  </span>
                </th>    
                 ))}

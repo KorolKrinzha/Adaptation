@@ -37,7 +37,7 @@ const Events = ()=> {
   return (
         <div className="container mt-5">
           <ExportButton fileformat="zip" data="events" >
-            Скачать все статичные QR-коды
+            СКАЧАТЬ СТАТИЧНЫЕ QR-КОДЫ
           </ExportButton>
 
           <EventFormPopup/> 

@@ -72,9 +72,11 @@ const CreateEvent = () =>{
   
   
             </div>
-    
-          <button type="submit" className="form-button">Добавить ивент
-          </button>
+            
+            <div className="d-flex justify-content-center">
+              <button type="submit" className="form-button">ДОБАВИТЬ ИВЕНТ </button>
+            </div>
+
         </form>
   
   

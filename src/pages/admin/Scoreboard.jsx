@@ -6,21 +6,13 @@ import UsersTable from "./UsersTable"
 const Scoreboard = ()=> {
 
 
-    // const downloadCSV = (e)=>{
-    //     e.preventDefault()
-    //     axios.get(`/api/export/users/csv`,{
-    //         withCredentials: true,
-    //         responseType: "blob"
-    //     }).then(response => {
-    //         fileDownload(response.data, "users.csv")
-    //     }).catch(error => console.log(error))
-    // }
+
 
 
     return (
         <>
-            <p className="mb-0 pb-0">Экспортировать пользователей</p>
-            <div className="d-flex flex-row mt-0 pt-0">
+      <div className="export-table-section">
+         <p>Экспортировать пользователей</p>
          <ExportButton fileformat="csv" data="users">
          CSV
          </ExportButton>
@@ -28,7 +20,7 @@ const Scoreboard = ()=> {
         <ExportButton fileformat="pdf" data="users">
         PDF
         </ExportButton>
-        </div>
+      </div>
 
         <UsersTable/>
 

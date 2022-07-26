@@ -175,16 +175,21 @@ li,ul{
     @extend .text-info;
     white-space: pre-line;
 
+
 }
-.infotext-small{
+.infotext-secondary{
     @extend .text-center;
     @extend .m-3;
     @extend .text-info;
     @extend .p-2;
-    
-    color: #000000 !important;
-    white-space: pre-line;
-    
+   
+    font-family: PrimaryText;
+}
+
+.infotext-small{
+    @extend .text-center;
+    @extend .m-3;
+    @extend .small-text;
     font-family: PrimaryText;
 }
 
@@ -199,14 +204,18 @@ li,ul{
     @extend .m-3;
     @extend .text-center;
     @extend .btn;
-    @extend .btn-danger;
     @extend .d-flex;   
     
     @extend .justify-content-center;
-    @extend .h4;
+    @extend .h3;
 
     font-family: PrimaryText;
     color: $success !important;
+    text-decoration: none;
+    border: transparent !important;
+    @extend .background-gradient-red;
+    
+
 }
 
 
@@ -214,6 +223,10 @@ li,ul{
     @extend .border-gradient;
     @extend .border-gradient-red;
 
+}
+
+.background-gradient-red{
+    background-image: linear-gradient(to left, $danger, $primary) !important;
 }
 
 // ДЛЯ ОКОШЕК В РЕГИСТРАЦИИ. НАПРИМЕР, МЭЙЛ
@@ -351,9 +364,6 @@ li,ul{
     @extend .mt-4;    
     @extend .table;
     @extend .justify-content-center;   
-    table{
-    width: 75%;
-        }
     
     th{
         border-bottom:1px solid $bg-dark !important;
@@ -389,6 +399,22 @@ li,ul{
     @extend .justify-content-center;
     @extend .h4;
     color: $secondary;
+}
+
+.export-table-section{
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .mt-0;
+    @extend .pt-0;
+    @extend .justify-content-center;
+    @extend .mb-3;
+    
+    p{
+        @extend .d-flex;
+        @extend .align-items-center;        
+        margin: 0 !important;
+        @extend .h4;
+    }
 }
 
 
@@ -447,6 +473,10 @@ li,ul{
     }
 }
 
+.score-noevents{
+    @extend .text-center;
+}
+
 .navbar-toggler{
     float: right;
     @extend .mx-3;
@@ -494,6 +524,11 @@ li,ul{
     overflow: hidden;
     outline: none;
 } 
+
+
+.NotFound{
+
+}
 
 
 // УВЕДОМЛЕНИЯ
