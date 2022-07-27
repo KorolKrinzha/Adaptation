@@ -176,7 +176,7 @@ def api_event(event_PATH):
         if check_dynamic(response['event_id']):
             
             new_event_creditentials = change_dynamic_event(response["event_id"])
-            update_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'])
+            update_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'], response['title'])
         
         return response      
     

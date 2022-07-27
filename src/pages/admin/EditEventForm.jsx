@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import fileDownload from 'js-file-download'
 import NotificationContainer from 'react-notifications/lib/NotificationContainer'
-import { ReactComponent as DeleteEventButton } from '../../assets/deleteevent.svg'
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
 import {ReactComponent as DownloadButton} from '../../assets/downloadeventqr.svg'
 import { NotificationManager } from 'react-notifications'
@@ -18,21 +17,6 @@ const EditEventForm = ({event}) => {
     const [value, setValue] = useState(event.value)
 
     const [disabled, setDisabled] = useState(true)
-
-    const deleteEvent = (e) =>{
-      e.preventDefault()
-      axios.post("/api/admin/deleteevent",{
-      event_id: event.event_id,
-      withCredentials: true
-      }
-      ).then((res)=>{
-        if (res.status===200){
-          console.log('Удалено')
-          window.location.reload()
-        }
-      })
-      
-    }
 
     const editEvent = (e) =>{
       e.preventDefault()
@@ -83,9 +67,6 @@ const EditEventForm = ({event}) => {
       
 
 
-      <button className='svg-button' onClick={(e)=>deleteEvent(e)}>
-        <DeleteEventButton/>
-        </button>
 
         
 

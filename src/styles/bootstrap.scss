@@ -663,7 +663,7 @@ li,ul{
 .eventlist-li{
     border: transparent !important;
     @extend .list-group-item;
-    @extend .mt-4;
+    @extend .mt-5;
     background-color: $bg-dark !important;
 }
 

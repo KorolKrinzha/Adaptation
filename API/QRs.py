@@ -63,14 +63,13 @@ def add_text_to_QR(title, filename, dynamic):
     return
 
 
-def update_QR(event_ID, event_URL):
+def update_QR(event_ID, event_URL, title):
     try:
         delete_QR(event_ID)
         
         qr = qrcode.QRCode(
-            version=1,
-            box_size=10
-        
+            border = 1,
+            box_size=20       
         )
         
         new_URL = f'{SITELINK}/event/{event_URL}'
@@ -79,6 +78,9 @@ def update_QR(event_ID, event_URL):
         qr.make(fit=True)
         qr_image = qr.make_image(fill_color="black", back_color="white")
         qr_image.save(f'../public/QRDYNAMIC/{event_ID}.png')
+        
+        add_text_to_QR(title, f'{event_ID}.png', True)
+
     except Exception as e: print(e)
     return 
 

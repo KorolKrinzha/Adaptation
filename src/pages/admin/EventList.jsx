@@ -14,8 +14,7 @@ const EventList = ({events,loading}) => {
       {events.map(event=>(
         <li key={event.event_id} className='eventlist-li'>
           <div className='eventlist-singleItem'>
-        <p className='text-secondary'>{event.title}</p>
-        <ShowAdminEvent event={event}/>
+        <ShowAdminEvent event={event} title={event.title}/>
         
         </div>
           

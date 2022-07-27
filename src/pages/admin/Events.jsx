@@ -11,7 +11,7 @@ const Events = ()=> {
   const [events,setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [eventsPerPage, setEventsPerPage] = useState(3)
+  const [eventsPerPage, setEventsPerPage] = useState(6)
 
   useEffect(()=>{
     const fetchEvents = async() =>{
