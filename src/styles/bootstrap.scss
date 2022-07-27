@@ -661,6 +661,7 @@ li,ul{
 // СПИСОК ИВЕНТОВ
 
 .eventlist-li{
+    border: transparent !important;
     @extend .list-group-item;
     @extend .mt-4;
     background-color: $bg-dark !important;

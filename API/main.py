@@ -223,7 +223,7 @@ def api_admin_createevent():
     value = data_json['value']
     dynamic = True if data_json['dynamic']=='on' else False
     event_creditentials = create_event(title, description, value, dynamic)
-    create_QR(event_creditentials['event_ID'], event_creditentials['event_url'],dynamic)
+    create_QR(event_creditentials['event_ID'], event_creditentials['event_url'],dynamic, title )
     
     
     
