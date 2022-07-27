@@ -50,13 +50,6 @@ const EditEventForm = ({event}) => {
 
   return (
     <div>
-      <button className='svg-button' onClick={(e)=>{
-        e.preventDefault()
-        setDisabled(!disabled)
-        
-      }}>
-        <EditEventButton/>
-      </button>
 
       {!event.dynamic &&
 
@@ -122,10 +115,24 @@ const EditEventForm = ({event}) => {
 
 
           </div>
-  
+        {!disabled ?
         <div className='d-flex justify-content-center'>
-          <button type="submit" className="form-button" disabled={disabled}>ОБНОВИТЬ ИВЕНТ</button>
+          <button type="submit" className="form-button" disabled={disabled}> ОБНОВИТЬ ИВЕНТ</button>
+        </div> : 
+
+        <div className='d-flex justify-content-center'>
+              <button className='form-button' onClick={(e)=>{
+                e.preventDefault()
+                setDisabled(!disabled)
+                
+              }}>
+                <EditEventButton/>
+              </button>
+
         </div>
+              
+
+        }
 
       </form>
 

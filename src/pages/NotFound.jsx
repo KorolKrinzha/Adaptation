@@ -6,7 +6,7 @@ const NotFound = ()=>{
     
   
     return (
-    <div className="NotFound">
+    <div>
         <h1 className="text-title">Ошибка 404</h1>
         <div className="d-flex justify-content-center my-4" >
             <FireIcon />
