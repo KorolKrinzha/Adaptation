@@ -28,14 +28,12 @@ yarn-error.log*
 /API/env.py
 
 # styles
-/src/styles/fonts
 /src/styles/style.css
 /src/styles/style.css.map
 
 # photos/tables
 /public/QR/
 /public/QRDYNAMIC
-/src/QR/
 /public/CSV
 /public/ZIP
 
