@@ -31,7 +31,6 @@ yarn-error.log*
 /src/styles/fonts
 /src/styles/style.css
 /src/styles/style.css.map
-/src/assets/
 
 # photos/tables
 /public/QR/
