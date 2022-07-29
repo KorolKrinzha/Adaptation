@@ -40,8 +40,8 @@ def check_email(email):
 # ! Сделать проверку на уникальность почты
 def sign_new_user(user_id, lastname, firstname, grade, email):    
     DB_COMMIT("""INSERT INTO `LycUsers`
-        (`user_id`,`lastname`,`firstname`,`grade`,`email`, `count`, `eventlist`) 
-        VALUES (%(user_id)s,%(lastname)s, %(firstname)s, %(grade)s, %(email)s, 0, '[]')""",{
+        (`user_id`,`lastname`,`firstname`,`grade`,`email`, `count`) 
+        VALUES (%(user_id)s,%(lastname)s, %(firstname)s, %(grade)s, %(email)s, 0)""",{
             'user_id':user_id,
             'lastname':lastname,
             'firstname':firstname,

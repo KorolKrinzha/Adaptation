@@ -31,7 +31,8 @@ def admin_role(f):
             session_token = request.cookies['session_token']
             if check_admin(session_token): return f(*args, **kwargs)
             else: return abort(404)
-        except: 
+        except Exception as e: 
+            print(e)
             return abort(404)
     return wrap
 
@@ -42,7 +43,9 @@ def user_role(f):
             session_token = request.cookies['session_token']
             if check_user(session_token): return f(*args, **kwargs)
             else: return abort(404)
-        except: return abort(404)
+        except Exception as e: 
+            print(e)
+            return abort(404) 
     return wrap
     
 
@@ -79,9 +82,15 @@ def api_check_admin():
 
 # ---ТЕСТИРОВАНИЕ API---
 @app.route("/api", methods=['GET'])
-@user_role
 def test_connection():    
     return "WELCOME TO API"
+
+
+@app.route("/api/user", methods=['GET'])
+@user_role
+def test_user():    
+    return "WELCOME TO API:USER"
+
 
 @app.route("/api/admin", methods=['GET'])
 @admin_role
@@ -297,3 +306,7 @@ def QRDYNAMIC_event(event_id):
         return send_from_directory('../public/QRDYNAMIC/', filename)
     except:
         abort(404)
+
+
+if __name__ == 'main':
+    app.run(debug=True, host='0.0.0.0')
