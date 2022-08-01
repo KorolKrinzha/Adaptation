@@ -283,14 +283,14 @@ def api_admin_editevent():
 @admin_role
 def api_export_users():
     filename = export_to_csv("lycusers")
-    return send_from_directory('../public/CSV', filename, as_attachment=True)
+    return send_from_directory('./api_public/CSV', filename, as_attachment=True)
 
 
 @app.route("/api/export/events/zip", methods=['GET'])
 @admin_role
 def api_export_events():
     filename = export_QR_codes()
-    return send_from_directory('../public/ZIP', f'{filename}.zip')
+    return send_from_directory('./api_public/ZIP', f'{filename}.zip')
 
 
 # ---ФАЙЛЫ---
@@ -298,7 +298,7 @@ def api_export_events():
 def QR_event(event_id):
     try:
         filename = f'{event_id}.png'
-        return send_from_directory('../public/QR/', filename)
+        return send_from_directory('./api_public/QR/', filename)
     except:
         abort(404)
     
@@ -306,7 +306,7 @@ def QR_event(event_id):
 def QRDYNAMIC_event(event_id):
     try:
         filename = f'{event_id}.png'
-        return send_from_directory('../public/QRDYNAMIC/', filename)
+        return send_from_directory('./api_public/QRDYNAMIC/', filename)
     except:
         abort(404)
 

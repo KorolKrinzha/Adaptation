@@ -27,15 +27,29 @@ yarn-error.log*
 /API/__pycache__
 /API/env.py
 
+# api-folders
+/API/api_public/CSV/*
+!/API/api_public/CSV/.gitkeep
+
+/API/api_public/QR/*
+!/API/api_public/QR/.gitkeep
+
+/API/api_public/QRDYNAMIC/*
+!/API/api_public/QRDYNAMIC/.gitkeep
+
+/API/api_public/ZIP/*
+!/API/api_public/ZIP/.gitkeep
+
 # styles
 /src/styles/style.css
 /src/styles/style.css.map
 
 # photos/tables
 /public/QR/
-/public/QRDYNAMIC
-/public/CSV
-/public/ZIP
+/public/QRDYNAMIC/
+/public/CSV/
+/public/ZIP/
 
 # environment variables
 /src/env
+

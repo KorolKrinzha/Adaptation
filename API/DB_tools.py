@@ -97,7 +97,7 @@ def DB_CHECK_EXISTENCE(statement,values):
 
 def export_to_csv(table_name):
     
-    filepath = f"../public/CSV/{table_name}.csv"
+    filepath = f"./api_public/CSV/{table_name}.csv"
     filename = f"{table_name}.csv"
     mydb = mysql.connector.connect(
     host=env.MYSQL_HOST,

@@ -21,9 +21,9 @@ def create_QR(event_ID, event_path, dynamic, title):
     qr.make(fit=True)
     qr_image = qr.make_image(fill_color="black", back_color="white")
     if not dynamic:
-        qr_image.save(f'../public/QR/{event_ID}.png')
+        qr_image.save(f'./api_public/QR/{event_ID}.png')
     elif dynamic:
-        qr_image.save(f'../public/QRDYNAMIC/{event_ID}.png')
+        qr_image.save(f'./api_public/QRDYNAMIC/{event_ID}.png')
     event_info = {"ID": event_ID, "Path": event_path }
     add_text_to_QR(title, f'{event_ID}.png', dynamic)
     
@@ -32,9 +32,9 @@ def create_QR(event_ID, event_path, dynamic, title):
 def add_text_to_QR(title, filename, dynamic):
     try:
         if not dynamic:
-            qr_image = Image.open(f'../public/QR/{filename}')
+            qr_image = Image.open(f'./api_public/QR/{filename}')
         else:
-            qr_image = Image.open(f'../public/QRDYNAMIC/{filename}')
+            qr_image = Image.open(f'./api_public/QRDYNAMIC/{filename}')
         
         qr_width, qr_height = qr_image.size
 
@@ -55,9 +55,9 @@ def add_text_to_QR(title, filename, dynamic):
         
             
         if not dynamic:    
-            background.save(f'../public/QR/{filename}')
+            background.save(f'./api_public/QR/{filename}')
         else:
-            background.save(f'../public/QRDYNAMIC/{filename}')
+            background.save(f'./api_public/QRDYNAMIC/{filename}')
         
     except Exception as e:print(e)
     return
@@ -77,7 +77,7 @@ def update_QR(event_ID, event_URL, title):
         qr.add_data(new_URL)
         qr.make(fit=True)
         qr_image = qr.make_image(fill_color="black", back_color="white")
-        qr_image.save(f'../public/QRDYNAMIC/{event_ID}.png')
+        qr_image.save(f'./api_public/QRDYNAMIC/{event_ID}.png')
         
         add_text_to_QR(title, f'{event_ID}.png', True)
 
@@ -87,9 +87,9 @@ def update_QR(event_ID, event_URL, title):
 
 def delete_QR(event_id):
     try:
-        remove(f'../public/QR/{event_id}.png')
+        remove(f'./api_public/QR/{event_id}.png')
     except:
-        remove(f'../public/QRDYNAMIC/{event_id}.png')
+        remove(f'./api_public/QRDYNAMIC/{event_id}.png')
         
     
     return
@@ -97,6 +97,6 @@ def delete_QR(event_id):
 
 def export_QR_codes():
     filename = 'events_QR'
-    make_archive(f'../public/ZIP/{filename}', 'zip', '../public/QR')
+    make_archive(f'./api_public/ZIP/{filename}', 'zip', './api_public/QR')
     
     return filename
