@@ -56,7 +56,7 @@ const Sign = () =>{
       <label htmlFor="surname">Фамилия</label>
       <input
           type="text"
-          placeholder="Фамилия"
+          placeholder="Фишбейн"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
           required
@@ -66,7 +66,7 @@ const Sign = () =>{
         <label htmlFor="name">Имя</label>
         <input
           type="text"
-          placeholder="Имя"
+          placeholder="Дмитрий"
           value={firstname}
           onChange={(e) => setFirstname(e.target.value)}
           required
@@ -108,7 +108,7 @@ const Sign = () =>{
     <label htmlFor="email">Мэйл</label>
         <input
         type='email'
-        placeholder="example@lyceum.ru"
+        placeholder="example@edu.hse.ru"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required

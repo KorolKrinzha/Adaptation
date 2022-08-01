@@ -19,7 +19,7 @@ def check_admin(session_token):
 def auth_new_user(email,password):
         user_id = create_ID()
         password = password_hash_create(password)
-        DB_COMMIT("""INSERT INTO `LycAuth`
+        DB_COMMIT("""INSERT INTO `lycauth`
             (`user_id`, `email`, `password`, `auth`)\
             VALUES (%(user_id)s,%(email)s,%(password)s,false)""",
             {
@@ -39,7 +39,7 @@ def check_email(email):
 
 # ! Сделать проверку на уникальность почты
 def sign_new_user(user_id, lastname, firstname, grade, email):    
-    DB_COMMIT("""INSERT INTO `LycUsers`
+    DB_COMMIT("""INSERT INTO `lycusers`
         (`user_id`,`lastname`,`firstname`,`grade`,`email`, `count`) 
         VALUES (%(user_id)s,%(lastname)s, %(firstname)s, %(grade)s, %(email)s, 0)""",{
             'user_id':user_id,
@@ -53,7 +53,7 @@ def sign_new_user(user_id, lastname, firstname, grade, email):
 def login_user(email, password):
     try:
      
-        account = DB_FETCH_ONE("SELECT * FROM LycAuth WHERE email=%(email)s", {'email':email})
+        account = DB_FETCH_ONE("SELECT * FROM lycauth WHERE email=%(email)s", {'email':email})
     except:
         account = []
     if len(account)==0:
@@ -64,6 +64,8 @@ def login_user(email, password):
 
         if password_hash_check(hash_password, password):
             return user_id
+        
+    
     
         
     return ''
@@ -119,7 +121,7 @@ def add_points_to_user(session_token, value, event_id):
 
 # --СКОРБОРД--
 def show_all_users():
-    users = DB_JSON("SELECT * FROM LycUsers",{})
+    users = DB_JSON("SELECT * FROM lycusers",{})
     return users
 
 # --СТРАНИЦА ИВЕНТОВ--
@@ -127,7 +129,7 @@ def create_event(title, description, value, dynamic=False):
     event_ID = create_ID()
     event_url = create_path()
     
-    DB_COMMIT("""INSERT INTO `LycEvents`
+    DB_COMMIT("""INSERT INTO `lycevents`
             (`event_id`,`title`,`description`,`value`,`dynamic`, `url`, `create_time`) 
             VALUES 
             (%(event_id)s,%(title)s, %(description)s,%(value)s, %(dynamic)s, %(event_url)s, now());""",{

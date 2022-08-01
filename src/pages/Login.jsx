@@ -1,6 +1,5 @@
 import { useState } from "react"
 import "../styles/style.css"
-import Footer from "../components/Footer"
 import Cookies from "universal-cookie/es6"
 import axios from "axios"
 
@@ -23,7 +22,7 @@ const Login = () =>{
           password:password
         }).then((response)=>
         {
-          if (response.status==200){
+          if (response.status===200){
             let session_token = response.data['session_token']
 
             const cookies = new Cookies()
@@ -56,7 +55,7 @@ const Login = () =>{
     <label htmlFor="email">Мэйл</label>
         <input
         type='email'
-        placeholder="example@lyceum.ru"
+        placeholder="example@edu.hse.ru"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required

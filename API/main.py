@@ -116,7 +116,8 @@ def api_signuser():
             user_id = auth_new_user(email, password)
             sign_new_user(user_id, lastname, firstname, grade, email)
             return {'session_token':user_id}
-        except:
+        except Exception as e:
+            print(e)
             return Response(response='Ошибка при регистрации. Пожалуйста, попробуйте еще раз', status=500)
     else: return Response(response='Данная почта уже используется. Пожалуйста, попробуйте еще раз', status=500)
         
@@ -136,13 +137,15 @@ def api_loginuser():
         password = data_json['password']
         user_id = login_user(email, password) 
         if (len(user_id)>0):
+            print('!!!')
             return {'session_token':user_id}
         
         return Response(response='Данный аккаунт не найден. Пожалуйста, проверьте введенные даннные',
                         status=500)
         
 
-    except:
+    except Exception as e:
+        print(e)
         return Response(response='Данный аккаунт не найден. Пожалуйста, проверьте введенные даннные',
                         status=500)
 
