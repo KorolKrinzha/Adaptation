@@ -1,0 +1,11 @@
+FROM python:3.8.10
+WORKDIR /app
+
+COPY api/requirements.txt api/main.py api/DBs.py api/DB_tools.py api/env.py api/QRs.py api/IDs.py api/.flaskenv ./
+RUN pip install -r ./requirements.txt
+ENV FLASK_ENV production
+
+EXPOSE 5000
+
+ENTRYPOINT [ "flask" ]
+CMD ["run", "--host=0.0.0.0", "--port=5000"]
