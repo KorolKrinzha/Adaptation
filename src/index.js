@@ -10,6 +10,7 @@ import {
   Events,
   SingleEvent,
   Logs,
+  ShowQR,
 } from "./pages";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -28,6 +29,10 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="/event" element={<SingleEvent />}>
           <Route path=":eventPATH" element={<SingleEvent />}></Route>
+        </Route>
+
+        <Route path="QR" element={<ShowQR />}>
+          <Route path=":eventID" element={<ShowQR />}></Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

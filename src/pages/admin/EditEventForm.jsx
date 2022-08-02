@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import fileDownload from 'js-file-download'
 import NotificationContainer from 'react-notifications/lib/NotificationContainer'
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
@@ -9,7 +9,6 @@ import { NotificationManager } from 'react-notifications'
 
 import "../../styles/style.css"
 
-import { SITELINK, APIPORT } from '../../env/envvar'
 
 const EditEventForm = ({event}) => {
     const [title, setTitle] = useState(event.title)
@@ -97,12 +96,12 @@ const EditEventForm = ({event}) => {
           <p>Это {event.dynamic ? "динамичный":"статичный"} ивент</p>
 
           {!event.dynamic ?
-          <a target="_blank" href={`${SITELINK}:${APIPORT}/QR/${event.event_id}`}>QR код ивента</a> : null
+          <NavLink to={`/QR/${event.event_id}`}>QR код ивента</NavLink> : null
 
           }
 
           {event.dynamic ? 
-          <a target="_blank" href={`${SITELINK}:${APIPORT}/QRDYNAMIC/${event.event_id}`}>QR код ивента</a> : null
+          <NavLink to={`/QR/${event.event_id}?dynamic=true`}>QR код ивента</NavLink> : null
 
           }
 
