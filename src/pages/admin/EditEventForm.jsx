@@ -36,7 +36,7 @@ const EditEventForm = ({event}) => {
 
     const downloadEventQR = (e) =>{
       e.preventDefault()
-      axios.get(`/QR/${event.event_id}.png`,{
+      axios.get(`/api/QR/${event.event_id}`,{
         withCredentials: true,
         responseType: "blob"
       }).then((response)=>{

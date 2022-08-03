@@ -20,7 +20,8 @@ const ShowQR = () =>{
     console.log(typeof checkDynamic)
 
     useEffect(()=>{
-        axios.get(`/QR/${eventID}`,
+        if (!dynamic){
+        axios.get(`/api/QR/${eventID}`,
         {withCredentials:true,
         responseType: 'blob'}).then((response)=>{
             console.log(response.data)
@@ -32,6 +33,23 @@ const ShowQR = () =>{
 
 
         }).catch(error => console.log(error))
+
+    } else{
+        axios.get(`/api/QRDYNAMIC/${eventID}`,
+        {withCredentials:true,
+        responseType: 'blob'}).then((response)=>{
+            console.log(response.data)
+            let binaryData = []
+            binaryData.push(response.data)
+
+            const image_data = window.URL.createObjectURL( new Blob(binaryData, {type: 'image/png'}))
+            document.getElementById("QR_code").src = image_data
+
+
+        }).catch(error => console.log(error))
+
+    }
+
     },[])
 
 
@@ -44,10 +62,7 @@ const ShowQR = () =>{
         <div className="EVENTS-textContainer">
 
 
-        {!checkDynamic ?
-        <img id="QR_code" alt="Lyceum Adaptation QR code"/> :
-        <img src={`/QRDYNAMIC/${eventID}`} alt="Lyceum Adaptation QR code"/> }
-
+        <img id="QR_code" alt="Lyceum Adaptation QR code"/> 
 
 
 
