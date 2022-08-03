@@ -28,8 +28,7 @@ const EditEventForm = ({event}) => {
       }).then(response=>
       {
         if (response.status===200)
-        // ! TODO добавить уведомление
-        console.log("Редактировано")
+
         NotificationManager.warning('Перезагрузите, чтобы видеть изменения', 'Ивент обновлен', 5000)
       }).catch((error)=>console.log(error.response.status))
 
