@@ -31,10 +31,6 @@ root.render(
           <Route path=":eventPATH" element={<SingleEvent />}></Route>
         </Route>
 
-        <Route path="QR" element={<ShowQR />}>
-          <Route path=":eventID" element={<ShowQR />}></Route>
-        </Route>
-
         <Route path="*" element={<NotFound />} />
 
         <Route
@@ -63,6 +59,17 @@ root.render(
             </AdminRoute>
           }
         />
+
+        <Route
+          path="QR"
+          element={
+            <AdminRoute>
+              <ShowQR />
+            </AdminRoute>
+          }
+        >
+          <Route path=":eventID" element={<ShowQR />}></Route>
+        </Route>
 
         <Route
           path="/admin/logs"

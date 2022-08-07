@@ -26,11 +26,6 @@ const BasicHeader = () => {
     
                 </li>
                 <li>
-                <NavLink to="/timetable" className="nav-link text-success">
-                    Расписание
-                </NavLink>
-                </li>
-                <li>
                 <NavLink to="/contacts" className="nav-link text-success">
                     Контакты
                 </NavLink>

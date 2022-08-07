@@ -295,6 +295,7 @@ def api_export_events():
 
 # ---ФАЙЛЫ---
 @app.route("/api/QR/<event_id>")
+@admin_role
 def QR_event(event_id):
     try:
         filename = f'{event_id}.png'
@@ -303,6 +304,7 @@ def QR_event(event_id):
         abort(404)
     
 @app.route("/api/QRDYNAMIC/<event_id>")
+@admin_role
 def QRDYNAMIC_event(event_id):
     try:
         filename = f'{event_id}.png'
