@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/style.css"
+import {ReactComponent as HeaderIcon} from '../assets/headericon.svg' 
 
 const BasicHeader = () => {
     return (
@@ -9,8 +10,8 @@ const BasicHeader = () => {
         <nav role="navigation">
     
             <a className="nav-brand" href="/">
-              <img src="/src/svg/Adaptation_icon.svg" width="40" height="40" className="d-inline-block align-center" alt=""></img>
-              <a>Адаптация </a>
+              <HeaderIcon className="d-inline-block align-center"/>
+              Адаптация
             </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
               <span className="navbar-toggler-icon"></span>

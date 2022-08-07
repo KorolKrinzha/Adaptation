@@ -62,7 +62,7 @@ const ShowQR = () =>{
         <div className="EVENTS-textContainer">
 
 
-        <img id="QR_code" alt="Lyceum Adaptation QR code"/> 
+        <img id="QR_code"  alt="Lyceum Adaptation QR code"/> 
 
 
 
