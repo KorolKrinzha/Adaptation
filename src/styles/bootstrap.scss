@@ -119,6 +119,36 @@ li,ul{
 
 
 
+// ---КОНТАКТЫ---
+.contacts-Single-Item{
+    @extend .d-flex;
+    @extend .flex-row;
+    
+}
+
+.contacts-developer{
+    @extend .mt-4;
+    p{
+        color: $secondary;
+    }
+
+    a{
+        text-decoration: none !important;
+
+    }
+}
+
+.contacts-person{
+    @extend .fw-bold;
+    color: $primary!important;
+
+}
+
+.contacts-responsibility{
+    color: $success !important;
+    @extend .mx-4;
+}
+
 
 
 // ---POPUP---
@@ -481,7 +511,8 @@ li,ul{
     float: right;
     @extend .mx-3;
 }
-// !НОВОЕ
+
+
 .basicheader{
     nav{
         @extend .navbar-dark;
