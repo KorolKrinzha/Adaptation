@@ -116,8 +116,12 @@ li,ul{
     background-color: $bg-dark !important;
 }
 
-
-
+// ---ГЛАВНАЯ СТРАНИЦА---
+.mainpage-title{
+    @extend .ps-4;
+    @extend .ms-4;
+    @extend .display-1;
+}
 
 // ---КОНТАКТЫ---
 .contacts-Single-Item{
