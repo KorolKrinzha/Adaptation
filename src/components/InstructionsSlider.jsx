@@ -12,16 +12,15 @@ const InstructionsSlider = () => {
 
   return ( <div className='home-details'>
      <p>Инструкция по использованию сайта</p>
-    <div>
+    <div className='image-slider'>
       <SimpleImageSlider
-        width={310}
-        height={400}
+        width={400}
+        height={500}
         images={images}
         showBullets={true}
         showNavs={true}
         autoPlay={true}
         bgColor='#000000'
-        className="image-slider"
         
         
       />

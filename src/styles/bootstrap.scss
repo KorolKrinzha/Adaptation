@@ -127,6 +127,7 @@ li,ul{
     @extend .d-flex;
     @extend .justify-content-center;
     @extend .flex-column;
+    
     @extend .mt-4;
     @extend .ps-4;
     p{
@@ -136,13 +137,11 @@ li,ul{
     }
 }
 
-.image-slider{
-    .rsis-image {
-        background-size: 100%; 
-        background-size: cover !important;
-        background-repeat: no-repeat;
 
-      }
+.image-slider{
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .justify-content-center;
 }
 
 // ---КОНТАКТЫ---
