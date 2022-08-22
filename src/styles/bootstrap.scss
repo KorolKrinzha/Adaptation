@@ -123,6 +123,13 @@ li,ul{
     @extend .display-1;
 }
 
+.mainpage-description{
+    @extend .ps-3;
+    @extend .ms-3;
+    @extend .display-4;
+    color: $secondary !important;
+}
+
 .home-details{
     @extend .d-flex;
     @extend .justify-content-center;
@@ -142,12 +149,15 @@ li,ul{
     @extend .d-flex;
     @extend .align-items-center;
     @extend .justify-content-center;
+    @extend .ps-4;
 }
+
 
 // ---КОНТАКТЫ---
 .contacts-Single-Item{
+    @extend .mt-4;
     @extend .d-flex;
-    @extend .flex-row;
+    @extend .flex-column;
     
 }
 
@@ -733,5 +743,25 @@ li,ul{
     }
 }
 
+// КАРУСЕЛЬ С ИНСТРУКЦИЯМИ
+.carousel .item {
+    height: 30px;
+  }
+  
+  .item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 30px;
+  }
+
+.carousel-instruction{
+    p{
+        color: #0000 !important;
+    }
+    color: red !important;
+    @extend .mb-5;
+    @extend .pb-5;
+}
 // !!! НЕ УДАЛЯТЬ ИМПОРТ
 @import "../../node_modules/bootstrap/scss/bootstrap.scss"

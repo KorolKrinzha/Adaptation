@@ -1,30 +1,43 @@
 import React from 'react'
-import SimpleImageSlider from "react-simple-image-slider";
 
 
 const InstructionsSlider = () => {
-    const images = [
-        { url: "/instruction_1.jpg" },
-        { url: '/instruction_2.jpg' },
-        { url: "/instruction_3.jpg" },
-        { url: "/instruction_4.jpg" },
-    ]
 
   return ( <div className='home-details'>
-     <p>Инструкция по использованию сайта</p>
-    <div className='image-slider'>
-      <SimpleImageSlider
-        width={400}
-        height={500}
-        images={images}
-        showBullets={true}
-        showNavs={true}
-        autoPlay={true}
-        bgColor='#000000'
-        
-        
-      />
+    
+    <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
+  <div className="carousel-inner">
+    <div className="carousel-item active">
+      <img src="/instruction_1.png" className="d-block w-100" alt="..."/>
+      <div class="carousel-caption d-none d-md-block">
+        <p className='carousel-instruction'>Откройте сайт lycadaptation.ru на телефоне</p>
+        </div>
     </div>
+    <div className="carousel-item">
+      <img src="/instruction_2.png" className="d-block w-100" alt="..."/>
+      <div class="carousel-caption d-none d-md-block">
+        <p className='carousel-instruction'>Откройте  'Мой аккаунт', чтобы увидеть  баллы</p>
+        </div>
+
+    </div>
+    <div className="carousel-item">
+      <img src="/instruction_3.png" className="d-block w-100" alt="..."/>
+      <div class="carousel-caption d-none d-md-block">
+        <p className='carousel-instruction'>Просканируйте QR-код, полученный на Адаптации</p>
+        </div>
+
+    </div>
+
+    <div className="carousel-item">
+      <img src="/instruction_4.png" className="d-block w-100" alt="..."/>
+      <div class="carousel-caption d-none d-md-block">
+        <p className='carousel-instruction'>Зарегистрируйтесь</p>
+        </div>
+
+    </div>
+
+  </div>
+</div>
     </div>
 
   )
