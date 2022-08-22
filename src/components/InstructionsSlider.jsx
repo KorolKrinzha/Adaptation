@@ -11,7 +11,6 @@ const InstructionsSlider = () => {
     ]
 
   return ( <div className='home-details'>
-      <img src='../'></img>
      <p>Инструкция по использованию сайта</p>
     <div>
       <SimpleImageSlider
