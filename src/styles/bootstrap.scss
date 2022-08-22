@@ -123,6 +123,19 @@ li,ul{
     @extend .display-1;
 }
 
+.home-details{
+    @extend .d-flex;
+    @extend .justify-content-center;
+    @extend .flex-column;
+    @extend .mt-4;
+    @extend .ps-4;
+    p{
+        color: $primary !important;
+        @extend .display-3;
+        
+    }
+}
+
 // ---КОНТАКТЫ---
 .contacts-Single-Item{
     @extend .d-flex;

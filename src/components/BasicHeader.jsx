@@ -30,6 +30,12 @@ const BasicHeader = () => {
                     Контакты
                 </NavLink>
                 </li>
+                <li>
+                <NavLink to="/sign" className="nav-link text-success">
+                    Регистрация
+                </NavLink>
+                </li>
+
               </ul>
     
             </div>
