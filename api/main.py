@@ -30,10 +30,10 @@ def admin_role(f):
         try:
             session_token = request.cookies['session_token']
             if check_admin(session_token): return f(*args, **kwargs)
-            else: return abort(404)
+            else: return abort(403)
         except Exception as e: 
             print(e)
-            return abort(404)
+            return abort(403)
     return wrap
 
 def user_role(f):
@@ -42,10 +42,10 @@ def user_role(f):
         try:
             session_token = request.cookies['session_token']
             if check_user(session_token): return f(*args, **kwargs)
-            else: return abort(404)
+            else: return abort(403)
         except Exception as e: 
             print(e)
-            return abort(404) 
+            return abort(403) 
     return wrap
     
 
