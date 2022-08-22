@@ -4,10 +4,10 @@ import SimpleImageSlider from "react-simple-image-slider";
 
 const InstructionsSlider = () => {
     const images = [
-        { url: "IMG/instruction_1.jpg" },
-        { url: "IMG/instruction_2.jpg" },
-        { url: "IMG/instruction_3.jpg" },
-        { url: "IMG/instruction_4.jpg" },
+        { url: "lycadaptation.ru/instruction_1.jpg" },
+        { url: "lycadaptation.ru/instruction_2.jpg" },
+        { url: "lycadaptation.ru/instruction_3.jpg" },
+        { url: "lycadaptation.ru/instruction_4.jpg" },
     ]
 
   return ( <div className='home-details'>
