@@ -136,6 +136,15 @@ li,ul{
     }
 }
 
+.image-slider{
+    .rsis-image {
+        background-size: 100%; 
+        background-size: cover !important;
+        background-repeat: no-repeat;
+
+      }
+}
+
 // ---КОНТАКТЫ---
 .contacts-Single-Item{
     @extend .d-flex;

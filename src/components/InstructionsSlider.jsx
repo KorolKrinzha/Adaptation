@@ -14,13 +14,14 @@ const InstructionsSlider = () => {
      <p>Инструкция по использованию сайта</p>
     <div>
       <SimpleImageSlider
-        width={723}
-        height={912}
+        width={310}
+        height={400}
         images={images}
         showBullets={true}
         showNavs={true}
         autoPlay={true}
         bgColor='#000000'
+        className="image-slider"
         
         
       />
