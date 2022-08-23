@@ -118,14 +118,14 @@ li,ul{
 
 // ---ГЛАВНАЯ СТРАНИЦА---
 .mainpage-title{
-    @extend .ps-4;
-    @extend .ms-4;
+    @extend .ps-3;
+    @extend .ms-3;
     @extend .display-1;
 }
 
 .mainpage-description{
-    @extend .ps-3;
-    @extend .ms-3;
+    @extend .ps-4;
+    @extend .ms-4;
     @extend .display-4;
     color: $secondary !important;
 }
@@ -135,14 +135,28 @@ li,ul{
     @extend .justify-content-center;
     @extend .flex-column;
     
-    @extend .mt-4;
-    @extend .ps-4;
     p{
-        color: $primary !important;
-        @extend .display-3;
+        color: $secondary!important;
+        @extend .h2;
         
     }
 }
+
+.home-section{
+
+    @extend .d-flex;
+    @extend .flex-column;    
+    @extend .ps-3;
+    @extend .ms-3;
+    @extend .mt-4;
+
+    p{
+        color: $primary !important;
+        @extend .display-3;
+    }
+    
+}
+
 
 
 .image-slider{

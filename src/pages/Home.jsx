@@ -11,8 +11,11 @@ const Home = ()=> {
 
     </div>
 
-    
+    <div className="home-section">
+      <p>Инструкция по использованию сайта</p>
     <InstructionsSlider/>
+    
+    </div>
     </>
 
   );
