@@ -10,10 +10,10 @@ import json
 from DBs import sign_new_user, check_email, login_user, auth_new_user, check_admin, check_user
 
 # взаимодействие обычного пользователя с ивентами
-from DBs import show_event, check_visited, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events 
+from DBs import show_event, check_visited, check_activated, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events 
 
 # взаимодействие админа с ивентами и пользователями
-from DBs import show_all_events, show_all_users, show_logs, create_event, edit_event, delete_event
+from DBs import show_all_events, show_all_users, show_logs, create_event, edit_event, delete_event, reactivate_event
 
 from QRs import create_QR, update_QR,export_QR_codes, delete_QR
 from DB_tools import export_to_csv
@@ -137,7 +137,6 @@ def api_loginuser():
         password = data_json['password']
         user_id = login_user(email, password) 
         if (len(user_id)>0):
-            print('!!!')
             return {'session_token':user_id}
         
         return Response(response='Данный аккаунт не найден. Пожалуйста, проверьте введенные даннные',
@@ -180,16 +179,18 @@ def api_event(event_PATH):
     
     response = show_event(event_PATH) 
     try:   
-        if not check_visited(session_token, response["event_id"]):
-            
-            add_points_to_user(session_token, response['value'], response['event_id'])
-            add_visit(session_token, response['event_id'])
-            
-        if check_dynamic(response['event_id']):
-            
-            new_event_creditentials = change_dynamic_event(response["event_id"])
-            update_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'], response['title'])
-        
+        if check_activated(event_id):
+            if not check_visited(session_token, response["event_id"]):
+                
+                add_points_to_user(session_token, response['value'], response['event_id'])
+                add_visit(session_token, response['event_id'])
+                
+            if check_dynamic(response['event_id']):
+                
+                new_event_creditentials = change_dynamic_event(response["event_id"])
+                update_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'], response['title'])
+        else:
+            Response(status=410, response="")
         return response      
     
     except:
@@ -258,6 +259,22 @@ def api_admin_deleteevent():
         return abort(500)
     
     return Response(status=200)
+
+@app.route("/api/admin/reactivateevent", methods=['POST'])
+@admin_role
+def api_admin_reactivate():
+    post_data = request.data
+    data_json = json.loads(post_data.decode('utf-8'))
+    event_id = data_json['event_id']
+    try:
+        reactivate_event(event_id)
+        
+    except Exception as e:
+        print(e)
+        return abort(500)
+    
+    return Response(status=200)
+
 
 @app.route("/api/admin/editevent", methods=['POST'])
 @admin_role

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import {NotFound} from '../../pages'
 import Sign from "../Sign";
+import NotActivated from "../NotActivated";
 
 const SingleEvent = () =>{
     const [title, setTitle] = useState('')
@@ -12,6 +13,7 @@ const SingleEvent = () =>{
 
     const [found,setFound] = useState(true)
     const [registered, setRegisterd] = useState(true)
+    const [activated, setActivated] = useState(true)
 
     useEffect(()=>{
         axios.post(`/api/event/${eventPATH}`,
@@ -25,6 +27,7 @@ const SingleEvent = () =>{
         ).catch(error => {
             if(error.response.status===404) setFound(false)
             if(error.response.status===403) setRegisterd(false)
+            if(error.response.status===410) setActivated(false)
         })
     },[])
 
@@ -39,6 +42,7 @@ const SingleEvent = () =>{
     }
     
     return registered ?(
+        <>{activated? (
     <>        
         {found ? (
             <div className="EVENTS-textContainer">
@@ -47,6 +51,9 @@ const SingleEvent = () =>{
             </div>
 
         ):<NotFound/>}
+    </>
+
+    ): <NotActivated/>} 
     </>
 
         

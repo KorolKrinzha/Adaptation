@@ -130,9 +130,9 @@ def create_event(title, description, value, dynamic=False):
     event_url = create_path()
     
     DB_COMMIT("""INSERT INTO `lycevents`
-            (`event_id`,`title`,`description`,`value`,`dynamic`, `url`, `create_time`) 
+            (`event_id`,`title`,`description`,`value`,`dynamic`, `url`, `activated`, `create_time`) 
             VALUES 
-            (%(event_id)s,%(title)s, %(description)s,%(value)s, %(dynamic)s, %(event_url)s, now());""",{
+            (%(event_id)s,%(title)s, %(description)s,%(value)s, %(dynamic)s, %(event_url)s, true,now());""",{
                 'event_id':event_ID,
                 'title': title,
                 'description': description,
@@ -163,6 +163,11 @@ def delete_event(event_id):
               {'event_id':event_id})
     
     return
+
+def reactivate_event(event_id):
+    DB_COMMIT(""" 
+              UPDATE lycevents SET activated = NOT activated WHERE event_id=%(event_id)s
+              """, {"event_id":event_id})
     
     
 def show_all_events():
@@ -206,6 +211,12 @@ def check_visited(session_token, event_id):
          'session_token':session_token})
     
     return visited
+
+def check_activated(event_id):
+    activated = DB_CHECK_EXISTENCE(""" 
+                                   SELECT COUNT(1) FROM lycevents WHERE
+        `event_id` = %(event_id)s and `activated` = true
+                                   """,{'event_id':event_id} )
 
 def add_visit(session_token, event_id):
     visit_time = current_date()

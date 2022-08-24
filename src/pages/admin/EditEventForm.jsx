@@ -5,6 +5,7 @@ import fileDownload from 'js-file-download'
 import NotificationContainer from 'react-notifications/lib/NotificationContainer'
 import { ReactComponent as EditEventButton } from '../../assets/editevent.svg'
 import {ReactComponent as DownloadButton} from '../../assets/downloadeventqr.svg'
+import {ReactComponent as ReactivateButton} from '../../assets/reactivateevent.svg'
 import { NotificationManager } from 'react-notifications'
 
 import "../../styles/style.css"
@@ -45,6 +46,22 @@ const EditEventForm = ({event}) => {
 
     }
 
+    const reactivateEvent = (e) =>{
+      e.preventDefault()
+      axios.post("/api/admin/reactivateevent",{
+      event_id: event.event_id,
+      withCredentials: true
+      }
+      ).then((res)=>{
+        if (res.status===200){
+          console.log('Деактивировано')
+          NotificationManager.warning('Перезагрузите, чтобы увидеть его изменненый статус', 'Ивент реактивирован', 5000)
+        }
+      })
+      
+    }
+
+
 
   return (
     <div>
@@ -55,6 +72,10 @@ const EditEventForm = ({event}) => {
         <DownloadButton/>
       </button>
       }
+
+      <button className='svg-button' onClick={(e)=>reactivateEvent(e)}>
+        <ReactivateButton/>
+      </button>
       
 
 
@@ -92,7 +113,9 @@ const EditEventForm = ({event}) => {
             onChange={(e) => setValue(e.target.value)}
           ></input>
 
-          <p>Это {event.dynamic ? "динамичный":"статичный"} ивент</p>
+          {event.activated?  (
+          <p>Это {event.dynamic ? "динамичный":"статичный"} ивент</p> )
+          : <p>ИВЕНТ ДЕАКТИВИРОВАН</p>}
 
           {!event.dynamic ?
           <NavLink to={`/QR/${event.event_id}`}>QR код ивента</NavLink> : null
