@@ -4,6 +4,8 @@ services:
         context: .
         dockerfile: Dockerfile.client
       image: react-flask-app-client
+      container_name: client 
+      restart: unless-stopped
       ports:
         - "80:80"
   
@@ -12,4 +14,6 @@ services:
         context: .
         dockerfile: Dockerfile.api
       image: react-flask-app-api
+      container_name: api
+      restart: unless-stopped
       
