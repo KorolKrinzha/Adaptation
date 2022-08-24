@@ -174,12 +174,14 @@ def api_score_events():
 @app.route('/api/event/<event_PATH>', methods=['POST'])
 @user_role
 def api_event(event_PATH):
-        
-    session_token = request.cookies['session_token']
     
-    response = show_event(event_PATH) 
+    session_token = request.cookies['session_token']
+
+    
     try:   
-        if check_activated(event_id):
+        response = show_event(event_PATH) 
+
+        if check_activated(response['event_id']):
             if not check_visited(session_token, response["event_id"]):
                 
                 add_points_to_user(session_token, response['value'], response['event_id'])
@@ -189,12 +191,16 @@ def api_event(event_PATH):
                 
                 new_event_creditentials = change_dynamic_event(response["event_id"])
                 update_QR(new_event_creditentials['event_id'], new_event_creditentials['event_url'], response['title'])
+            return response
         else:
-            Response(status=410, response="")
-        return response      
+            
+            return Response(status=410, response="")
     
-    except:
+    except Exception as e:
+        print(e)
         abort(404)
+        
+    
             
 
 

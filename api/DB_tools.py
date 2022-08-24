@@ -86,15 +86,11 @@ def DB_CHECK_EXISTENCE(statement,values):
         )
     mycursor = mydb.cursor(buffered=True)
     mycursor.execute(statement,values)
-    row_headers = [x[0] for x in mycursor.description]
-    rv = mycursor.fetchall()
-    data = []
-    for result in rv[::-1]:
-        data.append(dict(zip(row_headers, result)))
-   
-    existence_value = data[0]['COUNT(1)']
-    return bool(existence_value)
-
+    results = mycursor.fetchall()
+    row_count = mycursor.rowcount
+    if row_count == 0 or results[0]==(0,): return False
+    else: return True
+    
 def export_to_csv(table_name):
     
     filepath = f"./api_public/CSV/{table_name}.csv"

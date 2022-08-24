@@ -100,12 +100,10 @@ def show_event(event_PATH):
     event = DB_FETCH_ONE("""SELECT * FROM `lycevents` WHERE `url` = %(event_PATH)s""",
                          {'event_PATH':event_PATH}
                          )
-    try:
     
-        return {"event_id":event[0],"title":event[1], 
+    return {"event_id":event[0],"title":event[1], 
             "description":event[2], "value": event[3], "dynamic":bool(event[4])}
-    except:
-        return ''
+
     
 def add_points_to_user(session_token, value, event_id):
     # уеличиваем баллы у пользователя
@@ -168,6 +166,8 @@ def reactivate_event(event_id):
     DB_COMMIT(""" 
               UPDATE lycevents SET activated = NOT activated WHERE event_id=%(event_id)s
               """, {"event_id":event_id})
+    return
+    
     
     
 def show_all_events():
@@ -191,7 +191,7 @@ def show_logs():
 
 # ---ДЕЙСТВИЯ ИВЕНТОВ---
 def check_dynamic(event_id):
-    exists = DB_CHECK_EXISTENCE("""SELECT COUNT(1) FROM lycevents WHERE `event_id`=%(event_id)s AND `dynamic`=1""",{'event_id':event_id})
+    exists = DB_CHECK_EXISTENCE("""SELECT COUNT(1) FROM lycevents WHERE `event_id`=%(event_id)s AND `dynamic`=true""",{'event_id':event_id})
     return exists
 
 def change_dynamic_event(event_id):
@@ -217,6 +217,7 @@ def check_activated(event_id):
                                    SELECT COUNT(1) FROM lycevents WHERE
         `event_id` = %(event_id)s and `activated` = true
                                    """,{'event_id':event_id} )
+    return activated
 
 def add_visit(session_token, event_id):
     visit_time = current_date()
