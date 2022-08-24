@@ -178,7 +178,7 @@ def show_all_events():
 def show_logs():
     logs = DB_JSON(""" 
                 SELECT (@cnt := @cnt + 1) AS log_id, lycusers.lastname, lycusers.firstname, 
-                lycevents.title, lycvisits.visit_time, lycvisits.event_id
+                lycevents.title, lycevents.activated, lycvisits.visit_time, lycvisits.event_id
                 FROM lycvisits
                 INNER JOIN lycusers ON lycvisits.user_id = lycusers.user_id
                 INNER JOIN lycevents ON lycevents.event_id = lycvisits.event_id 
