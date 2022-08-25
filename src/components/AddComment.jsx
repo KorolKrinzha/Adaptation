@@ -26,7 +26,6 @@ const AddComment = ({event_id}) => {
           <div className="formSection bg-grey">
           
  
-             <p className='text-small text-secondary'>Комментарии в дальнейшем помогут нам улучшить ивенты для всех лицеистов!</p>   
             <label htmlFor="description">Ваши впечатления от ивента</label>
             <textarea 
             required
