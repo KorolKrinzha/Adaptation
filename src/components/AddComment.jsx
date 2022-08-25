@@ -48,7 +48,7 @@ const AddComment = ({event_id}) => {
             </div>
             
             <div className="d-flex justify-content-center">
-              <button type="submit" className="form-button">ДОБАВИТЬ ИВЕНТ </button>
+              <button type="submit" className="form-button">Отправить комментарий</button>
             </div>
 
         </form>
