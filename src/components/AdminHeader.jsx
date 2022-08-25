@@ -35,6 +35,12 @@ const AdminHeader = () => {
                   Логи
               </NavLink>
               </li>
+              <li>
+              <NavLink to="/admin/comments" className="nav-link text-success">
+                  Комментарии
+              </NavLink>
+              </li>
+
             </ul>
   
           </div>

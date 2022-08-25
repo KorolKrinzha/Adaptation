@@ -311,6 +311,7 @@ li,ul{
 
 // ДЛЯ ОКОШЕК В РЕГИСТРАЦИИ. НАПРИМЕР, МЭЙЛ
 .formSection{
+    
     @extend .mb-4;    
     background-color: $bg-dark;
     color: $success;
@@ -392,6 +393,7 @@ li,ul{
 
 
 }
+
 
 .form-select{
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
@@ -594,6 +596,23 @@ li,ul{
         
         
     }
+
+}
+
+
+// КОММЕНТАРИИ
+.comments-section{
+    @extend .d-flex;
+    @extend .justify-content-start;
+    @extend .pt-4;
+    @extend .px-3;
+}
+
+
+.text-comment{
+    @extend .h2;
+    color: $secondary !important;
+    @extend .ps-4;
 
 }
 

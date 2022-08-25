@@ -11,6 +11,7 @@ import {
   Events,
   SingleEvent,
   Logs,
+  Comments,
   ShowQR,
 } from "./pages";
 import reportWebVitals from "./reportWebVitals";
@@ -78,6 +79,14 @@ root.render(
           element={
             <AdminRoute>
               <Logs />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/comments"
+          element={
+            <AdminRoute>
+              <Comments />
             </AdminRoute>
           }
         />

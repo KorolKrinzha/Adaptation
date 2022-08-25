@@ -10,10 +10,10 @@ import json
 from DBs import sign_new_user, check_email, login_user, auth_new_user, check_admin, check_user
 
 # взаимодействие обычного пользователя с ивентами
-from DBs import show_event, check_visited, check_activated, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events 
+from DBs import show_event, check_visited, check_activated, add_points_to_user, add_visit, check_dynamic, change_dynamic_event, show_score, show_user_events, add_comment 
 
 # взаимодействие админа с ивентами и пользователями
-from DBs import show_all_events, show_all_users, show_logs, create_event, edit_event, delete_event, reactivate_event
+from DBs import show_all_events, show_all_users, show_logs, show_comments, create_event, edit_event, delete_event, reactivate_event
 
 from QRs import create_QR, update_QR,export_QR_codes, delete_QR
 from DB_tools import export_to_csv
@@ -200,7 +200,26 @@ def api_event(event_PATH):
         print(e)
         abort(404)
         
+
+        
+@app.route('/api/addcomment', methods=['POST'])
+@user_role
+def api_addcomment():
+    session_token = request.cookies['session_token']
+    try:
+        post_data = request.data
+        data_json = json.loads(post_data.decode('utf-8'))
+        comment = data_json['comment']
+        event_id = data_json['event_id']
+        add_comment(session_token,comment,event_id)
+        return Response(status=200)
     
+    except Exception as e:
+        return Response(response= str(e),status=500)
+
+
+
+    return
             
 
 
@@ -229,6 +248,11 @@ def api_admin_events():
 def api_admin_logs():  
     return show_logs()
 
+
+@app.route("/api/admin/comments")
+@admin_role
+def api_admin_comments():  
+    return show_comments()
 
 
 

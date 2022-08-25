@@ -1,8 +1,13 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import AddComment from "../../components/AddComment";
+import CommentPopup from "../../components/CommentPopup";
+import Popup from "../../components/Popup";
 
 const ScoreEvents = () =>{
     const [events, setEvents] = useState([])
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     
     useEffect(()=>{
@@ -24,10 +29,15 @@ const ScoreEvents = () =>{
     if (events.length>0){
     return (<div className="score-singleEvent">
         {events.map((event) => {
-          return <li key={event.event_id}>
+          return ( <div>
+          <li key={event.event_id}>
                 <span>V</span>
                 <p>{event.title}</p>
               </li>;
+              <CommentPopup event_id={event.event_id}/>
+              </div>
+          )
+              
           
         })}
     </div>)

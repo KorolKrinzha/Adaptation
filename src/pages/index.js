@@ -11,4 +11,5 @@ export { default as SingleEvent } from "./user/SingleEvent";
 export { default as Scoreboard } from "./admin/Scoreboard";
 export { default as Events } from "./admin/Events";
 export { default as Logs } from "./admin/Logs";
+export {default as Comments} from "./admin/Comments"
 export { default as ShowQR } from "./admin/ShowQR";

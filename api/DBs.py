@@ -94,6 +94,13 @@ def show_user_events(session_token):
     
     return event_list
 
+def add_comment(session_token,comment,event_id):
+    DB_COMMIT( """INSERT INTO user_comments
+        (user_id, event_id,comment, comment_time) 
+        VALUES (%(user_id)s,%(event_id)s, %(comment)s,now())""",
+        {'user_id':session_token, 'event_id':event_id, 'comment':comment})
+    return
+
 # --ПОСЕЩЕНИЕ ИВЕНТА--
 def show_event(event_PATH):    
     # делает проверку, есть ли ивент с таким путем. Если есть, возращает инфу
@@ -187,6 +194,21 @@ def show_logs():
                 """, {})
         
     return logs
+
+def show_comments():
+    comments = DB_JSON(""" 
+    SELECT lycevents.event_id, 
+    lycevents.title, 
+    lycevents.activated,
+    user_comments.comment_time,
+    user_comments.comment,
+    user_comments.event_id,
+    user_comments.comment_id FROM lycevents 
+    INNER JOIN user_comments 
+    ON user_comments.event_id = lycevents.event_id 
+    ORDER BY user_comments.comment_time ASC
+                       """, {})
+    return comments
 
 
 # ---ДЕЙСТВИЯ ИВЕНТОВ---
