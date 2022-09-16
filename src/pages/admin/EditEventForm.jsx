@@ -55,7 +55,7 @@ const EditEventForm = ({event}) => {
       ).then((res)=>{
         if (res.status===200){
           console.log('Деактивировано')
-          NotificationManager.warning('Перезагрузите, чтобы увидеть его изменненый статус', 'Ивент реактивирован', 5000)
+          NotificationManager.warning('Перезагрузите, чтобы увидеть его изменненый статус', `Ивент ${event.activated ? "деактивирован":"активирован"}`, 5000)
         }
       })
       

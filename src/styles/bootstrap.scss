@@ -118,22 +118,26 @@ li,ul{
 
 // ---ГЛАВНАЯ СТРАНИЦА---
 .mainpage-title{
-    @extend .ps-3;
+    @extend .px-3;
     @extend .ms-3;
     @extend .display-1;
+    @extend .fw-bold;
+
 }
 
 .mainpage-description{
-    @extend .ps-4;
+    @extend .px-4;
     @extend .ms-4;
     @extend .display-4;
     color: $secondary !important;
+    
 }
 
 .home-details{
     @extend .d-flex;
     @extend .justify-content-center;
     @extend .flex-column;
+    
     
     p{
         color: $secondary!important;
@@ -154,6 +158,8 @@ li,ul{
     p{
         color: $primary !important;
         @extend .display-3;
+        @extend .fw-bold;
+
     }
     
 }
