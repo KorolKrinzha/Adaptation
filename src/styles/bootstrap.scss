@@ -229,6 +229,10 @@ li,ul{
 
 // ---SIGN---
 
+.pointer-link{
+    cursor: pointer;
+}
+
 // НАДПИСЬ ВВЕРХУ 
 .text-title{
     @extend .display-3;

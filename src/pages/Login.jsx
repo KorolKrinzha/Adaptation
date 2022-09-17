@@ -2,6 +2,7 @@ import { useState } from "react"
 import "../styles/style.css"
 import Cookies from "universal-cookie/es6"
 import axios from "axios"
+import { Sign } from "."
 
 
 const Login = () =>{
@@ -11,6 +12,7 @@ const Login = () =>{
 
     const [errorMessage, setErrorMessage] = useState()
 
+    const [signPage, setSignPage] = useState(false)
 
 
 
@@ -43,7 +45,8 @@ const Login = () =>{
 
 
 
-    return (
+    return signPage? (
+      <Sign/>):(
     <div className="container -lg">
          <h1 className="text-title"> Адаптация | Вход</h1>
       <p className="infotext">Для получения баллов
@@ -71,7 +74,7 @@ const Login = () =>{
     <div className="middle-textSection">
       <button type="submit" className="form-button">Войти в систему</button>
       <p className="small-text">Еще не зарегистрированы?</p>               
-      <a href="/sign">Зарегистрируйтесь здесь</a>
+      <a className="pointer-link" onClick={()=>setSignPage(true)}>Зарегистрируйтесь здесь</a>
     </div>
 
   </form>
